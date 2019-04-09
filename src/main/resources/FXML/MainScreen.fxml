@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="general" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.MainScreenController">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="140.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pics/indeks.jpg" />
+               </image>
+            </ImageView>
+            <Separator layoutX="10.0" layoutY="172.0" prefHeight="68.0" prefWidth="140.0" />
+            <ToggleButton fx:id="showPoliceman" mnemonicParsing="false" onAction="#clickShowPoliceman" prefHeight="31.0" prefWidth="187.0" text="Pokaż" />
+            <ToggleButton fx:id="addPoliceman" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickAddPoliceman" prefHeight="31.0" prefWidth="186.0" text="Dodaj Policjanta" />
+            <Separator prefHeight="68.0" prefWidth="140.0" />
+            <ToggleButton layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#clickMaterials" prefHeight="31.0" prefWidth="185.0" text="Materiały" />
+            <ToggleButton layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#clickShowTransaction" prefHeight="31.0" prefWidth="185.0" text="Transakcje" />
+            <Separator prefHeight="65.0" prefWidth="140.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#clickConfiguration" prefHeight="31.0" prefWidth="184.0" text="Konfiguracja" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane prefHeight="580.0" prefWidth="1060.0" BorderPane.alignment="TOP_CENTER">
+         <padding>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+</BorderPane>
