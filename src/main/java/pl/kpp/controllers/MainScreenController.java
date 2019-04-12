@@ -23,8 +23,7 @@ public class MainScreenController {
 
     @FXML
     void clickShowPoliceman(ActionEvent event) {
-        ResourceBundle boundle = ResourceBundle.getBundle("Bundle/strings");
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/ShowPolicemanScreen.fxml"), boundle);
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/policeman/ShowPolicemanScreen.fxml"));
         try {
             pane = loader.load();
         //    ShowPolicemanScreenController controller = loader.getController();
@@ -57,8 +56,8 @@ public class MainScreenController {
 
     @FXML
     void clickAddPoliceman(ActionEvent event){
-            ResourceBundle boundle = ResourceBundle.getBundle("Bundle/strings");
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/AddPolicemanScreen.fxml"), boundle);
+
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/policeman/AddPolicemanScreen.fxml"));
             try{
                 pane = loader.load();
             }catch (IOException e) {

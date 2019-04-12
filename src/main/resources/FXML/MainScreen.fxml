@@ -14,7 +14,7 @@
          <children>
             <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Pics/indeks.jpg" />
+                  <Image url="@../pics/indeks.jpg" />
                </image>
             </ImageView>
             <Separator layoutX="10.0" layoutY="172.0" prefHeight="68.0" prefWidth="140.0" />

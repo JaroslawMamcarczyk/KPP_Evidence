@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="580.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.workersControllers.ShowPolicemanScreenController">
+   <children>
+      <TableView fx:id="policemanTableView" layoutX="14.0" layoutY="66.0" prefHeight="500.0" prefWidth="1032.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="66.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="206.0" text="Imię" />
+          <TableColumn fx:id="surrnameColumn" prefWidth="206.0" text="Nazwisko" />
+            <TableColumn fx:id="idColumn" prefWidth="134.0" text="ID" />
+            <TableColumn fx:id="peselColumn" prefWidth="211.0" text="Pesel" />
+            <TableColumn fx:id="standingColumn" prefWidth="273.0" text="Wydział" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchPolicemanTextField" layoutX="356.0" layoutY="35.0" prefHeight="31.0" prefWidth="257.0" />
+      <Label layoutX="400.0" layoutY="14.0" prefHeight="21.0" prefWidth="187.0" text="Szukaj" />
+   </children>
+</AnchorPane>

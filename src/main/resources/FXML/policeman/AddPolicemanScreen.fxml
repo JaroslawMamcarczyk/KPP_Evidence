@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane prefHeight="716.0" prefWidth="1083.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.workersControllers.AddPolicemanScreenController">
+   <tabs>
+      <Tab text="podstawowe">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="593.0">
+               <children>
+                  <Button layoutX="309.0" layoutY="408.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
+                  <VBox layoutX="14.0" layoutY="25.0" prefHeight="341.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Imię" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Nazwisko" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="ID" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Pesel" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Ranga" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Departament" />
+                        <Label prefHeight="31.0" prefWidth="106.0" text="Stanowisko" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="157.0" layoutY="25.0" prefHeight="277.0" prefWidth="220.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="laddName" prefHeight="31.0" />
+                        <TextField fx:id="lsurrname" prefHeight="31.0" />
+                        <TextField fx:id="lewidential" prefHeight="31.0" />
+                        <TextField fx:id="lpesel" prefHeight="31.0" />
+                        <ChoiceBox fx:id="choiceRange" prefHeight="31.0" prefWidth="221.0" />
+                        <ChoiceBox fx:id="choiceDepartament" prefHeight="31.0" prefWidth="219.0" />
+                        <ChoiceBox fx:id="choiceRanks" prefHeight="31.0" prefWidth="222.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   <Tab text="Uprawnienia KSIP">
+      <content>
+
+      </content></Tab>
+</tabs>
+</TabPane>
