@@ -45,8 +45,7 @@ public class RangeDao {
     /**
      * loading data from the table
      */
-    public static void readRange(){
-        Database date = new Database();
+    public static void readRange(Database date){
         try (ResultSet result = date.select("SELECT * from range")) {
             while (result.next()) {
                 RangeDao range = new RangeDao(result.getInt("id"),result.getString("range_name"),result.getString("pagons"));
@@ -55,7 +54,6 @@ public class RangeDao {
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
         }
-        date.closeDatabase();
     }
 
     /**
@@ -72,6 +70,5 @@ public class RangeDao {
         } catch (SQLException e) {
             System.out.println("błąd zapytania");
         }
-        date.closeDatabase();
     }
 }

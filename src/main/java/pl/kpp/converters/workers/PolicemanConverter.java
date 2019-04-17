@@ -1,4 +1,4 @@
-package pl.kpp.converters.converters;
+package pl.kpp.converters.workers;
 
 import javafx.util.StringConverter;
 import pl.kpp.workers.Policeman;

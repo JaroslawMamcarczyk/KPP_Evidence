@@ -9,15 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import pl.kpp.CreateWindowAlert;
+import pl.kpp.controllers.MainScreenController;
 import pl.kpp.workers.Departament;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
-import pl.kpp.converters.converters.DepartamentConverter;
-import pl.kpp.converters.converters.RangeConverter;
-import pl.kpp.converters.converters.RanksConverter;
+import pl.kpp.converters.workers.DepartamentConverter;
+import pl.kpp.converters.workers.RangeConverter;
+import pl.kpp.converters.workers.RanksConverter;
 import pl.kpp.dao.workersDao.PolicemanDao;
-import pl.kpp.dao.workersDao.RanksDao;
-
 
 
 public class AddPolicemanScreenController {
@@ -36,21 +35,28 @@ public class AddPolicemanScreenController {
     @FXML
     private ChoiceBox<Departament> choiceDepartament;
     private PolicemanDao policeman=null;
-    private ObservableList<Range> rangeObservableList = FXCollections.observableArrayList();
+
+
 
     @FXML
     void initialize(){
-      //  for (Range name:Range.getListRange()){
-      //      rangeObservableList.add(name);
-      //  }
+        ObservableList<Range> rangeObservableList = FXCollections.observableArrayList(Range.getListRange());
         choiceRange.setConverter(new RangeConverter());
         choiceRange.setItems(rangeObservableList);
         choiceDepartament.setConverter(new DepartamentConverter());
-        //choiceDepartament.setItems(departamentObservableList);
-        choiceRanks.setConverter(new RanksConverter());
-        RanksDao.readRanks();
-        ObservableList<Ranks> ranksObservableList = FXCollections.observableList(Ranks.getRanksList());
-        choiceRanks.setItems(ranksObservableList);
+        ObservableList<Departament> departamentObservableList= FXCollections.observableList(Departament.getDepartamentList());
+        choiceDepartament.setItems(departamentObservableList);
+        choiceDepartament.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            choiceRanks.setConverter(new RanksConverter());
+            ObservableList<Ranks> ranksObservableList = FXCollections.observableArrayList();
+            for(Ranks ranks:Ranks.getRanksList()){
+                if(ranks.getDepartamentRanks().getId()==newValue.getId()){
+                    ranksObservableList.add(ranks);
+                }
+            }
+            choiceRanks.setItems(ranksObservableList);
+        });
+
     }
     @FXML
     void clickSave(ActionEvent event) {
@@ -86,8 +92,9 @@ public class AddPolicemanScreenController {
             }
             policeman = new PolicemanDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave);
                 policeman.savePoliceman();
+                PolicemanDao.isChangeOnDatabaseProperty().setValue(true);
                 CreateWindowAlert.CreateWindowAlert("Dodano Nowego Policjanta");
-
-            }else CreateWindowAlert.createWindowError("Nie dodałem npwego policjanta");
+           MainScreenController.getMainScreenController().createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
+            }else CreateWindowAlert.createWindowError("Błąd dodawania nowego policjanta - popraw pola świecące na czerowno");
     }
 }

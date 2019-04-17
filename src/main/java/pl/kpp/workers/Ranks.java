@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Ranks {
     private int ranksId;
     private StringProperty nameRanks = new SimpleStringProperty();
-    private int departamentRanks;
+    private Departament departamentRanks;
     private static List<Ranks> ranksList = new ArrayList<>();
 
     public int getRanksId() {
@@ -20,22 +20,22 @@ public class Ranks {
     public String getNameRanks() {
         return nameRanks.get();
     }
-    public int getDepartamentRanks() {
+    public Departament getDepartamentRanks() {
         return departamentRanks;
     }
-    public static List<Ranks> getRanksList() {
-        RanksDao.readRanks();
+    public static List<Ranks> getRanksList() { return ranksList; }
+
+    public Ranks(RanksDao ranksDAO) {
+        this.ranksId = ranksDAO.getIdRanksDao();
+        this.departamentRanks = Departament.findDepartament(ranksDAO.getDepartamentRanksDao());
+        this.nameRanks.set(ranksDAO.getNameRanksDao());
+    }
+
+    public static void createRanksList(){
         ranksList.clear();
         for(RanksDao dao: RanksDao.getRanksDaoList()){
             ranksList.add(new Ranks(dao));
         }
-        return ranksList;
-    }
-
-    public Ranks(RanksDao ranksDAO) {
-        this.ranksId = ranksDAO.getIdRanksDao();
-        this.departamentRanks = ranksDAO.getDepartamentRanksDao();
-        this.nameRanks.set(ranksDAO.getNameRanksDao());
     }
 
     @Override

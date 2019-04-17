@@ -4,75 +4,44 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 
 public class MainScreenController {
 
     @FXML
     private BorderPane general;
-    @FXML
-    private ToggleButton showPoliceman;
 
     private Node pane = null;
+    private static MainScreenController mainScreenController;
+
+    public static MainScreenController getMainScreenController(){ return mainScreenController;}
 
     @FXML
     void clickShowPoliceman(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/policeman/ShowPolicemanScreen.fxml"));
-        try {
-            pane = loader.load();
-        //    ShowPolicemanScreenController controller = loader.getController();
-        //    controller.setMainScreenController(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        general.setCenter(pane);
+        createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
     }
-
-    public void setCentralPanel(Node pane){
-        general.setCenter(pane);
-    }
-
     @FXML
     void clickConfiguration(ActionEvent event) {
-        AnchorPane pane =null;
-    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/ConfigurationScreen.fxml"));
-        try {
-            pane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        general.setCenter(pane);
+       createCenter("/FXML/ConfigurationScreen.fxml");
     }
-
-    public void clickMaterials(ActionEvent event){
-        createCenter("/FXML/ShowMaterialsScreen.fxml");
+   public void clickMaterials(ActionEvent event){
+        createCenter("/FXML/materials/ShowMaterialsScreen.fxml");
     }
-
     @FXML
     void clickAddPoliceman(ActionEvent event){
-
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/policeman/AddPolicemanScreen.fxml"));
-            try{
-                pane = loader.load();
-            }catch (IOException e) {
-                System.out.println("błąd tworzenia okna dodawania policjanta" + e);
-            }
-            general.setCenter(pane);
+        createCenter("/FXML/policeman/AddPolicemanScreen.fxml");
     }
-
     @FXML
     void clickShowTransaction(ActionEvent event) {
-        createCenter("/FXML/ShowTransactionScreen.fxml");
+        createCenter("/FXML/materials/ShowTransactionScreen.fxml");
     }
-
-    private void createCenter(String s) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(s));
+public void initialize(){
+mainScreenController = this;
+}
+    public void createCenter(String path) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));
         try {
             pane = loader.load();
         } catch (IOException e) {

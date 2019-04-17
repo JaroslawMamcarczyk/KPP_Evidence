@@ -1,6 +1,8 @@
 package pl.kpp.controllers.workersControllers;
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -12,8 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import pl.kpp.controllers.MainScreenController;
+import pl.kpp.dao.Database;
+import pl.kpp.dao.workersDao.PolicemanDao;
 import pl.kpp.workers.Policeman;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,21 +37,25 @@ public class ShowPolicemanScreenController {
     private TextField searchPolicemanTextField;
 
     private String search;
-    private Node pane;
-    private MainScreenController mainScreenController;
     private static Policeman editPoliceman;
     private List<Policeman> temporaryList = new ArrayList<Policeman>();
+
 
     public static Policeman getEditPoliceman() {
         return editPoliceman;
     }
 
-    public void setMainScreenController(MainScreenController controller){
-        this.mainScreenController = controller;
-    }
 
     @FXML
     public void initialize() {
+        PolicemanDao.isChangeOnDatabaseProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue=true){
+                Database date = new Database();
+                PolicemanDao.readPoliceman(date);
+                Policeman.createList();
+                PolicemanDao.isChangeOnDatabaseProperty().setValue(false);
+            }
+        });
         ObservableList<Policeman> observableListPoliceman;
         observableListPoliceman = FXCollections.observableList(Policeman.createList());
         setPolicemanTableView(observableListPoliceman);
@@ -68,13 +75,7 @@ public class ShowPolicemanScreenController {
  */
         policemanTableView.setOnMouseClicked(click ->{
             if (click.getClickCount()==2){
-                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/policeman/DetailsPolicemanScreen.fxml"));
-                try{
-                    pane = loader.load();
-                }catch (IOException e) {
-                    System.out.println("Nie wczytałem danych policjanta" + e);
-                }
-                mainScreenController.setCentralPanel(pane);
+               MainScreenController.getMainScreenController().createCenter("/FXML/policeman/DetailsPolicemanScreen.fxml");
             }
         });
         /**

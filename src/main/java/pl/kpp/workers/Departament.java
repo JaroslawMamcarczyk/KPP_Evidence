@@ -20,23 +20,24 @@ public class Departament {
     }
     public void setName(String gname){this.name.set(gname);}
 
-    public static List<Departament> getDepartamentList() {
-        departamentList.clear();
-        for(DepartamentDao departamentDao:DepartamentDao.getDepartamentDaoList()){
-            departamentList.add(new Departament(departamentDao));
-        }
-        return departamentList;
-    }
+    public static List<Departament> getDepartamentList() { return departamentList; }
     public Departament(DepartamentDao dao){
         name.set(dao.getName());
         id = dao.getId();
     }
 
     public static Departament findDepartament(int serchingDepartament){
-        for (Departament departament:departamentList){
+        for (Departament departament:getDepartamentList()){
             if(departament.getId()==serchingDepartament){
                 return departament;
             }
         }return null;
+    }
+
+    public static void createDepartamentList(){
+        departamentList.clear();
+        for(DepartamentDao departamentDao:DepartamentDao.getDepartamentDaoList()){
+            departamentList.add(new Departament(departamentDao));
+        }
     }
 }

@@ -47,18 +47,16 @@ public class RanksDao {
         date.closeDatabase();
     }
 
-    public static void readRanks(){
-        Database date = new Database();
+    public static void readRanks(Database date){
         try (ResultSet read = date.select("SELECT * from ranks")) {
             ranksDaoList.clear();
             while (read.next()) {
-               RanksDao ranksDAO = new RanksDao(read.getInt("id"),read.getString("name"),read.getInt("departament"));
+               RanksDao ranksDAO = new RanksDao(read.getInt("id"),read.getString("ranks_name"),read.getInt("ranks_departament"));
                 ranksDaoList.add(ranksDAO);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
         }
-        date.closeDatabase();
     }
 
     public static void deleteRanks(int ranksToDelete){

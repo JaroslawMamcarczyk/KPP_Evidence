@@ -1,14 +1,13 @@
-package pl.kpp.converters.converters;
+package pl.kpp.converters.workers;
 
 
 import javafx.util.StringConverter;
-import pl.kpp.workers.Departament;
 import pl.kpp.workers.Ranks;
 
 public class RanksConverter extends StringConverter<Ranks> {
     @Override
     public String toString(Ranks ranks) {
-        return ranks.getNameRanks()+"( "+ Departament.findDepartament(ranks.getDepartamentRanks()).getName()+" )";
+        return ranks.getNameRanks()+"( "+ ranks.getDepartamentRanks().getName()+" )";
     }
 
     @Override

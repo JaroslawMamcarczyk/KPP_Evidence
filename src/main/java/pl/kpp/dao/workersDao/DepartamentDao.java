@@ -40,8 +40,7 @@ public class DepartamentDao {
         date.closeDatabase();
     }
 
-    public static void readDepartament(){
-        Database date = new Database();
+    public static void readDepartament(Database date){
         try (ResultSet read = date.select("SELECT * from departament")) {
             while (read.next()) {
                 DepartamentDao dao = new DepartamentDao(read.getString("departament_name"),read.getInt("id"));
@@ -50,7 +49,6 @@ public class DepartamentDao {
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
         }
-        date.closeDatabase();
     }
 
     public static void deleteDepartament(String gfind){

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="634.0" prefWidth="868.0" stylesheets="@../../mainScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.ShowTransactionScreenController">
+   <children>
+      <TableView fx:id="tableTransaction" layoutX="30.0" layoutY="50.0" prefHeight="496.0" prefWidth="500.0">
+        <columns>
+          <TableColumn fx:id="columnNumberTransaction" prefWidth="87.0" text="Numer" />
+          <TableColumn fx:id="columnDataTransaction" prefWidth="117.0" text="Data" />
+            <TableColumn fx:id="columnCustomerTransaction" prefWidth="295.0" text="Klient" />
+        </columns>
+      </TableView>
+      <Button layoutX="325.0" layoutY="553.0" mnemonicParsing="false" onAction="#clickAddGetOut" text="Wydanie" />
+      <Button layoutX="409.0" layoutY="553.0" mnemonicParsing="false" onAction="#clickAddGetIn" text="Przyjęcie" />
+      <TableView fx:id="tableMaterials" layoutX="606.0" layoutY="50.0" prefHeight="339.0" prefWidth="242.0">
+        <columns>
+          <TableColumn fx:id="columnMaterials" prefWidth="162.0" text="Towar" />
+          <TableColumn fx:id="columnCount" prefWidth="79.0" text="Ilość" />
+        </columns>
+      </TableView>
+      <Button layoutX="68.0" layoutY="553.0" mnemonicParsing="false" onAction="#clickGeneratePdf" text="Generuj pdf" />
+      <ToggleButton layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickShowAll" text="Pokaż wszystko">
+         <toggleGroup>
+            <ToggleGroup fx:id="showTransaction" />
+         </toggleGroup>
+      </ToggleButton>
+      <ToggleButton layoutX="207.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickShowOut" text="Pokaż wydania" toggleGroup="$showTransaction" />
+      <ToggleButton layoutX="409.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickShowIn" text="Pokaż przyjęcia" toggleGroup="$showTransaction" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,63 @@
+package pl.kpp.controllers.materials;
+
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import pl.kpp.CreateWindowAlert;
+import pl.kpp.converters.workers.PolicemanConverter;
+import pl.kpp.dao.materialsDao.TransactionDao;
+import pl.kpp.materials.Materials;
+import pl.kpp.workers.Policeman;
+
+import java.time.LocalDate;
+
+
+public class AddNewGetOutController extends AddNewTransactionController{
+
+    @FXML
+    private ChoiceBox<Policeman> choiceEmployer;
+    @FXML
+    private CheckBox checkHelples;
+    @FXML
+    private CheckBox checkCriminal;
+    @FXML
+    private CheckBox checkPrewent;
+    @FXML
+    private CheckBox checkCar;
+
+
+
+
+    private ObservableList<Policeman> observableListPoliceman = FXCollections.observableArrayList();
+    private ObservableList<Materials> observableListMaterials = FXCollections.observableArrayList();
+
+    @FXML
+    void initialize (){
+        super.initialize();
+        choiceEmployer.setConverter(new PolicemanConverter());
+        observableListPoliceman = FXCollections.observableList(Policeman.getPolicemanList());
+        choiceEmployer.setItems(observableListPoliceman);
+    }
+
+    @FXML
+    void clickSave(ActionEvent e){
+        if(choiceEmployer.getValue()!=null) {
+            if (clickSave(1)) {
+                Policeman police = choiceEmployer.getValue();
+                String numberOfTransaction = (TransactionDao.getTransactionDaoList().size() + 1) + "/" + LocalDate.now().getYear();
+                TransactionDao transaction = new TransactionDao(police.getId(), numberOfTransaction);
+                transaction.saveTransaction(1);
+                ShowTransactionScreenController.setIsNewTransaction();
+            }
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
+            stage.close();
+        }else
+        {
+            CreateWindowAlert.CreateWindowAlert("Nie wybrałeś policjanta");
+        }
+}}

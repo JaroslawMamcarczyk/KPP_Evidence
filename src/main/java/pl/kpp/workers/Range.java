@@ -20,16 +20,10 @@ public class Range {
 
     private static List<Range> listRange = new ArrayList<>();
 
-    public static List<Range> getListRange() {
-        listRange.clear();
-        for(RangeDao rangeDao:RangeDao.getRangeDaoList()){
-           listRange.add(new Range(rangeDao));
-        }
-        return listRange;
+    public static List<Range> getListRange() { return listRange; }
+    public int getId() { return id;
     }
-    public int getId(){
-        return id;
-    }
+
     public String getRangeName() {
         return rangeName.get();
     }
@@ -40,25 +34,34 @@ public class Range {
 
     /**
      * Constructor
+     *
      * @param dao object reading from database
      */
-    public  Range(RangeDao dao){
+    public Range(RangeDao dao) {
         this.rangeName.set(dao.getRangeName());
         this.path = dao.getPath();
-        this.pagons = new ImageView(this.path);
+        this.pagons = new ImageView(getClass().getResource(this.path).toString());
         this.id = dao.getId();
     }
 
     /**
      * Searching range
+     *
      * @param index index search range
      * @return finding range
      */
-    public static Range searchRange(int index){
-        Range rang =null;
-        for(Range range: listRange){
+    public static Range searchRange(int index) {
+        Range rang = null;
+        for (Range range : listRange) {
             if (range.getId() == index) rang = range;
         }
         return rang;
+    }
+
+    public static void createRangeList() {
+        listRange.clear();
+        for (RangeDao rangeDao : RangeDao.getRangeDaoList()) {
+            listRange.add(new Range(rangeDao));
+        }
     }
 }

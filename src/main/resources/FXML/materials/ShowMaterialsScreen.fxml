@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.ShowMaterialScreenController">
+   <children>
+      <TableView fx:id="tableEquipment" layoutX="20.0" layoutY="14.0" prefHeight="580.0" prefWidth="778.0">
+        <columns>
+          <TableColumn fx:id="lp" prefWidth="46.0" text="LP" />
+          <TableColumn fx:id="name" prefWidth="445.0" text="Nazwa" />
+            <TableColumn fx:id="count" prefWidth="129.0" text="Ilość" />
+            <TableColumn fx:id="type" prefWidth="157.0" text="Typ" />
+        </columns>
+      </TableView>
+      <ToggleButton layoutX="809.0" layoutY="48.0" mnemonicParsing="false" onAction="#clickAdd" prefHeight="31.0" prefWidth="101.0" text="Dodaj" />
+      <ToggleButton layoutX="809.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickEdit" prefHeight="31.0" prefWidth="101.0" text="Edytuj" />
+      <ToggleButton layoutX="809.0" layoutY="110.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="31.0" prefWidth="101.0" text="Usuń" />
+   </children>
+</AnchorPane>

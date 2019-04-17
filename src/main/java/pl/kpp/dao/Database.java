@@ -22,7 +22,6 @@ public class Database {
             try {
                 con = DriverManager.getConnection(DBURL);
                 stmt = con.createStatement();
-                System.out.println("podłączyłem bazę");
             }catch (SQLException e){
                 System.out.println("bład zapytania");
             }
@@ -66,24 +65,18 @@ public class Database {
             }
         }
 
-    /**
-     * creating table
-     */
-    public void createTable(){
-        try {
-            PreparedStatement statement = con.prepareStatement("CREATE TABLE IF NOT EXISTS workers(id INTEGER not null constraint workers_pk primary key, " +
-                    "name VARCHAR(50), surname VARCHAR(100), ewidential_number VARCHAR(6)," +
-                    "pesel int,range int constraint workers_range_id_fk references range," +
-                    "departament int constraint workers_departament_id_fk references departament," +
-                    "ranks int constraint workers_ranks_id_fk references ranks)");
-            statement.execute();
-            System.out.println("utworzyłem tabele");
-            statement = con.prepareStatement("CREATE TABLE IF NOT EXISTS departament(id INTEGER" +
-                    "constraint departament_pk\n" +
-                    "primary key, departament_name VARCHAR(200))");
-            statement.execute();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * creating table
+//     */
+//    public void createTable(){
+//        try {
+//            PreparedStatement statement = con.prepareStatement("CREATE TABLE IF NOT EXISTS test(id INTEGER not null constraint workers_pk primary key, name VARCHAR(100))");
+//            statement.execute();
+//            System.out.println("utworzyłem tabele");
+//            statement = con.prepareStatement("DROP TABLE test");
+//            statement.execute();
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
 }

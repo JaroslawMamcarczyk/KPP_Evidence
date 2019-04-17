@@ -1,5 +1,7 @@
 package pl.kpp.dao.workersDao;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import pl.kpp.dao.Database;
 import pl.kpp.workers.Policeman;
 import java.sql.PreparedStatement;
@@ -19,6 +21,7 @@ public class PolicemanDao {
     private int daoDepartament;
     private int daoRanks;
     private static List<PolicemanDao> policemanDaoList = new ArrayList<>();
+    private static BooleanProperty isChangeOnDatabase = new SimpleBooleanProperty(false);
 
     public int getDaoId() {
         return daoId;
@@ -43,7 +46,7 @@ public class PolicemanDao {
     public static List<PolicemanDao> getPolicemanDAOList() {
         return policemanDaoList;
     }
-
+    public static BooleanProperty isChangeOnDatabaseProperty() { return isChangeOnDatabase; }
 
     public PolicemanDao(int daoid, String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks) {
         this.daoId = daoid;
@@ -69,8 +72,7 @@ public class PolicemanDao {
     /**
      *Reading all workers from Database and create list
      */
-    public static void readPoliceman(){
-        Database date = new Database();
+    public static void readPoliceman(Database date){
         policemanDaoList.clear();
         try (ResultSet result = date.select("SELECT * FROM workers")) {
             while (result.next()) {
@@ -82,7 +84,6 @@ public class PolicemanDao {
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
         }
-        date.closeDatabase();
     }
 
     /**
@@ -92,7 +93,7 @@ public class PolicemanDao {
         PreparedStatement statement;
         Database date = new Database();
         try {
-            statement = date.getCon().prepareStatement("INSERT INTO policeman (name, Surname, ewidential, Pesel, Range,Departament, ranks) " +
+            statement = date.getCon().prepareStatement("INSERT INTO workers (worker_name,worker_surname,worker_evidential,worker_pesel,worker_range,worker_departament,worker_ranks) " +
                     "VALUES (?,?,?,?,?,?,?)");
             statement.setString(1, this.daoName);
             statement.setString(2, this.daoSurname);
@@ -102,6 +103,7 @@ public class PolicemanDao {
             statement.setInt(6,this.daoDepartament);
             statement.setInt(7,this.daoRanks);
             statement.execute();
+            isChangeOnDatabase.setValue(true);
         } catch (SQLException e) {
             System.out.println("błąd zapytania sql");
         }
@@ -130,7 +132,7 @@ public class PolicemanDao {
      */
     public static void updatePoliceman(PolicemanDao policeman){
         Database date = new Database();
-        String sql = "UPDATE workers SET name=?, surname = ?, pesel = ?, ewidential = ?, range = ?,departament = ?, ranks = ?"+"WHERE id=?";
+        String sql = "UPDATE workers SET worker_name=?, worker_surname = ?, worker_pesel = ?, worker_evidential = ?, worker_range = ?,worker_departament = ?, worker_ranks = ?"+"WHERE id=?";
         try{
             PreparedStatement statement = date.getCon().prepareStatement(sql);
             statement.setString(1,policeman.getDaoName());

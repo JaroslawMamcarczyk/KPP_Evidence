@@ -15,9 +15,9 @@ import pl.kpp.workers.Departament;
 import pl.kpp.workers.Policeman;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
-import pl.kpp.converters.converters.DepartamentConverter;
-import pl.kpp.converters.converters.RangeConverter;
-import pl.kpp.converters.converters.RanksConverter;
+import pl.kpp.converters.workers.DepartamentConverter;
+import pl.kpp.converters.workers.RangeConverter;
+import pl.kpp.converters.workers.RanksConverter;
 import pl.kpp.dao.workersDao.PolicemanDao;
 
 
@@ -48,9 +48,6 @@ public class DetailsPolicemanScreenController {
     @FXML
     private TextField ltelephone;
 
-
-
-
     private Policeman police;
 
     @FXML
@@ -59,7 +56,7 @@ public class DetailsPolicemanScreenController {
         lname.setText(police.getName() + " " + police.getSurrname());
         lid.setText(police.getEwidential());
         lpesel.setText(police.getPesel());
-       // ldepartament.setText(police.getNamePoliceDepartament());
+        ldepartament.setText(police.getNamePoliceDepartament());
         if (police.getPolicemanRange()!=null) {
             lrange.setText(police.getPolicemanRange().getRangeName());
             lpagons.setImage(new Image(police.getPolicemanRange().getPath()));
@@ -71,8 +68,6 @@ public class DetailsPolicemanScreenController {
     @FXML
     void clickSave(ActionEvent event) {
         String[] names = lname.getText().split(" ");
-        //PolicemanDAO policeman = new PolicemanDAO(names[0],names[1],lid.getText(),lpesel.getText(),police.getId(),choiceRange.getValue().getId());
-        //PolicemanDAO.updatePoliceman(policeman);
     }
 
     @FXML
@@ -89,6 +84,7 @@ public class DetailsPolicemanScreenController {
         ChoiceBox<Range> choiceRange=new ChoiceBox<>();
         choiceRange.setConverter(new RangeConverter());
         choiceRange.setItems(rangeObservableList);
+        choiceRange.getSelectionModel().select(police.getPolicemanRange());
         vBoxTextField.getChildren().remove(2);
         vBoxTextField.getChildren().remove(2);
         ObservableList<Departament> departamentObservableList = FXCollections.observableList(Departament.getDepartamentList());

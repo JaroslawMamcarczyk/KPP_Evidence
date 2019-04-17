@@ -60,28 +60,28 @@ public class Policeman {
         pesel.set(policemanDao.getDaoPesel());
         id = policemanDao.getDaoId();
         if(policemanDao.getDaoRange() != 0) {
-         //   policemanRange = Range.searchRange(dao.getDaoRange());
+            policemanRange = Range.searchRange(policemanDao.getDaoRange());
         }
         else policemanRange = null;
-//        if (policemanDao.getDaoDepartament()!=0){
-//            for (Departament departament:Departament.getDepartamentList()){
-//                if(departament.getId()==policemanDao.getDaoDepartament()){
-//                    this.policemanDepartament=departament;
-//                   this.namePolicedepartament.set(departament.getName());
-//                }
-//            }
-//        }else{
+        if (policemanDao.getDaoDepartament()!=0){
+            for (Departament departament:Departament.getDepartamentList()){
+                if(departament.getId()==policemanDao.getDaoDepartament()){
+                    this.policemanDepartament=departament;
+                   this.namePolicedepartament.set(departament.getName());
+                }
+            }
+        }else{
             this.policemanDepartament=null;
             this.namePolicedepartament.set(" ");
-        //}
-//        if (policemanDao.getDaoRanks()!=0){
-//            for (Ranks ranks:Ranks.getRanksList()){
-//                if (ranks.getRanksId()==dao.getDaoRanks()){
-//                    this.policemanRanks=ranks;
-//                }
-//            }
-//        }
-        //else
+        }
+        if (policemanDao.getDaoRanks()!=0){
+            for (Ranks ranks:Ranks.getRanksList()){
+                if (ranks.getRanksId()==policemanDao.getDaoRanks()){
+                    this.policemanRanks=ranks;
+                }
+            }
+        }
+        else
             this.policemanRanks = null;
     }
 
