@@ -6,16 +6,18 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.workersControllers.ShowPolicemanScreenController">
    <children>
-      <TableView id="tablePoliceman" fx:id="policemanTableView" layoutX="14.0" layoutY="84.0" prefHeight="502.0" prefWidth="972.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="84.0">
+      <TableView id="tablePoliceman" fx:id="policemanTableView" layoutX="14.0" layoutY="79.0" prefHeight="510.0" prefWidth="581.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="80.0">
         <columns>
-          <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="206.0" text="Imię" />
-          <TableColumn id="surnameColumn" fx:id="surrnameColumn" prefWidth="206.0" text="Nazwisko" />
-            <TableColumn fx:id="idColumn" prefWidth="134.0" text="ID" />
-            <TableColumn fx:id="peselColumn" prefWidth="211.0" text="Pesel" />
-            <TableColumn fx:id="standingColumn" prefWidth="273.0" text="Wydział" />
+          <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="179.0" text="Imię" />
+          <TableColumn id="surnameColumn" fx:id="surrnameColumn" prefWidth="205.0" text="Nazwisko" />
+            <TableColumn fx:id="idColumn" prefWidth="109.0" text="ID" />
+            <TableColumn fx:id="peselColumn" prefWidth="188.0" text="Pesel" />
+            <TableColumn fx:id="standingColumn" prefWidth="195.322265625" text="Wydział" />
         </columns>
       </TableView>
       <TextField fx:id="searchPolicemanTextField" layoutX="356.0" layoutY="35.0" prefHeight="31.0" prefWidth="257.0" />
       <Label layoutX="400.0" layoutY="14.0" prefHeight="21.0" prefWidth="187.0" text="Szukaj" />
+      <ToggleButton layoutX="768.0" layoutY="79.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="300.0" text="Wszyscy" AnchorPane.rightAnchor="20.0" />
+      <VBox fx:id="vBoxButtons" layoutX="770.0" layoutY="126.0" prefHeight="465.0" prefWidth="300.0" spacing="5.0" AnchorPane.rightAnchor="20.0" />
    </children>
 </AnchorPane>

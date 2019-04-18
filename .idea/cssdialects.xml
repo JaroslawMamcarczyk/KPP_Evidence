@@ -2,6 +2,5 @@
 <project version="4">
   <component name="CssDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/css/showTransactionCss.css" dialect="CLASSIC" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/mainScreen.css" dialect="CLASSIC" />
   </component>
 </project>

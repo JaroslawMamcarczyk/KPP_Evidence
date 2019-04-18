@@ -1,21 +1,17 @@
 package pl.kpp.controllers.workersControllers;
 
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.workers.Departament;
 import pl.kpp.workers.Policeman;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +31,14 @@ public class ShowPolicemanScreenController {
     private TableColumn<Policeman, String> standingColumn;
     @FXML
     private TextField searchPolicemanTextField;
+    @FXML
+    private VBox vBoxButtons;
+
 
     private String search;
     private static Policeman editPoliceman;
     private List<Policeman> temporaryList = new ArrayList<Policeman>();
+    public ObservableList<Policeman> specialObservablePolicemanList = FXCollections.observableArrayList();
 
 
     public static Policeman getEditPoliceman() {
@@ -106,6 +106,22 @@ public class ShowPolicemanScreenController {
                     setPolicemanTableView(listResult);
                 }
         );
+        ToggleGroup buttonsgroup = new ToggleGroup();
+        for(Departament departament:Departament.getDepartamentList()){
+            ToggleButton toggleButton = new ToggleButton(departament.getName());
+            toggleButton.setWrapText(true);
+            toggleButton.setPrefWidth(300);
+            toggleButton.setToggleGroup(buttonsgroup);
+            toggleButton.setOnAction(event-> {
+                        List <Policeman> policemanSpecialList = new ArrayList<>();
+                for (Policeman policeman:Policeman.getPolicemanList()) {
+                    if(policeman.getPolicemanDepartament()!=null&&policeman.getPolicemanDepartament().getId()==departament.getId())
+                    policemanSpecialList.add(policeman);
+                }
+                setPolicemanTableView(FXCollections.observableArrayList(policemanSpecialList));
+                        });
+            vBoxButtons.getChildren().add(toggleButton);
+        }
     }
     /**
      * filling the table with data
@@ -120,4 +136,5 @@ public class ShowPolicemanScreenController {
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         standingColumn.setCellValueFactory(new PropertyValueFactory<>("namePoliceDepartament"));
     }
+
 }

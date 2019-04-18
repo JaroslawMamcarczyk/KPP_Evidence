@@ -2,6 +2,8 @@ package pl.kpp.workers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pl.kpp.dao.workersDao.PolicemanDao;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,5 +130,4 @@ public class Policeman {
     public int hashCode() {
         return Objects.hash(name, surrname, ewidential, pesel, policemanRange, id);
     }
-
 }
