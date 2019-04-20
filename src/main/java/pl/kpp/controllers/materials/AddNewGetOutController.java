@@ -47,7 +47,7 @@ public class AddNewGetOutController extends AddNewTransactionController{
     @FXML
     void clickSave(ActionEvent e){
         if(choiceEmployer.getValue()!=null) {
-            if (clickSave(1)) {
+            if (SaveNewTransaction(1)) {
                 Policeman police = choiceEmployer.getValue();
                 String numberOfTransaction = (TransactionDao.getTransactionDaoList().size() + 1) + "/" + LocalDate.now().getYear();
                 TransactionDao transaction = new TransactionDao(police.getId(), numberOfTransaction);

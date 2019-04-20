@@ -35,7 +35,6 @@ public class ShowMaterialScreenController {
     private TableView<Materials> tableEquipment;
 
     private Materials newequip;
-    private Stage newStageAddEquipment;
     private ObservableList<Materials> list = FXCollections.observableArrayList();
 
     @FXML
@@ -53,10 +52,10 @@ public class ShowMaterialScreenController {
 
     @FXML
     void clickAdd(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/AddMaterialScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/materials/AddMaterialScreen.fxml"));
         try {
             Parent parent = loader.load();
-            newStageAddEquipment = new Stage(StageStyle.TRANSPARENT);
+            Stage newStageAddEquipment = new Stage(StageStyle.TRANSPARENT);
             newStageAddEquipment.initModality(Modality.WINDOW_MODAL);
             newStageAddEquipment.setTitle("Dodawanie nowego artykułu");
             newStageAddEquipment.setScene(new Scene(parent));
@@ -78,7 +77,7 @@ public class ShowMaterialScreenController {
 
     }
 
-    public void setTable(ObservableList<Materials> glist) {
+    private void setTable(ObservableList<Materials> glist) {
         tableEquipment.getItems().clear();
         tableEquipment.setItems(glist);
         lp.setCellValueFactory(new PropertyValueFactory<>("id"));

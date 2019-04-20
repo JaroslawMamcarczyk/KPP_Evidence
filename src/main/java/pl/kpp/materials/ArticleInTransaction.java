@@ -26,11 +26,11 @@ public class ArticleInTransaction {
     public String getNameArticleInTransaction() {return nameArticleInTransaction.get();}
 
     public ArticleInTransaction(ArticleInTransactionDao garticle){
-        this.id = garticle.getDaoIdArticle();
-        this.articleInTransactionMaterial = Materials.findmaterial(garticle.getDaoIdProduckt());
+        this.id = garticle.getDaoId();
+        this.articleInTransactionMaterial = Materials.findmaterial(garticle.getDaoMaterialId());
         this.nameArticleInTransaction.set(this.articleInTransactionMaterial.getName());
-        this.count = garticle.getDaoCountArticle();
-        this.articleInTransactionTransaction = Transaction.findTransaction(garticle.getDaoTransactionID());
+        this.count = garticle.getDaoArticleInTransactionCount();
+        this.articleInTransactionTransaction = Transaction.findTransaction(garticle.getDaoTransactionId());
     }
 
     public static void CreateArticleIntransactionList() {

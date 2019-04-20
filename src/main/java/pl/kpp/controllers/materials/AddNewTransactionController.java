@@ -94,7 +94,7 @@ public class AddNewTransactionController {
         stage.close();
     }
 
-    public boolean clickSave(int transactiontype){
+    public boolean SaveNewTransaction(int transactiontype){
         boolean isArticleToSave=false;
         ArticleInTransactionDao article;
         int temporaryNumberOfList = 0;

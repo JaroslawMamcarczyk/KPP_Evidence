@@ -30,10 +30,6 @@ import java.util.Date;
 
 public class ShowTransactionScreenController {
     @FXML
-    private ToggleGroup showTransaction;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private TableColumn<Transaction, Date> columnDataTransaction;
     @FXML
     private TableColumn<Policeman, String> columnNumberTransaction;
@@ -138,14 +134,17 @@ public class ShowTransactionScreenController {
     }
 
     public void clickShowAll(){
+        tableMaterials.setItems(null);
         setTable(transactionObservableList);
     }
 
     public void clickShowIn(){
+        tableMaterials.setItems(null);
         setTable(transactionInObservableList);
     }
 
     public void ClickShowOut(){
+        tableMaterials.setItems(null);
         setTable(transactionOutObservableList);
     }
 

@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleInTransactionDao {
-    private int daoTransactionID;
-    private int daoIdArticle;
-    private int daoIdProduct;
-    private int daoCountArticle;
+    private int daoId;
+    private int daoTransactionId;
+    private int daoMaterialId;
+    private int daoArticleInTransactionCount;
     private static PreparedStatement statement;
     private static List<ArticleInTransactionDao> articleInTransactionDaoList = new ArrayList<>();
 
-    public int getDaoTransactionID() {
-        return daoTransactionID;
+    public int getDaoId() {
+        return daoId;
     }
 
-    public int getDaoIdArticle() {
-        return daoIdArticle;
+    public int getDaoTransactionId() {
+        return daoTransactionId;
     }
 
-    public int getDaoIdProduckt() {
-        return daoIdProduct;
+    public int getDaoMaterialId() {
+        return daoMaterialId;
     }
 
-    public int getDaoCountArticle() {
-        return daoCountArticle;
+    public int getDaoArticleInTransactionCount() {
+        return daoArticleInTransactionCount;
     }
 
     public static List<ArticleInTransactionDao> getArticleInTransactionDaoList() {
@@ -37,16 +37,16 @@ public class ArticleInTransactionDao {
     }
 
     public ArticleInTransactionDao(int gid, int gtransaction, int gproduckt, int gcount){
-        this.daoCountArticle = gcount;
-        this.daoIdArticle = gid;
-        this.daoIdProduct = gproduckt;
-        this.daoTransactionID = gtransaction;
+        this.daoArticleInTransactionCount = gcount;
+        this.daoTransactionId = gtransaction;
+        this.daoMaterialId = gproduckt;
+        this.daoId = gid;
     }
 
     public ArticleInTransactionDao(int gtransaction, int gproduckt, int gcount){
-        this.daoCountArticle = gcount;
-        this.daoIdProduct = gproduckt;
-        this.daoTransactionID = gtransaction;
+        this.daoArticleInTransactionCount = gcount;
+        this.daoMaterialId = gproduckt;
+        this.daoTransactionId = gtransaction;
     }
     public static void readArticleInTransaction(){
         Database date = new Database();
@@ -67,9 +67,9 @@ public class ArticleInTransactionDao {
         Database date = new Database();
         try {
             statement = date.getCon().prepareStatement("INSERT INTO article_in_transaction (transaction_id, material_id, article_in_transaction_count) VALUES (?,?,?)");
-            statement.setInt(1, this.daoTransactionID);
-            statement.setInt(2, this.daoIdProduct);
-            statement.setInt(3, this.daoCountArticle);
+            statement.setInt(1, this.daoTransactionId);
+            statement.setInt(2, this.daoMaterialId);
+            statement.setInt(3, this.daoArticleInTransactionCount);
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Nie zapisałem - cos nie pykło");

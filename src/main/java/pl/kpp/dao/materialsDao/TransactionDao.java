@@ -119,7 +119,7 @@ public class TransactionDao {
         int lastGeneratedID=0;
         try{
         Statement stat = date.getCon().createStatement();
-        ResultSet result= stat.executeQuery("SELECT MAX(id) from transaction_list WHERE type=2");
+        ResultSet result= stat.executeQuery("SELECT MAX(id) from transaction_list");
            while(result.next()) {
                 lastGeneratedID = result.getInt(1);
            }

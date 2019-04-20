@@ -49,14 +49,14 @@ public class AddNewGetInController extends AddNewTransactionController {
         if(yearField.getText().matches("[1-2]\\d{3}")&&monthField.getText().matches("[0-1]\\d")&&dayField.getText().matches("[0-3]\\d")) {
                 date = yearField.getText() + "-" + monthField.getText() + "-" + dayField.getText();
                 if (!isButtonNewDeliveryPush) {
-                    if (clickSave(2)) {
+                    if (SaveNewTransaction(2)) {
                         TransactionDao transactionDAO = new TransactionDao(0,1,numberOfTransactionField.getText(), date, 2);
                         transactionDAO.saveTransaction(2);
                     }
                 } else {
                     if (newDeliverer.getText() != null) {
                         String deliveryToSave = newDeliverer.getText();
-                        if (clickSave(2)) {
+                        if (SaveNewTransaction(2)) {
                             DeliverysDao deliverysDAO = new DeliverysDao(deliveryToSave, newAddress.getText());
                             int lastId = deliverysDAO.saveDelivery();
                             TransactionDao transactionDAO = new TransactionDao(0,lastId, numberOfTransactionField.getText(), date, 2);

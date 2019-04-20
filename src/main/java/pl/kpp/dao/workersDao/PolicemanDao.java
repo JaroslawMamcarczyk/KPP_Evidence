@@ -2,6 +2,7 @@ package pl.kpp.dao.workersDao;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import pl.kpp.CreateWindowAlert;
 import pl.kpp.dao.Database;
 import pl.kpp.workers.Policeman;
 import java.sql.PreparedStatement;
@@ -149,5 +150,33 @@ public class PolicemanDao {
             System.out.println("błąd zapytania");
         }
         date.closeDatabase();
+    }
+
+    public static void updateWorkerString(String databaseField, String value, int id){
+        Database date = new Database();
+        String sql = "UPDATE workers SET "+databaseField+"= ? WHERE id=?";
+        try{
+            PreparedStatement statement = date.getCon().prepareStatement(sql);
+            statement.setString(1,value);
+            statement.setInt(2,id);
+            statement.execute();
+            isChangeOnDatabase.set(true);
+        }catch (SQLException e){
+            CreateWindowAlert.createWindowError("Bład tworzenia zapytania");
+        }
+    }
+
+    public static void updateWorkerInt(String databaseField, int value, int id){
+        Database date = new Database();
+        String sql = "UPDATE workers SET "+databaseField+"= ? WHERE id=?";
+        try{
+            PreparedStatement statement = date.getCon().prepareStatement(sql);
+            statement.setInt(1,value);
+            statement.setInt(2,id);
+            statement.execute();
+            isChangeOnDatabase.set(true);
+        }catch (SQLException e){
+            CreateWindowAlert.createWindowError("Bład tworzenia zapytania");
+        }
     }
 }
