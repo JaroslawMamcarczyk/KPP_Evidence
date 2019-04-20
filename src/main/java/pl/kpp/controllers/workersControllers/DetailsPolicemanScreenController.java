@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,8 +44,6 @@ public class DetailsPolicemanScreenController {
     @FXML
     private Button buttonDelete;
     @FXML
-    private Button buttonModify;
-    @FXML
     private TextField lranks;
     @FXML
     private TextField ltelephone;
@@ -54,6 +53,8 @@ public class DetailsPolicemanScreenController {
     private HBox hBoxDepartament;
     @FXML
     private HBox hBoxRanks;
+    @FXML
+    VBox vBoxHaving;
 
     private Policeman police;
     private Range newPolicemanRange = null;
@@ -79,6 +80,9 @@ public class DetailsPolicemanScreenController {
         }
         if(police.getPolicemanRanks()!=null)
         lranks.setText(police.getPolicemanRanks().getNameRanks());
+        if(police.getPolicemanIntranet()==1) createLabel(police.getName()+"."+police.getSurrname(), "Intranet");
+        if(police.getPolicemanIntradok()==1) createLabel(police.getName()+"."+police.getSurrname(), "Intranet");
+        if(police.getPolicemanLotus()==1) createLabel(police.getName()+"."+police.getSurrname()+"@", "Lotus/Domino");
         }
 
     @FXML
@@ -209,6 +213,14 @@ public class DetailsPolicemanScreenController {
             }
         }
         return ranks;
+    }
+
+    private void createLabel(String text, String name){
+        Label label = new Label(text);
+        Label label1 = new Label(name+":    ");
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(label1,label);
+        vBoxHaving.getChildren().add(hBox);
     }
 
 }

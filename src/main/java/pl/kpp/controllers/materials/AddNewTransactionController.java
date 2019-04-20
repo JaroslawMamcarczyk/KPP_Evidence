@@ -81,7 +81,7 @@ public class AddNewTransactionController {
 
     @FXML
     void initialize() {
-        cancelButton.setGraphic(new ImageView("Pics/cancel.jpg"));
+        cancelButton.setGraphic(new ImageView("/pics/cancel.jpg"));
         choiceEquipment.setConverter(new EquipmentNameConverter());
         Materials.createMaterialsList();
         observableListMaterials = FXCollections.observableList(Materials.getMaterialsList());

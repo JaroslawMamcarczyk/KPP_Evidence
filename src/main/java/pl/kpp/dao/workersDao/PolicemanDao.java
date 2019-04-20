@@ -21,6 +21,12 @@ public class PolicemanDao {
     private int daoId;
     private int daoDepartament;
     private int daoRanks;
+    private  int daoIntranet;
+    private  int daoIntradok;
+    private  int daoLotus;
+    private  int daoExchange;
+    private  int daoCryptomail;
+    private int daoSWD;
     private static List<PolicemanDao> policemanDaoList = new ArrayList<>();
     private static BooleanProperty isChangeOnDatabase = new SimpleBooleanProperty(false);
 
@@ -44,12 +50,38 @@ public class PolicemanDao {
     }
     public int getDaoDepartament(){return daoDepartament;}
     public int getDaoRanks(){return daoRanks;}
+
+    public int getDaoIntranet() {
+        return daoIntranet;
+    }
+
+    public int getDaoIntradok() {
+        return daoIntradok;
+    }
+
+    public int getDaoLotus() {
+        return daoLotus;
+    }
+
+    public int getDaoExchange() {
+        return daoExchange;
+    }
+
+    public int getDaoCryptomail() {
+        return daoCryptomail;
+    }
+
+    public int getDaoSWD() {
+        return daoSWD;
+    }
+
     public static List<PolicemanDao> getPolicemanDAOList() {
         return policemanDaoList;
     }
     public static BooleanProperty isChangeOnDatabaseProperty() { return isChangeOnDatabase; }
 
-    public PolicemanDao(int daoid, String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks) {
+    public PolicemanDao(int daoid, String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
+                        int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
         this.daoId = daoid;
         this.daoName = daoName;
         this.daoSurname = daoSurname;
@@ -58,6 +90,12 @@ public class PolicemanDao {
         this.daoRange = daoRange;
         this.daoDepartament = daoDepartament;
         this.daoRanks = daoRanks;
+        this.daoIntranet = daoIntranet;
+        this.daoIntradok = daoIntradok;
+        this.daoLotus= daoLotus;
+        this.daoExchange=daoExchange;
+        this.daoCryptomail=daoCryptomail;
+        this.daoSWD=daoSWD;
     }
     public PolicemanDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks) {
         this.daoName = daoName;
@@ -79,7 +117,8 @@ public class PolicemanDao {
             while (result.next()) {
                 PolicemanDao policeman = new PolicemanDao(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
                         result.getString(5),result.getInt(6),result.getInt(7),
-                        result.getInt(8));
+                        result.getInt(8), result.getInt(9), result.getInt(10), result.getInt(11),
+                        result.getInt(12),result.getInt(13),result.getInt(14));
                 policemanDaoList.add(policeman);
             }
         }catch (SQLException e){

@@ -20,6 +20,12 @@ public class Policeman {
     private Departament policemanDepartament;
     private StringProperty namePolicedepartament = new SimpleStringProperty();
     private Ranks policemanRanks;
+    private  int policemanIntranet;
+    private  int policemanIntradok;
+    private  int policemanLotus;
+    private  int policemanExchange;
+    private  int policemanCryptomail;
+    private int policemanSWD;
     private static List<Policeman> policemanList = new ArrayList<>();
 
     public Range getPolicemanRange() {
@@ -50,6 +56,30 @@ public class Policeman {
     public String getNamePoliceDepartament(){ return namePolicedepartament.get();}
     public Departament getPolicemanDepartament() { return policemanDepartament;}
     public Ranks getPolicemanRanks(){return  policemanRanks;}
+
+    public int getPolicemanIntranet() {
+        return policemanIntranet;
+    }
+
+    public int getPolicemanIntradok() {
+        return policemanIntradok;
+    }
+
+    public int getPolicemanLotus() {
+        return policemanLotus;
+    }
+
+    public int getPolicemanExchange() {
+        return policemanExchange;
+    }
+
+    public int getPolicemanCryptomail() {
+        return policemanCryptomail;
+    }
+
+    public int getPolicemanSWD() {
+        return policemanSWD;
+    }
 
     /**
      * Constructor
@@ -85,6 +115,12 @@ public class Policeman {
         }
         else
             this.policemanRanks = null;
+        this.policemanIntranet=policemanDao.getDaoIntranet();
+        this.policemanIntradok=policemanDao.getDaoIntradok();
+        this.policemanLotus=policemanDao.getDaoLotus();
+        this.policemanExchange=policemanDao.getDaoExchange();
+        this.policemanCryptomail=policemanDao.getDaoCryptomail();
+        this.policemanSWD=policemanDao.getDaoSWD();
     }
 
     /**
