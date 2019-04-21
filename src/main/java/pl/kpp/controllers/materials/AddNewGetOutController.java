@@ -58,6 +58,6 @@ public class AddNewGetOutController extends AddNewTransactionController{
             stage.close();
         }else
         {
-            CreateWindowAlert.CreateWindowAlert("Nie wybrałeś policjanta");
+            CreateWindowAlert.CreateWindowConfirmation("Nie wybrałeś policjanta");
         }
 }}

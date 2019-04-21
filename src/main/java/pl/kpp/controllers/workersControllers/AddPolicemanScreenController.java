@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import pl.kpp.CreateWindowAlert;
@@ -34,6 +35,18 @@ public class AddPolicemanScreenController {
     private ChoiceBox<Ranks> choiceRanks;
     @FXML
     private ChoiceBox<Departament> choiceDepartament;
+    @FXML
+    private CheckBox checkBoxIntradok;
+    @FXML
+    private  CheckBox checkBoxIntranet;
+    @FXML
+    private CheckBox checkBoxExchange;
+    @FXML
+    private CheckBox checkBoxLotus;
+    @FXML
+    private CheckBox checkBoxSWD;
+    @FXML
+    private CheckBox checkBoxCryptomail;
     private PolicemanDao policeman=null;
 
 
@@ -90,10 +103,16 @@ public class AddPolicemanScreenController {
             if(choiceDepartament.getValue()!=null){
                 departamentToSave=choiceDepartament.getValue().getId();
             }
-            policeman = new PolicemanDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave);
-                policeman.savePoliceman();
+            policeman = new PolicemanDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave,0,0,0,0,0,0);
+            if(checkBoxIntradok.isSelected())policeman.setDaoIntradok(1);
+            if(checkBoxIntranet.isSelected())policeman.setDaoIntranet(1);
+            if(checkBoxExchange.isSelected())policeman.setDaoExchange(1);
+            if(checkBoxCryptomail.isSelected())policeman.setDaoCryptomail(1);
+            if(checkBoxLotus.isSelected())policeman.setDaoLotus(1);
+            if(checkBoxSWD.isSelected())policeman.setDaoSWD(1);
+            policeman.savePoliceman();
                 PolicemanDao.isChangeOnDatabaseProperty().setValue(true);
-                CreateWindowAlert.CreateWindowAlert("Dodano Nowego Policjanta");
+                CreateWindowAlert.CreateWindowConfirmation("Dodano Nowego Policjanta");
            MainScreenController.getMainScreenController().createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
             }else CreateWindowAlert.createWindowError("Błąd dodawania nowego policjanta - popraw pola świecące na czerowno");
     }

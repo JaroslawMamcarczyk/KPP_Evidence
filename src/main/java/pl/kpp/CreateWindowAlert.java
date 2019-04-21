@@ -1,6 +1,10 @@
 package pl.kpp;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class CreateWindowAlert {
 
@@ -11,9 +15,9 @@ public class CreateWindowAlert {
         alert.showAndWait();
     }
 
-    public static void CreateWindowAlert(String message) {
+    public static Optional<ButtonType> CreateWindowConfirmation(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(message);
-        alert.showAndWait();
+        return alert.showAndWait();
     }
 }

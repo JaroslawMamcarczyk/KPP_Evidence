@@ -50,30 +50,21 @@ public class PolicemanDao {
     }
     public int getDaoDepartament(){return daoDepartament;}
     public int getDaoRanks(){return daoRanks;}
+    public int getDaoIntranet() { return daoIntranet; }
+    public int getDaoIntradok() { return daoIntradok; }
+    public int getDaoLotus() { return daoLotus; }
+    public int getDaoExchange() { return daoExchange; }
+    public int getDaoCryptomail() { return daoCryptomail; }
+    public int getDaoSWD() { return daoSWD; }
 
-    public int getDaoIntranet() {
-        return daoIntranet;
-    }
 
-    public int getDaoIntradok() {
-        return daoIntradok;
-    }
 
-    public int getDaoLotus() {
-        return daoLotus;
-    }
-
-    public int getDaoExchange() {
-        return daoExchange;
-    }
-
-    public int getDaoCryptomail() {
-        return daoCryptomail;
-    }
-
-    public int getDaoSWD() {
-        return daoSWD;
-    }
+    public void setDaoIntranet(int daoIntranet) { this.daoIntranet = daoIntranet; }
+    public void setDaoIntradok(int daoIntradok) { this.daoIntradok = daoIntradok; }
+    public void setDaoLotus(int daoLotus) { this.daoLotus = daoLotus; }
+    public void setDaoExchange(int daoExchange) { this.daoExchange = daoExchange; }
+    public void setDaoCryptomail(int daoCryptomail) { this.daoCryptomail = daoCryptomail; }
+    public void setDaoSWD(int daoSWD) { this.daoSWD = daoSWD; }
 
     public static List<PolicemanDao> getPolicemanDAOList() {
         return policemanDaoList;
@@ -97,7 +88,8 @@ public class PolicemanDao {
         this.daoCryptomail=daoCryptomail;
         this.daoSWD=daoSWD;
     }
-    public PolicemanDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks) {
+    public PolicemanDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
+                        int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
         this.daoName = daoName;
         this.daoSurname = daoSurname;
         this.daoEwidential = daoEwidential;
@@ -105,6 +97,12 @@ public class PolicemanDao {
         this.daoRange = daoRange;
         this.daoDepartament = daoDepartament;
         this.daoRanks = daoRanks;
+        this.daoIntranet = daoIntranet;
+        this.daoIntradok = daoIntradok;
+        this.daoLotus= daoLotus;
+        this.daoExchange=daoExchange;
+        this.daoCryptomail=daoCryptomail;
+        this.daoSWD=daoSWD;
     }
 
 
@@ -133,8 +131,8 @@ public class PolicemanDao {
         PreparedStatement statement;
         Database date = new Database();
         try {
-            statement = date.getCon().prepareStatement("INSERT INTO workers (worker_name,worker_surname,worker_evidential,worker_pesel,worker_range,worker_departament,worker_ranks) " +
-                    "VALUES (?,?,?,?,?,?,?)");
+            statement = date.getCon().prepareStatement("INSERT INTO workers (worker_name,worker_surname,worker_evidential,worker_pesel,worker_range,worker_departament,worker_ranks," +
+                    "intranet,intradok,lotus,exchange,cryptomail,swd)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, this.daoName);
             statement.setString(2, this.daoSurname);
             statement.setString(3, this.daoEwidential);
@@ -142,6 +140,12 @@ public class PolicemanDao {
             statement.setInt(5, this.daoRange);
             statement.setInt(6,this.daoDepartament);
             statement.setInt(7,this.daoRanks);
+            statement.setInt(8,this.daoIntranet);
+            statement.setInt(9,daoIntradok);
+            statement.setInt(10,daoLotus);
+            statement.setInt(11,daoExchange);
+            statement.setInt(12,daoCryptomail);
+            statement.setInt(13,daoSWD);
             statement.execute();
             isChangeOnDatabase.setValue(true);
         } catch (SQLException e) {
@@ -166,30 +170,6 @@ public class PolicemanDao {
         date.closeDatabase();
     }
 
-    /**
-     * modify worker from database
-     * @param policeman object to be saved instead of the original
-     */
-    public static void updatePoliceman(PolicemanDao policeman){
-        Database date = new Database();
-        String sql = "UPDATE workers SET worker_name=?, worker_surname = ?, worker_pesel = ?, worker_evidential = ?, worker_range = ?,worker_departament = ?, worker_ranks = ?"+"WHERE id=?";
-        try{
-            PreparedStatement statement = date.getCon().prepareStatement(sql);
-            statement.setString(1,policeman.getDaoName());
-            statement.setString(2,policeman.getDaoSurname());
-            statement.setString(3,policeman.getDaoPesel());
-            statement.setString(4,policeman.getDaoEwidential());
-            statement.setInt(5,policeman.getDaoRange());
-            statement.setInt(6,policeman.getDaoDepartament());
-            statement.setInt(7,policeman.getDaoRanks());
-            statement.setInt(8,policeman.getDaoId());
-            statement.executeUpdate();
-            System.out.println("zapisałem nowego pracownika");
-        }catch (SQLException e){
-            System.out.println("błąd zapytania");
-        }
-        date.closeDatabase();
-    }
 
     public static void updateWorkerString(String databaseField, String value, int id){
         Database date = new Database();

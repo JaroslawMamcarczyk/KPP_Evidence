@@ -8,66 +8,75 @@
 
 <Pane fx:id="general" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.workersControllers.DetailsPolicemanScreenController">
    <children>
-      <TabPane layoutX="4.0" layoutY="110.0" prefHeight="631.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="4.0" layoutY="110.0" prefHeight="688.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="podstawowe">
             <content>
-              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="788.0">
+              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="990.0">
                      <children>
                         <ImageView fx:id="lpagons" fitHeight="246.0" fitWidth="185.0" layoutX="780.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="buttonSave" layoutX="108.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" visible="false" />
                         <Button fx:id="buttonDelete" layoutX="211.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickCancel" text="Anuluj" visible="false" />
-                        <VBox fx:id="vBoxTextField" layoutX="25.0" layoutY="15.0" prefHeight="257.0" prefWidth="565.0" spacing="10.0">
+                        <VBox fx:id="vBoxTextField" layoutX="25.0" layoutY="15.0" prefHeight="257.0" prefWidth="697.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="26.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="ID" />
-                                    <TextField fx:id="lid" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#modifyId" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="ID" />
+                                    <TextField fx:id="lid" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#modifyId" prefHeight="31.0" prefWidth="129.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="35.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="Pesel" />
-                                    <TextField fx:id="lpesel" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#modifyPesel" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="Pesel" />
+                                    <TextField fx:id="lpesel" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#modifyPesel" prefHeight="31.0" prefWidth="132.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                               <HBox fx:id="hBoxRange" prefHeight="31.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="Ranga" />
-                                    <TextField fx:id="lrange" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#modifyRange" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="Ranga" />
+                                    <TextField fx:id="lrange" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#modifyRange" prefHeight="31.0" prefWidth="132.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                               <HBox fx:id="hBoxDepartament" prefHeight="32.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="Departament" />
-                                    <TextField fx:id="ldepartament" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#modifyDepartament" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="Departament" />
+                                    <TextField fx:id="ldepartament" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#modifyDepartament" prefHeight="31.0" prefWidth="132.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                               <HBox fx:id="hBoxRanks" prefHeight="34.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="Stanowisko" />
-                                    <TextField fx:id="lranks" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#modifyRanks" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="Stanowisko" />
+                                    <TextField fx:id="lranks" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#modifyRanks" prefHeight="31.0" prefWidth="133.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="32.0" prefWidth="436.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="31.0" prefWidth="120.0" text="Telefon" />
-                                    <TextField fx:id="ltelephone1" prefHeight="31.0" prefWidth="230.0" />
-                                    <ToggleButton mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Modyfikuj" />
+                                    <Label prefHeight="31.0" prefWidth="150.0" text="Telefon" />
+                                    <TextField fx:id="ltelephone1" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <ToggleButton mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="vBoxHaving" layoutX="613.0" layoutY="14.0" prefHeight="245.0" prefWidth="249.0" spacing="5.0">
+                        <VBox fx:id="vBoxHaving" layoutX="18.0" layoutY="306.0" prefHeight="329.0" prefWidth="928.0" spacing="5.0">
                            <children>
-                              <Label prefHeight="21.0" prefWidth="251.0" text="Posiada:" />
-                           </children>
-                        </VBox>
+                              <HBox prefHeight="40.0" prefWidth="928.0" spacing="5.0">
+                                 <children>
+                                    <Label prefHeight="40.0" prefWidth="150.0" text="Posiada:">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Separator prefHeight="40.0" prefWidth="300.0" />
+                                    <Button mnemonicParsing="false" onAction="#clickAdd" prefHeight="40.0" prefWidth="78.0" text="Dodaj" />
+                                 </children>
+                              </HBox>
+                           </children></VBox>
                      </children>
                      <opaqueInsets>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

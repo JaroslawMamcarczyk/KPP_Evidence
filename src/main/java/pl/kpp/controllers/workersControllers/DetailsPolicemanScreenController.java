@@ -5,14 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
+import pl.kpp.CreateWindowAlert;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.dao.workersDao.PolicemanDao;
 import pl.kpp.workers.Departament;
@@ -22,6 +23,10 @@ import pl.kpp.workers.Ranks;
 import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RangeConverter;
 import pl.kpp.converters.workers.RanksConverter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class DetailsPolicemanScreenController {
 
@@ -60,6 +65,12 @@ public class DetailsPolicemanScreenController {
     private Range newPolicemanRange = null;
     private Ranks newWorkerRanks = null;
     private Departament newPolicemanDepartament = null;
+    private List<CheckBox> checkBoxList = new ArrayList<>();
+    private CheckBox checkBoxExchange;
+    private CheckBox checkBoxCryptomail;
+    private CheckBox checkBoxLotus;
+    private CheckBox checkBoxIntradok;
+    private CheckBox checkBoxIntranet;
 
     @FXML
     public void initialize() {
@@ -80,9 +91,32 @@ public class DetailsPolicemanScreenController {
         }
         if(police.getPolicemanRanks()!=null)
         lranks.setText(police.getPolicemanRanks().getNameRanks());
-        if(police.getPolicemanIntranet()==1) createLabel(police.getName()+"."+police.getSurrname(), "Intranet");
-        if(police.getPolicemanIntradok()==1) createLabel(police.getName()+"."+police.getSurrname(), "Intranet");
-        if(police.getPolicemanLotus()==1) createLabel(police.getName()+"."+police.getSurrname()+"@", "Lotus/Domino");
+        String policemanAdres = deletePolishChar(police.getName()+"."+police.getSurrname());
+        if(police.getPolicemanIntranet()==1) createLabel(policemanAdres, "intranet");
+                else {
+                    checkBoxIntranet = new CheckBox("Intranet");
+                    checkBoxList.add(checkBoxIntranet);
+        }
+        if(police.getPolicemanIntradok()==1) createLabel(policemanAdres, "intradok");
+        else {
+            checkBoxIntradok = new CheckBox("Intradok");
+            checkBoxList.add(checkBoxIntradok);
+        }
+        if(police.getPolicemanLotus()==1) createLabel(policemanAdres+"@", "lotus");
+        else {
+             checkBoxLotus = new CheckBox("Lotus");
+            checkBoxList.add(checkBoxLotus);
+        }
+        if(police.getPolicemanCryptomail()==1) createLabel(policemanAdres+"@..","cryptomail");
+        else {
+            checkBoxCryptomail = new CheckBox("Kryptomail");
+            checkBoxList.add(checkBoxCryptomail);
+        }
+        if(police.getPolicemanExchange()==1)createLabel(policemanAdres+"@...","exchange");
+        else {
+             checkBoxExchange = new CheckBox("Exchange");
+            checkBoxList.add(checkBoxExchange);
+        }
         }
 
     @FXML
@@ -217,10 +251,70 @@ public class DetailsPolicemanScreenController {
 
     private void createLabel(String text, String name){
         Label label = new Label(text);
+        label.setStyle("-fx-border-style: solid;-fx-border-color: #000000;-fx-border-width: 2px; -fx-background-color: #63B8EE");
+        label.setMinSize(300,40);
+        label.setAlignment(Pos.CENTER);
         Label label1 = new Label(name+":    ");
+        label1.setMinSize(150,40);
+        label1.setTextAlignment(TextAlignment.CENTER);
         HBox hBox = new HBox();
-        hBox.getChildren().addAll(label1,label);
+        hBox.setPadding(new Insets(0,10,10,10));
+        hBox.setSpacing(5);
+        Button deleteButton = new Button("Usuń");
+        deleteButton.setOnMouseClicked(event -> {
+            Optional<ButtonType> result = CreateWindowAlert.CreateWindowConfirmation("Czy na pewno chcesz usunąć dostęp do: "+name);
+            if (result.get()== ButtonType.OK) {
+                PolicemanDao.updateWorkerInt(name, 0, police.getId());
+                label.setText("usunięto");
+                label.setStyle("-fx-background-color: red");
+            }
+        });
+        hBox.getChildren().addAll(label1,label,deleteButton);
         vBoxHaving.getChildren().add(hBox);
     }
-
+    private String deletePolishChar(String textToModify){
+        String result = textToModify;
+        String[] tablePolischChar = new String[]{"ą","ę","ć","ł","ń","ó","ś","ż","ź"} ;
+        String [] tableNonPolischchar = new String[]{"a","e","SS","l","n","o","s","z","z"};
+        for(int i=0;i<9;i++){
+            result = result.toLowerCase().replace(tablePolischChar[i],tableNonPolischchar[i]);
+        }
+    return result;
 }
+@FXML
+ void clickAdd(){
+        vBoxHaving.getChildren().addAll(checkBoxList);
+        Button saveButton = new Button("Zapisz");
+        saveButton.setOnMouseClicked(event -> {
+            if(checkBoxIntranet!=null && checkBoxIntranet.isSelected()) {
+                PolicemanDao.updateWorkerInt("intranet",1,police.getId());
+                changeNodeInVBox(checkBoxIntranet, "Intranet dodano");
+            }
+            if(checkBoxIntradok!= null && checkBoxIntradok.isSelected()){
+                PolicemanDao.updateWorkerInt("intradok",1,police.getId());
+                changeNodeInVBox(checkBoxIntradok, "Intradok dodano");
+            }
+            if(checkBoxExchange!=null && checkBoxExchange.isSelected()){
+                PolicemanDao.updateWorkerInt("exchange",1,police.getId());
+                changeNodeInVBox(checkBoxExchange, "Exchange dodano");
+            }
+            if(checkBoxLotus!= null && checkBoxLotus.isSelected()){
+                PolicemanDao.updateWorkerInt("lotus",1,police.getId());
+                changeNodeInVBox(checkBoxIntranet, "Lotus dodano");
+            }
+            if(checkBoxCryptomail!=null && checkBoxCryptomail.isSelected()){
+                PolicemanDao.updateWorkerInt("cryptomail",1,police.getId());
+                changeNodeInVBox(checkBoxCryptomail,"Kryptomail dodano");
+            }
+        });
+        vBoxHaving.getChildren().add(saveButton);
+}
+
+    private void changeNodeInVBox(CheckBox checkBox, String s) {
+        int pos = vBoxHaving.getChildren().indexOf(checkBox);
+        vBoxHaving.getChildren().remove(pos);
+        Label label = new Label(s);
+        vBoxHaving.getChildren().add(pos, label);
+    }
+}
+
