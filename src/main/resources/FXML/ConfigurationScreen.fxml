@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.ConfigurationScreenController">
+  <tabs>
+    <Tab text="Ranga">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableRange" layoutX="30.0" layoutY="13.0" prefHeight="714.0" prefWidth="552.0">
+                     <columns>
+                        <TableColumn fx:id="rangeName" prefWidth="344.0" text="Ranga" />
+                        <TableColumn fx:id="pagons" prefWidth="207.0" resizable="false" text="Pagony" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Wydział">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="departamentListView" layoutX="14.0" layoutY="78.0" prefHeight="643.0" prefWidth="752.0" />
+                  <Label id="labelListDepartament" layoutX="38.0" layoutY="26.0" prefHeight="21.0" prefWidth="310.0" text="Lista Wydziałów" />
+                  <Button layoutX="785.0" layoutY="124.0" mnemonicParsing="false" onAction="#clickEditDepartament" prefHeight="31.0" prefWidth="95.0" text="Edytuj" />
+                  <Button layoutX="785.0" layoutY="165.0" mnemonicParsing="false" onAction="#clickDeleteDepartament" prefHeight="31.0" prefWidth="95.0" text="Usuń" />
+                  <Button layoutX="785.0" layoutY="78.0" mnemonicParsing="false" onAction="#clickAddDepartament" prefHeight="31.0" prefWidth="95.0" text="Dodaj" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Stanowisko">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="ranksListView" layoutX="30.0" layoutY="77.0" prefHeight="642.0" prefWidth="617.0" />
+                  <Button layoutX="722.0" layoutY="77.0" mnemonicParsing="false" onAction="#clickNewRanks" prefHeight="21.0" prefWidth="107.0" text="Dodaj" />
+                  <Label id="labelListRanks" layoutX="30.0" layoutY="5.0" prefHeight="66.0" prefWidth="613.0" text="Lista Stanowisk" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="KSIP">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="38.0" prefHeight="299.0" prefWidth="295.0">
+                     <columns>
+                        <TableColumn prefWidth="98.0" text="Nazwa obszaru" />
+                        <TableColumn prefWidth="196.0" text="Opis obszaru" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="17.0" layoutY="14.0" prefHeight="21.0" prefWidth="145.0" text="Obszary Ksip" />
+                  <Button layoutX="365.0" layoutY="38.0" mnemonicParsing="false" text="Dodaj" />
+                  <Button layoutX="365.0" layoutY="84.0" mnemonicParsing="false" text="Edytuj" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

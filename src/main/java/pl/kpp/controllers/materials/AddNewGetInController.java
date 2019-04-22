@@ -52,6 +52,7 @@ public class AddNewGetInController extends AddNewTransactionController {
                     if (SaveNewTransaction(2)) {
                         TransactionDao transactionDAO = new TransactionDao(0,1,numberOfTransactionField.getText(), date, 2);
                         transactionDAO.saveTransaction(2);
+                        ShowTransactionScreenController.setIsNewTransaction();
                     }
                 } else {
                     if (newDeliverer.getText() != null) {
@@ -61,6 +62,7 @@ public class AddNewGetInController extends AddNewTransactionController {
                             int lastId = deliverysDAO.saveDelivery();
                             TransactionDao transactionDAO = new TransactionDao(0,lastId, numberOfTransactionField.getText(), date, 2);
                             transactionDAO.saveTransaction(2);
+                            ShowTransactionScreenController.setIsNewTransaction();
                         }
                     } else if (choiceDelivery.getValue() != null) {
                     }

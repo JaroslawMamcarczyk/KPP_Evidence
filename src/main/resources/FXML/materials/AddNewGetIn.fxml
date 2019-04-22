@@ -5,34 +5,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchorPane" prefHeight="605.0" prefWidth="792.0" stylesheets="@../../css/showTransactionCss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddNewGetInController">
+<AnchorPane id="anchorPane" prefHeight="668.0" prefWidth="792.0" stylesheets="@../../css/showTransactionCss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddNewGetInController">
    <children>
       <Label id="newDelivery" layoutX="36.0" layoutY="21.0" prefHeight="51.0" prefWidth="523.0" text="Nowe Przyjęcie" />
       <Button fx:id="cancelButton" cancelButton="true" layoutX="721.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />
-      <VBox fx:id="boxArticle" layoutX="36.0" layoutY="107.0" prefHeight="328.0" prefWidth="148.0" stylesheets="@../../css/showTransactionCss.css">
+      <VBox fx:id="boxArticle" layoutX="13.0" layoutY="107.0" prefHeight="328.0" prefWidth="244.0" spacing="3.0" stylesheets="@../../css/showTransactionCss.css">
          <children>
-            <Label prefHeight="21.0" prefWidth="149.0" text="Towar" />
-            <ChoiceBox fx:id="choiceEquipment" prefWidth="150.0" />
+            <Label prefHeight="30.0" prefWidth="245.0" text="Towar" />
+            <ChoiceBox fx:id="choiceEquipment" prefHeight="44.0" prefWidth="246.0" />
          </children>
       </VBox>
-      <VBox fx:id="boxCount" layoutX="212.0" layoutY="107.0" prefHeight="346.0" prefWidth="67.0">
+      <VBox fx:id="boxCount" layoutX="274.0" layoutY="107.0" prefHeight="393.0" prefWidth="67.0" spacing="3.0">
          <children>
-            <Label prefHeight="21.0" prefWidth="70.0" text="ilość" />
+            <Label prefHeight="30.0" prefWidth="70.0" text="ilość" />
          </children>
       </VBox>
-      <Button layoutX="288.0" layoutY="507.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
-      <VBox fx:id="vBoxChangeDeliverer" layoutX="432.0" layoutY="107.0" prefHeight="431.0" prefWidth="325.0" spacing="10.0">
+      <Button layoutX="201.0" layoutY="559.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
+      <VBox fx:id="vBoxChangeDeliverer" layoutX="358.0" layoutY="107.0" prefHeight="551.0" prefWidth="399.0" spacing="10.0">
          <children>
             <Label id="labelDeliveryName" prefHeight="21.0" prefWidth="327.0" stylesheets="@../../css/showTransactionCss.css" text="Dostawca" />
-            <Label prefHeight="21.0" prefWidth="323.0" text="Komenda Wojewódzka Policji w Krakowie" />
+            <Label prefHeight="30.0" prefWidth="400.0" text="Komenda Wojewódzka Policji w Krakowie" />
             <Label prefHeight="21.0" prefWidth="318.0" text="Numer Faktury" />
             <TextField fx:id="numberOfTransactionField" />
             <Label prefHeight="21.0" prefWidth="326.0" text="Data wystawienia" />
             <HBox prefHeight="33.0" prefWidth="325.0">
                <children>
-                  <TextField fx:id="yearField" promptText="rrrr" />
+                  <TextField fx:id="yearField" prefHeight="31.0" prefWidth="172.0" promptText="rrrr" />
                   <TextField fx:id="monthField" prefHeight="31.0" prefWidth="97.0" promptText="mm" />
-                  <TextField fx:id="dayField" prefHeight="31.0" prefWidth="101.0" promptText="dd" />
+                  <TextField fx:id="dayField" prefHeight="31.0" prefWidth="118.0" promptText="dd" />
                </children>
             </HBox>
             <HBox prefHeight="75.0" prefWidth="325.0">

@@ -34,6 +34,7 @@ public class ArticleInTransaction {
     }
 
     public static void CreateArticleIntransactionList() {
+        articleInTransactionList.clear();
         ArticleInTransactionDao.readArticleInTransaction();
         for (ArticleInTransactionDao articleInTransactionDao : ArticleInTransactionDao.getArticleInTransactionDaoList()) {
             ArticleInTransaction transaction = new ArticleInTransaction(articleInTransactionDao);

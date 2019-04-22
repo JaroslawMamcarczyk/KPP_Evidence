@@ -41,6 +41,7 @@ public class DepartamentDao {
     }
 
     public static void readDepartament(Database date){
+        departamentDaoList.clear();
         try (ResultSet read = date.select("SELECT * from departament")) {
             while (read.next()) {
                 DepartamentDao dao = new DepartamentDao(read.getString("departament_name"),read.getInt("id"));
@@ -62,13 +63,13 @@ public class DepartamentDao {
         }
     }
 
-    public static void editDepartament(String old, String newName)
+    public static void editDepartament(String newName, int idDepartamentToDelete)
     {
         Database date = new Database();
         try{
-            PreparedStatement statement = date.getCon().prepareStatement("UPDATE departament SET departament_name =? WHERE departament_name =?");
+            PreparedStatement statement = date.getCon().prepareStatement("UPDATE departament SET departament_name =? WHERE id =?");
             statement.setString(1,newName);
-            statement.setString(2,old);
+            statement.setInt(2,idDepartamentToDelete);
             statement.execute();
         }catch (SQLException e){
             System.out.println("błąd aktualizacji rekordu "+e);

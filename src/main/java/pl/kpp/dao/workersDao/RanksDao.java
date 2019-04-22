@@ -37,7 +37,7 @@ public class RanksDao {
     public void saveRanks(){
         Database date = new Database();
         try {
-            PreparedStatement statement = date.getCon().prepareStatement("INSERT INTO ranks (name, departament)"+" VALUES (?,?)");
+            PreparedStatement statement = date.getCon().prepareStatement("INSERT INTO ranks (ranks_name, ranks_departament)"+" VALUES (?,?)");
             statement.setString(1,this.nameRanksDao);
             statement.setInt(2,this.departamentRanksDao);
             statement.execute();
@@ -74,7 +74,7 @@ public class RanksDao {
     {
         Database date = new Database();
         try{
-            PreparedStatement statement = date.getCon().prepareStatement("UPDATE ranks SET name =?, departament = ? WHERE id =?");
+            PreparedStatement statement = date.getCon().prepareStatement("UPDATE ranks SET ranks_name =?, ranks_departament = ? WHERE id =?");
             statement.setString(1,this.nameRanksDao);
             statement.setInt(2,this.departamentRanksDao);
             statement.setInt(3,old);

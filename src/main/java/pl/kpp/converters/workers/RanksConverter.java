@@ -7,7 +7,7 @@ import pl.kpp.workers.Ranks;
 public class RanksConverter extends StringConverter<Ranks> {
     @Override
     public String toString(Ranks ranks) {
-        return ranks.getNameRanks()+"( "+ ranks.getDepartamentRanks().getName()+" )";
+        return ranks.getNameRanks()+" ( "+ ranks.getDepartamentRanks().getName()+" )";
     }
 
     @Override

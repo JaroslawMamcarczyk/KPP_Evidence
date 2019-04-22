@@ -49,6 +49,7 @@ public class AddNewTransactionController {
                if(flagIfCreateNextTexfield&& flagIfCreateNextCheckbox) {
                    flagIfCreateNextTexfield=false;
                    TextField secondCount = new TextField();
+                   secondCount.setPrefHeight(44);
                    boxCount.getChildren().add(secondCount);
                    this.addListenerTextField(secondCount);
                }
@@ -66,6 +67,7 @@ public class AddNewTransactionController {
                 if(flagIfCreateNextCheckbox) {
                     flagIfCreateNextCheckbox = false;
                     ChoiceBox<Materials> secondChoice = new ChoiceBox<>();
+                    secondChoice.setPrefSize(246,44);
                     secondChoice.setConverter(new EquipmentNameConverter());
                     secondChoice.setItems(observableListMaterials);
                     addListener(secondChoice);

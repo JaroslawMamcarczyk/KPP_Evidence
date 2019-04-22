@@ -8,10 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,7 +22,6 @@ import pl.kpp.materials.Deliverys;
 import pl.kpp.materials.Materials;
 import pl.kpp.materials.Transaction;
 import pl.kpp.workers.Policeman;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -68,9 +65,11 @@ public class ShowTransactionScreenController {
         addListenerToTable();
         isNewTransaction.addListener((Observable, oldValue, newValue)->{
             if (newValue){
-                TransactionDao.readTransaction();
-                clickShowAll();
                 isNewTransaction.set(false);
+                TransactionDao.readTransaction();
+                createObservableList();
+                ArticleInTransaction.CreateArticleIntransactionList();
+                clickShowAll();
             }
         });
     }
@@ -85,16 +84,15 @@ public class ShowTransactionScreenController {
     private void addListenerToTable() {
         tableTransaction.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null){
-                    selectedTransaction = newValue;
                     articleInTransactionsObservableList.clear();
                     for (ArticleInTransaction article:ArticleInTransaction.getArticleInTransactionList()){
-                        if(article.getArticleInTransactionTransaction().getIdTransaction()==selectedTransaction.getIdTransaction())
+                        if(article.getArticleInTransactionTransaction().getIdTransaction()==newValue.getIdTransaction())
                         articleInTransactionsObservableList.add(article);
                     }
                     tableMaterials.setItems(articleInTransactionsObservableList);
                     columnMaterials.setCellValueFactory(new PropertyValueFactory<>("nameArticleInTransaction"));
                     columnCount.setCellValueFactory(new PropertyValueFactory<>("count"));
-                }}
+        }}
         );
     }
 
@@ -155,9 +153,9 @@ public class ShowTransactionScreenController {
             transactionOutObservableList.clear();
         if (transactionObservableList.size() != 0)
             transactionObservableList.clear();
-        for (TransactionDao transactionDao : TransactionDao.getTransactionDaoList()) {
-            Transaction transaction = new Transaction(transactionDao);
-            transactionObservableList.add(transaction);
+        Transaction.createTransactionList();
+        transactionObservableList =FXCollections.observableArrayList(Transaction.getTransactionList());
+        for (Transaction transaction : Transaction.getTransactionList()) {
             if (transaction.getType() == 1)
                 transactionOutObservableList.add(transaction);
             else if (transaction.getType() == 2)

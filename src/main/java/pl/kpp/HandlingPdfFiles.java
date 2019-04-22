@@ -30,7 +30,6 @@ public class HandlingPdfFiles extends Application {
                 Paragraph paragraph = new Paragraph("Dokument wydania z magazynu materiałów informatycznych " + transaction.getNameTransaction(), fontHeaders);
                 paragraph.setAlignment(Element.ALIGN_CENTER);
                 document.add(paragraph);
-                //Policeman policeman = Policeman.findPoliceman(transaction.getIdCustomer());
                 Paragraph paragraphCustomer = new Paragraph("Odbiorca:    " + transaction.getCustomerName() +
                         "\n", fontHeadersTable);
                 paragraphCustomer.setSpacingBefore(20f);
