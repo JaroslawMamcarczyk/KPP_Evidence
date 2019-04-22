@@ -48,12 +48,14 @@ public class AddMaterialScreenController {
         if(!lfieldNewType.getText().equals("")) {
            MaterialsDao dao = new MaterialsDao(lname.getText(), count, lfieldNewType.getText());
             dao.saveEquipment();
+            ShowMaterialScreenController.setIsNewMaterials();
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
         } else {
             if (lfieldNewType.getText().equals("") && !choiceTyp.getValue().equals("")){
                 MaterialsDao dao = new MaterialsDao(lname.getText(), count, choiceTyp.getValue().getType());
                 dao.saveEquipment();
+                ShowMaterialScreenController.setIsNewMaterials();
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }else{
@@ -104,18 +106,14 @@ public class AddMaterialScreenController {
         lfieldNewType.setVisible(false);
         lnewType.setVisible(false);
         ObservableList<Materials> listMaterials = FXCollections.observableArrayList();
-    for(Materials materials : Materials.getMaterialsList()){
-        listMaterials.add(materials);
-    }
-    for (int i = 0; i< listMaterials.size(); i++){
-        if(i+1< listMaterials.size()){
-            if(listMaterials.get(i).getType().equals(listMaterials.get(i+1).getType())){
-                listMaterials.remove(i+1);
-                i--;
-            }
-
+        listMaterials.addAll(Materials.getMaterialsList());
+        for(int i=0;i<listMaterials.size()-1;i++){
+            for(int j=i+1;j<listMaterials.size();j++){
+          if(listMaterials.get(i).getType().equals(listMaterials.get(j).getType())){
+              listMaterials.remove(j);
+              j--;
+          }}
         }
-    }
     choiceTyp.setConverter(new MaterialConverter());
     choiceTyp.setItems(listMaterials);
     }

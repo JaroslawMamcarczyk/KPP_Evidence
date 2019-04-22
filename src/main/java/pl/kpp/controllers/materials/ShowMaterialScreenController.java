@@ -2,6 +2,8 @@ package pl.kpp.controllers.materials;
 
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -16,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.materials.Materials;
 
 import java.io.IOException;
@@ -34,11 +37,20 @@ public class ShowMaterialScreenController {
     @FXML
     private TableView<Materials> tableEquipment;
 
-    private Materials newequip;
+    private static BooleanProperty isNewMaterials = new SimpleBooleanProperty(false);
     private ObservableList<Materials> list = FXCollections.observableArrayList();
+    private Materials changeEquip =null;
 
+public static void setIsNewMaterials(){isNewMaterials.set(true);}
     @FXML
     public void initialize() {
+        isNewMaterials.addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                Materials.createMaterialsList();
+                isNewMaterials.set(false);
+                initialize();
+            }
+        });
         Materials.createMaterialsList();
          list = FXCollections.observableArrayList(Materials.getMaterialsList());
         setTable(list);
@@ -46,8 +58,9 @@ public class ShowMaterialScreenController {
                     while (newEquip.next()) if (newEquip.wasUpdated()) setTable(list);
                 }
         );
+
         tableEquipment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-                newequip = newValue);
+                changeEquip = newValue);
     }
 
     @FXML
@@ -74,6 +87,10 @@ public class ShowMaterialScreenController {
 
     @FXML
     void clickDelete(ActionEvent event) {
+        if(changeEquip!=null){
+            MaterialsDao.deleteEquipment(changeEquip);
+            setIsNewMaterials();
+        }
 
     }
 

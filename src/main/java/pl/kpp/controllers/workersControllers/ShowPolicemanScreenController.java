@@ -49,7 +49,7 @@ public class ShowPolicemanScreenController {
     @FXML
     public void initialize() {
         PolicemanDao.isChangeOnDatabaseProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue=true){
+            if(newValue){
                 Database date = new Database();
                 PolicemanDao.readPoliceman(date);
                 Policeman.createList();

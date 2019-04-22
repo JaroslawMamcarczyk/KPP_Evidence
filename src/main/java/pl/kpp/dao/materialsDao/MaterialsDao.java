@@ -1,6 +1,9 @@
 package pl.kpp.dao.materialsDao;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import pl.kpp.dao.Database;
+import pl.kpp.materials.Materials;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +18,7 @@ public class MaterialsDao {
     private String daoType;
     private static PreparedStatement statement;
     private static List<MaterialsDao> materialsDaoList = new ArrayList<>();
+
 
     public int getDaoId() {
         return daoId;
@@ -76,10 +80,10 @@ public class MaterialsDao {
 
 
 
-    public static void deleteEquipment(MaterialsDao equipment){
+    public static void deleteEquipment(Materials equipment){
         Database date = new Database();
         try {
-            statement = date.getCon().prepareStatement("DELETE FROM materials WHERE id="+equipment.getDaoId());
+            statement = date.getCon().prepareStatement("DELETE FROM materials WHERE id="+searchMaterialDao(equipment));
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Nie usunąłęm - bład zapytania");
@@ -131,5 +135,13 @@ public class MaterialsDao {
         }catch (SQLException e){
             System.out.println("Nie pobrałem wartości z tabeli");
         }return  actualyNumberofEquipment;
+    }
+
+    public static int searchMaterialDao(Materials materials){
+        int searchingId = 0;
+        for(MaterialsDao materialsDao:materialsDaoList){
+           if(materials.getId()==materialsDao.daoId)
+               searchingId=materialsDao.daoId;
+        }return searchingId;
     }
 }
