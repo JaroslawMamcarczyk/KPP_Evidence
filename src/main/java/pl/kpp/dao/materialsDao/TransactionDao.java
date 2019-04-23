@@ -69,7 +69,7 @@ public class TransactionDao {
     public static void readTransaction(){
         Database date = new Database();
         transactionDaoList.clear();
-        try (ResultSet result = date.select("SELECT * FROM transaction_list")) {
+        try (ResultSet result = date.select("SELECT * FROM transaction_list ORDER BY transaction_date DESC")) {
            while (result.next()) {
                 TransactionDao transaction = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
                 result.getString(4), result.getDate(5), result.getInt(6));

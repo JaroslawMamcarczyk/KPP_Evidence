@@ -12,12 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.materials.Materials;
 
@@ -54,11 +56,10 @@ public static void setIsNewMaterials(){isNewMaterials.set(true);}
         Materials.createMaterialsList();
          list = FXCollections.observableArrayList(Materials.getMaterialsList());
         setTable(list);
-        list.addListener((ListChangeListener.Change<? extends Materials> newEquip) -> {      //dodanie Listnera na obserwowaną listę
-                    while (newEquip.next()) if (newEquip.wasUpdated()) setTable(list);
-                }
-        );
-
+//        list.addListener((ListChangeListener.Change<? extends Materials> newEquip) -> {      //dodanie Listnera na obserwowaną listę
+//                    while (newEquip.next()) if (newEquip.wasUpdated()) setTable(list);
+//                }
+//        );
         tableEquipment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                 changeEquip = newValue);
     }

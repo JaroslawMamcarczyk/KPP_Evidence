@@ -38,7 +38,7 @@ public class ShowPolicemanScreenController {
     private String search;
     private static Policeman editPoliceman;
     private List<Policeman> temporaryList = new ArrayList<Policeman>();
-    public ObservableList<Policeman> specialObservablePolicemanList = FXCollections.observableArrayList();
+ //   public ObservableList<Policeman> specialObservablePolicemanList = FXCollections.observableArrayList();
 
 
     public static Policeman getEditPoliceman() {
@@ -136,5 +136,9 @@ public class ShowPolicemanScreenController {
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         standingColumn.setCellValueFactory(new PropertyValueFactory<>("namePoliceDepartament"));
     }
-
+    @FXML
+     void clickShowAll(){
+        ObservableList<Policeman> listResult = FXCollections.observableArrayList(Policeman.getPolicemanList());
+        setPolicemanTableView(listResult);
+}
 }
