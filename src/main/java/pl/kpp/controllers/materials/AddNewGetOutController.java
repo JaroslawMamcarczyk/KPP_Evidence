@@ -9,12 +9,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import pl.kpp.CreateWindowAlert;
+import pl.kpp.HandlingPdfFiles;
 import pl.kpp.converters.workers.PolicemanConverter;
 import pl.kpp.dao.materialsDao.TransactionDao;
-import pl.kpp.materials.Materials;
+import pl.kpp.materials.Transaction;
 import pl.kpp.workers.Policeman;
 
 import java.time.LocalDate;
+
 
 
 public class AddNewGetOutController extends AddNewTransactionController{
@@ -34,7 +36,6 @@ public class AddNewGetOutController extends AddNewTransactionController{
 
 
     private ObservableList<Policeman> observableListPoliceman = FXCollections.observableArrayList();
-    private ObservableList<Materials> observableListMaterials = FXCollections.observableArrayList();
 
     @FXML
     void initialize (){
@@ -47,12 +48,14 @@ public class AddNewGetOutController extends AddNewTransactionController{
     @FXML
     void clickSave(ActionEvent e){
         if(choiceEmployer.getValue()!=null) {
-            if (SaveNewTransaction(1)) {
+            if (SaveNewTransaction(1)!=0) {
                 Policeman police = choiceEmployer.getValue();
                 String numberOfTransaction = (TransactionDao.getTransactionDaoList().size() + 1) + "/" + LocalDate.now().getYear();
                 TransactionDao transaction = new TransactionDao(police.getId(), numberOfTransaction);
                 transaction.saveTransaction(1);
-                ShowTransactionScreenController.setIsNewTransaction();
+                HandlingPdfFiles pdfFiles = new HandlingPdfFiles();
+                Transaction transactionToPdf = new Transaction(TransactionDao.getLastSavedTransaction());
+                pdfFiles.showPdfFile(pdfFiles.print(transactionToPdf,getArticleInTransactionObservableList()));
             }
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();

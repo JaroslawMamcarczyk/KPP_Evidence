@@ -9,23 +9,30 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import pl.kpp.controllers.materials.ShowTransactionScreenController;
 import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Transaction;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class HandlingPdfFiles extends Application {
-    public int print(Transaction transaction, ObservableList<ArticleInTransaction> list) {
+    private String nameFileToSave ="";
+    public String print(Transaction transaction, ObservableList<ArticleInTransaction> list) {
         if (transaction.getType() == 1) {
+            String nameTransaction = transaction.getNameTransaction().replace("/","_");
+            nameFileToSave=ShowTransactionScreenController.getPath()+"/Dokument wydania "+nameTransaction+".pdf";
             Document document = new Document();
             Font fontInTable = FontFactory.getFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, 15);
             Font fontHeadersTable = FontFactory.getFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1250, 20);
             Font fontHeaders = FontFactory.getFont(BaseFont.COURIER_BOLD, BaseFont.CP1250, 30);
             try {
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Dokument wydania.pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(nameFileToSave));
                 document.open();
                 Paragraph paragraph = new Paragraph("Dokument wydania z magazynu materiałów informatycznych " + transaction.getNameTransaction(), fontHeaders);
                 paragraph.setAlignment(Element.ALIGN_CENTER);
@@ -66,23 +73,24 @@ public class HandlingPdfFiles extends Application {
             } catch (FileNotFoundException e) {
                 System.out.println("nie znaleziono dokumentu " + e);
             }
-            return  1;
+            return  nameFileToSave;
         }
             else{
                 CreateWindowAlert.createWindowError("Nie można wygenerować pliku pdf do dokumentu Przyjęcia");
-            }return 0;
+            }return ("brak pliku");
     }
     private PdfPCell createCell(String string, Font font, boolean border) {
         PdfPCell cell1 = new PdfPCell(new Paragraph(string, font));
         cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        if (border==true)
+        if (border)
             cell1.setBorder(PdfPCell.NO_BORDER);
         return cell1;
     }
 
-    public void showPdfFile(){
-        File file = new File("Dokument wydania.pdf");
+    public void showPdfFile(String path){
+        File file = null;
+        file = new File(path);
         HostServices hostServices = getHostServices();
         hostServices.showDocument(file.getAbsolutePath());
     }

@@ -102,17 +102,17 @@ public class DetailsPolicemanScreenController {
             checkBoxIntradok = new CheckBox("Intradok");
             checkBoxList.add(checkBoxIntradok);
         }
-        if(police.getPolicemanLotus()==1) createLabel(policemanAdres+"@", "lotus");
+        if(police.getPolicemanLotus()==1) createLabel(policemanAdres+"@kk", "lotus");
         else {
              checkBoxLotus = new CheckBox("Lotus");
             checkBoxList.add(checkBoxLotus);
         }
-        if(police.getPolicemanCryptomail()==1) createLabel(policemanAdres+"@..","cryptomail");
+        if(police.getPolicemanCryptomail()==1) createLabel(policemanAdres+"@","cryptomail");
         else {
             checkBoxCryptomail = new CheckBox("Kryptomail");
             checkBoxList.add(checkBoxCryptomail);
         }
-        if(police.getPolicemanExchange()==1)createLabel(policemanAdres+"@...","exchange");
+        if(police.getPolicemanExchange()==1)createLabel(policemanAdres+"@","exchange");
         else {
              checkBoxExchange = new CheckBox("Exchange");
             checkBoxList.add(checkBoxExchange);

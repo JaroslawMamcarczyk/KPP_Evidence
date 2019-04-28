@@ -18,6 +18,7 @@ import pl.kpp.converters.materials.EquipmentNameConverter;
 import pl.kpp.dao.materialsDao.ArticleInTransactionDao;
 import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.dao.materialsDao.TransactionDao;
+import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Materials;
 
 import java.util.ArrayList;
@@ -39,7 +40,9 @@ public class AddNewTransactionController {
     private ObservableList<Materials> observableListMaterials = FXCollections.observableArrayList();
     private boolean flagIfCreateNextCheckbox=true;
     private boolean flagIfCreateNextTexfield=true;
+    private ObservableList<ArticleInTransaction> articleInTransactionObservableList = FXCollections.observableArrayList();
 
+    public ObservableList<ArticleInTransaction> getArticleInTransactionObservableList(){ return articleInTransactionObservableList;}
     public AddNewTransactionController() {
     }
 
@@ -96,28 +99,27 @@ public class AddNewTransactionController {
         stage.close();
     }
 
-    public boolean SaveNewTransaction(int transactiontype){
-        boolean isArticleToSave=false;
+    public int SaveNewTransaction(int transactiontype){
         ArticleInTransactionDao article;
+        int transactionId=TransactionDao.getLastUsingId() + 1;
         int temporaryNumberOfList = 0;
         Group group = new Group();
         group.getChildren().add(boxArticle);
         Node nodeOut = group.getChildren().get(0);
         for(Node nodeIn:((VBox)nodeOut).getChildren())
             if (nodeIn instanceof ChoiceBox && ((ChoiceBox) nodeIn).getValue() != null) {
-                Materials eq = ((ChoiceBox<Materials>) nodeIn).getValue();
+                Materials material = ((ChoiceBox<Materials>) nodeIn).getValue();
                 if (listCount.get(temporaryNumberOfList) != 0) {
-                    article = new ArticleInTransactionDao(TransactionDao.getLastUsingId() + 1,
-                            eq.getId(), listCount.get(temporaryNumberOfList));
+                    article = new ArticleInTransactionDao(transactionId, material.getId(), listCount.get(temporaryNumberOfList));
                     article.saveArticleInTransaction();
+                    articleInTransactionObservableList.add(new ArticleInTransaction(article));
                     if(transactiontype==1)
-                    MaterialsDao.changeNumberOfEquipment(MaterialsDao.checkNumberOfEquipment(eq.getId()) - listCount.get(temporaryNumberOfList), eq.getId());
+                    MaterialsDao.changeNumberOfEquipment(MaterialsDao.checkNumberOfEquipment(material.getId()) - listCount.get(temporaryNumberOfList), material.getId());
                     else if(transactiontype==2)
-                        MaterialsDao.changeNumberOfEquipment(MaterialsDao.checkNumberOfEquipment(eq.getId()) + listCount.get(temporaryNumberOfList), eq.getId());
-                    isArticleToSave = true;
+                        MaterialsDao.changeNumberOfEquipment(MaterialsDao.checkNumberOfEquipment(material.getId()) + listCount.get(temporaryNumberOfList), material.getId());
                 }
                 temporaryNumberOfList++;
-            }return isArticleToSave;
+            }return transactionId;
     }
 
 }

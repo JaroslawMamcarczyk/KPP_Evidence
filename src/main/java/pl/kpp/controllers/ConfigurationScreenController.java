@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import pl.kpp.controllers.materials.ShowTransactionScreenController;
 import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RanksConverter;
 import pl.kpp.dao.Database;
@@ -20,6 +21,7 @@ import pl.kpp.workers.Departament;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
 
+import java.io.*;
 import java.util.Optional;
 
 
@@ -34,7 +36,6 @@ public class ConfigurationScreenController {
     private ListView<Departament> departamentListView;
    @FXML
     private ListView<Ranks> ranksListView;
-
 
     private static BooleanProperty isNewDepartament= new SimpleBooleanProperty(false);
     private static BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
