@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchorPane" prefHeight="668.0" prefWidth="792.0" stylesheets="@../../css/showTransactionCss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddNewGetInController">
+<AnchorPane id="anchorPane" prefHeight="767.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddNewGetInController">
    <children>
       <Label id="newDelivery" layoutX="36.0" layoutY="21.0" prefHeight="51.0" prefWidth="523.0" text="Nowe Przyjęcie" />
-      <Button fx:id="cancelButton" cancelButton="true" layoutX="721.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />
-      <VBox fx:id="boxArticle" layoutX="13.0" layoutY="107.0" prefHeight="328.0" prefWidth="244.0" spacing="3.0" stylesheets="@../../css/showTransactionCss.css">
+      <Button fx:id="cancelButton" cancelButton="true" layoutX="902.0" layoutY="34.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />
+      <VBox fx:id="boxArticle" layoutX="13.0" layoutY="107.0" prefHeight="551.0" prefWidth="375.0" spacing="3.0" stylesheets="@../../css/showTransactionCss.css">
          <children>
             <Label prefHeight="30.0" prefWidth="245.0" text="Towar" />
-            <ChoiceBox fx:id="choiceEquipment" prefHeight="44.0" prefWidth="246.0" />
+            <ChoiceBox fx:id="choiceEquipment" prefHeight="44.0" prefWidth="376.0" />
          </children>
       </VBox>
-      <VBox fx:id="boxCount" layoutX="274.0" layoutY="107.0" prefHeight="393.0" prefWidth="67.0" spacing="3.0">
+      <VBox fx:id="boxCount" layoutX="389.0" layoutY="107.0" prefHeight="393.0" prefWidth="67.0" spacing="3.0">
          <children>
             <Label prefHeight="30.0" prefWidth="70.0" text="ilość" />
          </children>
       </VBox>
-      <Button layoutX="201.0" layoutY="559.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
-      <VBox fx:id="vBoxChangeDeliverer" layoutX="358.0" layoutY="107.0" prefHeight="551.0" prefWidth="399.0" spacing="10.0">
+      <Button layoutX="382.0" layoutY="680.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="59.0" prefWidth="128.0" text="Zapisz" />
+      <VBox fx:id="vBoxChangeDeliverer" layoutX="488.0" layoutY="107.0" prefHeight="638.0" prefWidth="466.0" spacing="10.0">
          <children>
             <Label id="labelDeliveryName" prefHeight="21.0" prefWidth="327.0" stylesheets="@../../css/showTransactionCss.css" text="Dostawca" />
             <Label prefHeight="30.0" prefWidth="400.0" text="Komenda Wojewódzka Policji w Krakowie" />
@@ -46,5 +47,10 @@
             </HBox>
          </children>
       </VBox>
+      <Button layoutX="25.0" layoutY="678.0" mnemonicParsing="false" onAction="#clickAddNewMaterials" text="Dodaj nowy towar" />
    </children>
+   <stylesheets>
+      <URL value="@../../css/showTransactionCss.css" />
+      <URL value="@../../css/AddNewTransaction.css" />
+   </stylesheets>
 </AnchorPane>

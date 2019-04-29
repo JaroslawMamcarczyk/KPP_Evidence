@@ -22,6 +22,34 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Database date = new Database();
+        date.createTable("create table IF NOT EXISTS workers(id INTEGER not null constraint workers_pk primary key," +
+                        "worker_name VARCHAR(200) not null,worker_surname VARCHAR(200) not null," +
+                        "worker_evidential  VARCHAR(6),worker_pesel VARCHAR(11),worker_range int" +
+                        "references range,worker_departament int references departament," +
+                        "worker_ranks int references ranks,intranet int,intradok int,lotus int,exchange int,"+
+                        "cryptomail int,ksip int sespol int,swd int,column_17 int);" +
+                        "create unique index workers_id_uindex on workers (id);");
+        date.createTable("create table if not exists range(id INTEGER not null constraint range_pk primary key,"+
+                        "range_name VARCHAR(200) not null, pagons     VARCHAR(200) );"+
+                        "create unique index range_id_uindex on range (id);");
+        date.createTable("create table if not exists ranks(id INTEGER not null constraint ranks_pk primary key,"+
+                            "ranks_name VARCHAR(200) not null,ranks_departament int references departament on delete set null );"+
+                            "create unique index ranks_id_uindex on ranks (id);");
+        date.createTable("create table if not exists departament(id INTEGER not null constraint departament_pk primary key,"+
+                         "departament_name VARCHAR(200) not null ); create unique index departament_id_uindex on departament (id);");
+        date.createTable("create table if not exists transaction_list(id INTEGER not null constraint transaction_pk primary key,"+
+                        "worker_id int references workers on delete set null, delivery_id int references deliverys on delete set null,"+
+                        "transaction_number VARCHAR(100),transaction_date   DATE,type int);"+
+                        "create unique index transaction_id_uindex on transaction_list (id);");
+        date.createTable("create table if not exists materials(id INTEGER not null constraint materials_pk primary key,"+
+                            "materials_name VARCHAR(100) not null, count int not null,materials_type VARCHAR(100) not null);"+
+                            "create unique index materials_id_uindex on materials (id);");
+        date.createTable("create table if not exists deliverys(id INTEGER not null constraint deliverys_pk primary key,"+
+                         "delivery_name VARCHAR(200) not null,delivery_address VARCHAR(200));"+
+                        "create unique index deliverys_id_uindex on deliverys (id);");
+        date.createTable("create table if not exists article_in_transaction (id INTEGER not null constraint article_in_transaction_pk primary key,"+
+                            "transaction_id int references transaction_list, material_id int references materials on delete set null,article_in_transaction_count int );"+
+                            "create unique index article_in_transaction_id_uindex on article_in_transaction (id);");
         PolicemanDao.readPoliceman(date);
         Policeman.createList();
         RangeDao.readRange(date);

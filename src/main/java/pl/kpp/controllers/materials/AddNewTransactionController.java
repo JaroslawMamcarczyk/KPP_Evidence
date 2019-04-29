@@ -88,10 +88,14 @@ public class AddNewTransactionController {
     void initialize() {
         cancelButton.setGraphic(new ImageView("/pics/cancel.jpg"));
         choiceEquipment.setConverter(new EquipmentNameConverter());
+        createChoiceEquipmentField();
+        addListener(choiceEquipment);
+    }
+
+    public void createChoiceEquipmentField() {
         Materials.createMaterialsList();
         observableListMaterials = FXCollections.observableList(Materials.getMaterialsList());
         choiceEquipment.setItems(observableListMaterials);
-        addListener(choiceEquipment);
     }
 
     public void clickCancel(ActionEvent event) {
