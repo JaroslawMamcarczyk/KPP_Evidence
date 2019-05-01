@@ -1,6 +1,7 @@
 package pl.kpp.dao.workersDao;
 
 import pl.kpp.dao.Database;
+import pl.kpp.workers.Ranks;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,6 @@ public class RanksDao {
     private int idRanksDao;
     private String nameRanksDao;
     private int departamentRanksDao;
-    private static List<RanksDao> ranksDaoList = new ArrayList<>();
 
     public int getIdRanksDao() {
         return idRanksDao;
@@ -23,7 +23,6 @@ public class RanksDao {
     public int getDepartamentRanksDao() {
         return departamentRanksDao;
     }
-    public static List<RanksDao> getRanksDaoList(){ return ranksDaoList;}
 
     public RanksDao(int idRanksDao, String nameRanksDao, int departamentRanksDao) {
         this.idRanksDao = idRanksDao;
@@ -49,10 +48,11 @@ public class RanksDao {
 
     public static void readRanks(Database date){
         try (ResultSet read = date.select("SELECT * from ranks")) {
-            ranksDaoList.clear();
+            Ranks.getRanksList().clear();
             while (read.next()) {
                RanksDao ranksDAO = new RanksDao(read.getInt("id"),read.getString("ranks_name"),read.getInt("ranks_departament"));
-                ranksDaoList.add(ranksDAO);
+                Ranks ranks = new Ranks(ranksDAO);
+               Ranks.getRanksList().add(ranks);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");

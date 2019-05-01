@@ -7,13 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.workersDao.DepartamentDao;
-import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.dao.workersDao.RangeDao;
 import pl.kpp.dao.workersDao.RanksDao;
-import pl.kpp.workers.Departament;
-import pl.kpp.workers.Policeman;
 import pl.kpp.workers.Range;
-import pl.kpp.workers.Ranks;
+
 
 import java.io.IOException;
 
@@ -50,14 +48,12 @@ public class Main extends Application {
         date.createTable("create table if not exists article_in_transaction (id INTEGER not null constraint article_in_transaction_pk primary key,"+
                             "transaction_id int references transaction_list, material_id int references materials on delete set null,article_in_transaction_count int );"+
                             "create unique index article_in_transaction_id_uindex on article_in_transaction (id);");
-        PolicemanDao.readPoliceman(date);
-        Policeman.createList();
+        DepartamentDao.readDepartament(date);
+        RanksDao.readRanks(date);
         RangeDao.readRange(date);
         Range.createRangeList();
-        DepartamentDao.readDepartament(date);
-        Departament.createDepartamentList();
-        RanksDao.readRanks(date);
-        Ranks.createRanksList();
+        WorkerDao.readWorkers(date);
+
         date.closeDatabase();
         Parent root = null;
         try {

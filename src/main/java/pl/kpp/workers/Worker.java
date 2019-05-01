@@ -2,14 +2,12 @@ package pl.kpp.workers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.dao.workersDao.WorkerDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Policeman {
+public class Worker {
 
     private int id;
     private StringProperty name = new SimpleStringProperty();
@@ -26,16 +24,16 @@ public class Policeman {
     private  int policemanExchange;
     private  int policemanCryptomail;
     private int policemanSWD;
-    private static List<Policeman> policemanList = new ArrayList<>();
+    private static List<Worker> worekrList = new ArrayList<>();
 
     public Range getPolicemanRange() {
         return policemanRange;
     }
-    public static List<Policeman> getPolicemanList() {
-        return policemanList;
+    public static List<Worker> getWorekrList() {
+        return worekrList;
     }
-    public static void addToList(Policeman gpoliceman){
-        policemanList.add(gpoliceman);
+    public static void addToList(Worker gpoliceman){
+        worekrList.add(gpoliceman);
     }
     public String getName() {
         return name.get();
@@ -83,21 +81,21 @@ public class Policeman {
 
     /**
      * Constructor
-     * @param policemanDao - object reading from database
+     * @param workerDao - object reading from database
      */
-    public Policeman(PolicemanDao policemanDao){
-        name.set(policemanDao.getDaoName());
-        surrname.set(policemanDao.getDaoSurname());
-        ewidential.set(policemanDao.getDaoEwidential());
-        pesel.set(policemanDao.getDaoPesel());
-        id = policemanDao.getDaoId();
-        if(policemanDao.getDaoRange() != 0) {
-            policemanRange = Range.searchRange(policemanDao.getDaoRange());
+    public Worker(WorkerDao workerDao){
+        name.set(workerDao.getDaoName());
+        surrname.set(workerDao.getDaoSurname());
+        ewidential.set(workerDao.getDaoEwidential());
+        pesel.set(workerDao.getDaoPesel());
+        id = workerDao.getDaoId();
+        if(workerDao.getDaoRange() != 0) {
+            policemanRange = Range.searchRange(workerDao.getDaoRange());
         }
         else policemanRange = null;
-        if (policemanDao.getDaoDepartament()!=0){
+        if (workerDao.getDaoDepartament()!=0){
             for (Departament departament:Departament.getDepartamentList()){
-                if(departament.getId()==policemanDao.getDaoDepartament()){
+                if(departament.getId()== workerDao.getDaoDepartament()){
                     this.policemanDepartament=departament;
                    this.namePolicedepartament.set(departament.getName());
                 }
@@ -106,61 +104,48 @@ public class Policeman {
             this.policemanDepartament=null;
             this.namePolicedepartament.set(" ");
         }
-        if (policemanDao.getDaoRanks()!=0){
+        if (workerDao.getDaoRanks()!=0){
             for (Ranks ranks:Ranks.getRanksList()){
-                if (ranks.getRanksId()==policemanDao.getDaoRanks()){
+                if (ranks.getRanksId()== workerDao.getDaoRanks()){
                     this.policemanRanks=ranks;
                 }
             }
         }
         else
             this.policemanRanks = null;
-        this.policemanIntranet=policemanDao.getDaoIntranet();
-        this.policemanIntradok=policemanDao.getDaoIntradok();
-        this.policemanLotus=policemanDao.getDaoLotus();
-        this.policemanExchange=policemanDao.getDaoExchange();
-        this.policemanCryptomail=policemanDao.getDaoCryptomail();
-        this.policemanSWD=policemanDao.getDaoSWD();
+        this.policemanIntranet= workerDao.getDaoIntranet();
+        this.policemanIntradok= workerDao.getDaoIntradok();
+        this.policemanLotus= workerDao.getDaoLotus();
+        this.policemanExchange= workerDao.getDaoExchange();
+        this.policemanCryptomail= workerDao.getDaoCryptomail();
+        this.policemanSWD= workerDao.getDaoSWD();
     }
 
     /**
-     * Serching Policeman
+     * Serching Worker
      * @param idPoliceman - id searched worker
      * @return - searched object or null
      */
-    public static Policeman findPoliceman(int idPoliceman) {
-        for (Policeman policeman: policemanList){
-            if (idPoliceman==policeman.getId()){
-                return policeman;
+    public static Worker findWorker(int idPoliceman) {
+        for (Worker worker : worekrList){
+            if (idPoliceman== worker.getId()){
+                return worker;
             }
         }
         return null;
-    }
-
-    /**
-     * Create workers list
-     * @return workers list
-     */
-    public static List<Policeman> createList(){
-        policemanList.clear();
-        for(PolicemanDao dao:PolicemanDao.getPolicemanDAOList()){
-            Policeman policeman = new Policeman(dao);
-            policemanList.add(policeman);
-        }
-        return  policemanList;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Policeman policeman = (Policeman) o;
-        return id == policeman.id &&
-                Objects.equals(name, policeman.name) &&
-                Objects.equals(surrname, policeman.surrname) &&
-                Objects.equals(ewidential, policeman.ewidential) &&
-                Objects.equals(pesel, policeman.pesel) &&
-                Objects.equals(policemanRange, policeman.policemanRange);
+        Worker worker = (Worker) o;
+        return id == worker.id &&
+                Objects.equals(name, worker.name) &&
+                Objects.equals(surrname, worker.surrname) &&
+                Objects.equals(ewidential, worker.ewidential) &&
+                Objects.equals(pesel, worker.pesel) &&
+                Objects.equals(policemanRange, worker.policemanRange);
     }
     @Override
     public int hashCode() {

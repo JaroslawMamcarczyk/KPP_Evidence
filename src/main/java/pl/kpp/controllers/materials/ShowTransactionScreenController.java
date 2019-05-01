@@ -24,7 +24,8 @@ import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Deliverys;
 import pl.kpp.materials.Materials;
 import pl.kpp.materials.Transaction;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class ShowTransactionScreenController {
     @FXML
     private TableColumn<Transaction, Date> columnDataTransaction;
     @FXML
-    private TableColumn<Policeman, String> columnNumberTransaction;
+    private TableColumn<Worker, String> columnNumberTransaction;
     @FXML
     private TableView<Transaction> tableTransaction;
     @FXML

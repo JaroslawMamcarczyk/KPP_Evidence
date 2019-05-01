@@ -1,6 +1,8 @@
 package pl.kpp.dao.workersDao;
 
 import pl.kpp.dao.Database;
+import pl.kpp.workers.Departament;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,11 +12,6 @@ import java.util.List;
 public class DepartamentDao {
     private String name;
     private int id;
-    private static List<DepartamentDao> departamentDaoList = new ArrayList<>();
-
-    public static List<DepartamentDao> getDepartamentDaoList() {
-        return departamentDaoList;
-    }
 
 
     public DepartamentDao(String gname, int gid){
@@ -41,11 +38,12 @@ public class DepartamentDao {
     }
 
     public static void readDepartament(Database date){
-        departamentDaoList.clear();
+        Departament.getDepartamentList().clear();
         try (ResultSet read = date.select("SELECT * from departament")) {
             while (read.next()) {
                 DepartamentDao dao = new DepartamentDao(read.getString("departament_name"),read.getInt("id"));
-                departamentDaoList.add(dao);
+                Departament departament = new Departament(dao);
+                Departament.getDepartamentList().add(departament);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");

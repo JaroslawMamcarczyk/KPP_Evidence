@@ -33,11 +33,4 @@ public class Departament {
             }
         }return null;
     }
-
-    public static void createDepartamentList(){
-        departamentList.clear();
-        for(DepartamentDao departamentDao:DepartamentDao.getDepartamentDaoList()){
-            departamentList.add(new Departament(departamentDao));
-        }
-    }
 }

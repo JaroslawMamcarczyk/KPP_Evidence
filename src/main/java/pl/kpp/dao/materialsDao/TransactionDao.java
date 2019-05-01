@@ -1,5 +1,6 @@
 package pl.kpp.dao.materialsDao;
 import pl.kpp.dao.Database;
+import pl.kpp.materials.Transaction;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ public class TransactionDao {
     private Date dateTransactionDao;
     private int typeDao;
     private int deliveryIdDao;
-    private static List<TransactionDao> transactionDaoList = new ArrayList<>();
     private PreparedStatement statement;
 
     public TransactionDao(int idTransactionDao, int customerDao, int deliveryDao, String numberTransactionDao, Date date, int typeDao) {
@@ -60,20 +60,18 @@ public class TransactionDao {
     public Date getDateTransactionDao(){
         return dateTransactionDao;
     }
-    public static List<TransactionDao> getTransactionDaoList(){
-        return transactionDaoList;
-    }
     public int getTypeDao(){return typeDao;}
     public int getDeliveryIdDao() {return deliveryIdDao;}
 
     public static void readTransaction(){
         Database date = new Database();
-        transactionDaoList.clear();
+        Transaction.getTransactionList().clear();
         try (ResultSet result = date.select("SELECT * FROM transaction_list ORDER BY transaction_date DESC")) {
            while (result.next()) {
-                TransactionDao transaction = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
+                TransactionDao transactionDao = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
                 result.getString(4), result.getDate(5), result.getInt(6));
-                transactionDaoList.add(transaction);
+               Transaction transaction = new Transaction(transactionDao);
+                Transaction.getTransactionList().add(transaction);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli transakcji");
@@ -135,7 +133,7 @@ public class TransactionDao {
         Database date = new Database();
         try{
             Statement stat = date.getCon().createStatement();
-            ResultSet result= stat.executeQuery("SELECT * from transaction_list ORDER BY id DESC LIMIT 1");
+            ResultSet result= stat.executeQuery("SELECT * from transaction_list WHERE type=1 ORDER BY id DESC LIMIT 1");
             while(result.next()) {
                 TransactionDao transaction = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
                         result.getString(4),result.getDate(5),result.getInt(6));

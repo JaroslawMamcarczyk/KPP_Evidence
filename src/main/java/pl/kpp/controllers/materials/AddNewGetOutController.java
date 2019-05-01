@@ -13,7 +13,7 @@ import pl.kpp.HandlingPdfFiles;
 import pl.kpp.converters.workers.PolicemanConverter;
 import pl.kpp.dao.materialsDao.TransactionDao;
 import pl.kpp.materials.Transaction;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
 
 import java.time.LocalDate;
 
@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class AddNewGetOutController extends AddNewTransactionController{
 
     @FXML
-    private ChoiceBox<Policeman> choiceEmployer;
+    private ChoiceBox<Worker> choiceEmployer;
     @FXML
     private CheckBox checkHelples;
     @FXML
@@ -35,22 +35,22 @@ public class AddNewGetOutController extends AddNewTransactionController{
 
 
 
-    private ObservableList<Policeman> observableListPoliceman = FXCollections.observableArrayList();
+    private ObservableList<Worker> observableListWorker = FXCollections.observableArrayList();
 
     @FXML
     void initialize (){
         super.initialize();
         choiceEmployer.setConverter(new PolicemanConverter());
-        observableListPoliceman = FXCollections.observableList(Policeman.getPolicemanList());
-        choiceEmployer.setItems(observableListPoliceman);
+        observableListWorker = FXCollections.observableList(Worker.getWorekrList());
+        choiceEmployer.setItems(observableListWorker);
     }
 
     @FXML
     void clickSave(ActionEvent e){
         if(choiceEmployer.getValue()!=null) {
             if (SaveNewTransaction(1)!=0) {
-                Policeman police = choiceEmployer.getValue();
-                String numberOfTransaction = (TransactionDao.getTransactionDaoList().size() + 1) + "/" + LocalDate.now().getYear();
+                Worker police = choiceEmployer.getValue();
+                String numberOfTransaction = (Transaction.getTransactionList().size() + 1) + "/" + LocalDate.now().getYear();
                 TransactionDao transaction = new TransactionDao(police.getId(), numberOfTransaction);
                 transaction.saveTransaction(1);
                 HandlingPdfFiles pdfFiles = new HandlingPdfFiles();

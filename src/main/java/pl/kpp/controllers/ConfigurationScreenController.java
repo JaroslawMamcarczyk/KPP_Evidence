@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import pl.kpp.controllers.materials.ShowTransactionScreenController;
 import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RanksConverter;
 import pl.kpp.dao.Database;
@@ -20,8 +19,6 @@ import pl.kpp.dao.workersDao.RanksDao;
 import pl.kpp.workers.Departament;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
-
-import java.io.*;
 import java.util.Optional;
 
 
@@ -39,6 +36,10 @@ public class ConfigurationScreenController {
 
     private static BooleanProperty isNewDepartament= new SimpleBooleanProperty(false);
     private static BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
+
+    public static BooleanProperty isNewRanksProperty() {
+        return isNewRanks;
+    }
 
     @FXML
     void initialize() {
@@ -61,7 +62,6 @@ public class ConfigurationScreenController {
             if(isNewRanks.get()){
                 Database date = new Database();
                 RanksDao.readRanks(date);
-                Ranks.createRanksList();
                 createListViewRanks(FXCollections.observableList(Ranks.getRanksList()));
                 isNewRanks.set(false);
             }
@@ -75,7 +75,6 @@ public class ConfigurationScreenController {
     }
 
     private void createListViewDepartament() {
-        Departament.createDepartamentList();
         ObservableList<Departament> departamentObservableList = FXCollections.observableArrayList(Departament.getDepartamentList());
         departamentListView.setItems(departamentObservableList);
         departamentListView.setCellFactory(departamentListView -> {
@@ -111,8 +110,11 @@ private void createListViewRanks(ObservableList<Ranks> ranksObservableList){
     }
 
     @FXML
-    void clickNewRanks() {
-        ObservableList<Ranks> ranksObservableList;
+    public void  clickNewRanks() {
+        createNewRanks(null);
+    }
+
+    public static void createNewRanks(Departament departament) {
         Dialog<RanksDao> newRanks = new Dialog<>();
         newRanks.setHeaderText("Dodaj nowe Stanowisko");
         GridPane grid = new GridPane();
@@ -126,6 +128,9 @@ private void createListViewRanks(ObservableList<Ranks> ranksObservableList){
         departamentChoiceBox.setConverter(new DepartamentConverter());
         ObservableList<Departament> departamentObservableList = FXCollections.observableArrayList(Departament.getDepartamentList());
         departamentChoiceBox.setItems(departamentObservableList);
+        if(departament!=null) {
+            departamentChoiceBox.getSelectionModel().select(departament);
+        }
         grid.add(departamentChoiceBox,1,2);
         newRanks.getDialogPane().setContent(grid);
         ButtonType saveButton = new ButtonType("save", ButtonBar.ButtonData.OK_DONE);
@@ -142,7 +147,8 @@ private void createListViewRanks(ObservableList<Ranks> ranksObservableList){
             daoToSave.saveRanks();
             isNewRanks.set(true);
         });
-   }
+    }
+
 //
 //
 //    /**

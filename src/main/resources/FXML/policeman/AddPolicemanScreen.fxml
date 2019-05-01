@@ -74,6 +74,7 @@
                         <CheckBox fx:id="checkBoxSWD" mnemonicParsing="false" prefHeight="21.0" prefWidth="317.0" text="SWD" />
                      </children>
                   </VBox>
+                  <Button layoutX="672.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickAddRanks" prefHeight="31.0" prefWidth="186.0" text="Dodaj stanowisko" />
                </children>
             </AnchorPane>
          </content>

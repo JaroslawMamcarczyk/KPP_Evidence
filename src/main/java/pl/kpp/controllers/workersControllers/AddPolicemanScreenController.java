@@ -2,6 +2,8 @@ package pl.kpp.controllers.workersControllers;
 
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,14 +12,17 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import pl.kpp.CreateWindowAlert;
+import pl.kpp.controllers.ConfigurationScreenController;
 import pl.kpp.controllers.MainScreenController;
+import pl.kpp.dao.Database;
+import pl.kpp.dao.workersDao.RanksDao;
 import pl.kpp.workers.Departament;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
 import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RangeConverter;
 import pl.kpp.converters.workers.RanksConverter;
-import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.dao.workersDao.WorkerDao;
 
 
 public class AddPolicemanScreenController {
@@ -47,7 +52,8 @@ public class AddPolicemanScreenController {
     private CheckBox checkBoxSWD;
     @FXML
     private CheckBox checkBoxCryptomail;
-    private PolicemanDao policeman=null;
+    private WorkerDao policeman=null;
+    private BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
 
 
 
@@ -69,16 +75,27 @@ public class AddPolicemanScreenController {
             }
             choiceRanks.setItems(ranksObservableList);
         });
+        isNewRanks.addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                Database date = new Database();
+                RanksDao.readRanks(date);
+                int i=choiceDepartament.getSelectionModel().getSelectedIndex();
+                choiceDepartament.getSelectionModel().clearSelection();
+                choiceDepartament.getSelectionModel().select(i);
+                isNewRanks.set(false);
+            }
+        });
 
     }
+
     @FXML
     void clickSave(ActionEvent event) {
         boolean isOK = true;
-        if (lewidential.getText().length() != 6 || lewidential.getText().isEmpty()) {
+        if (lewidential.getText().length() != 6) {
             isOK = false;
             lewidential.setStyle("-fx-background-color: red");
         }
-        if (lpesel.getText().length() != 11 || lpesel.getText().isEmpty()) {
+        if (lpesel.getText().length() != 11) {
             isOK = false;
             lpesel.setStyle("-fx-background-color: red");
         }
@@ -90,7 +107,7 @@ public class AddPolicemanScreenController {
             isOK = false;
             lsurrname.setStyle("-fx-background-color: red");
         }
-        if (isOK == true) {
+        if (isOK) {
             int rangeToSave=0;
             int ranksToSave=0;
             int departamentToSave=0;
@@ -103,7 +120,7 @@ public class AddPolicemanScreenController {
             if(choiceDepartament.getValue()!=null){
                 departamentToSave=choiceDepartament.getValue().getId();
             }
-            policeman = new PolicemanDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave,0,0,0,0,0,0);
+            policeman = new WorkerDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave,0,0,0,0,0,0);
             if(checkBoxIntradok.isSelected())policeman.setDaoIntradok(1);
             if(checkBoxIntranet.isSelected())policeman.setDaoIntranet(1);
             if(checkBoxExchange.isSelected())policeman.setDaoExchange(1);
@@ -111,9 +128,14 @@ public class AddPolicemanScreenController {
             if(checkBoxLotus.isSelected())policeman.setDaoLotus(1);
             if(checkBoxSWD.isSelected())policeman.setDaoSWD(1);
             policeman.savePoliceman();
-                PolicemanDao.isChangeOnDatabaseProperty().setValue(true);
-                CreateWindowAlert.CreateWindowConfirmation("Dodano Nowego Policjanta");
+                WorkerDao.isChangeOnDatabaseProperty().setValue(true);
+                CreateWindowAlert.CreateWindowConfirmation("Dodano Nowego Pracownika");
            MainScreenController.getMainScreenController().createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
             }else CreateWindowAlert.createWindowError("Błąd dodawania nowego policjanta - popraw pola świecące na czerowno");
+    }
+
+    public void clickAddRanks(){
+        ConfigurationScreenController.createNewRanks(choiceDepartament.getSelectionModel().getSelectedItem());
+        isNewRanks.set(true);
     }
 }

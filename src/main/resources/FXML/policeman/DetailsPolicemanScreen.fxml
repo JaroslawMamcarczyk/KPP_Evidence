@@ -15,8 +15,6 @@
               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="990.0">
                      <children>
                         <ImageView fx:id="lpagons" fitHeight="246.0" fitWidth="185.0" layoutX="780.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="buttonSave" layoutX="108.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" visible="false" />
-                        <Button fx:id="buttonDelete" layoutX="211.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickCancel" text="Anuluj" visible="false" />
                         <VBox fx:id="vBoxTextField" layoutX="25.0" layoutY="15.0" prefHeight="257.0" prefWidth="697.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="26.0" prefWidth="436.0" spacing="10.0">
@@ -74,6 +72,9 @@
                                     </Label>
                                     <Separator prefHeight="40.0" prefWidth="300.0" />
                                     <Button mnemonicParsing="false" onAction="#clickAdd" prefHeight="40.0" prefWidth="78.0" text="Dodaj" />
+                                    <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="68.0" />
+                                    <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#clickSave" prefHeight="40.0" prefWidth="111.0" text="Zapisz" visible="false" />
+                                    <Button fx:id="buttonDelete" mnemonicParsing="false" onAction="#clickCancel" prefHeight="40.0" prefWidth="126.0" text="Anuluj" visible="false" />
                                  </children>
                               </HBox>
                            </children></VBox>

@@ -10,25 +10,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.dao.Database;
-import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.workers.Departament;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowPolicemanScreenController {
     @FXML
-    private TableColumn<Policeman, String> nameColumn;
+    private TableColumn<Worker, String> nameColumn;
     @FXML
-    private TableColumn<Policeman, String> peselColumn;
+    private TableColumn<Worker, String> peselColumn;
     @FXML
-    private TableView<Policeman> policemanTableView;
+    private TableView<Worker> policemanTableView;
     @FXML
-    private TableColumn<Policeman, String> surrnameColumn;
+    private TableColumn<Worker, String> surrnameColumn;
     @FXML
-    private TableColumn<Policeman, String> idColumn;
+    private TableColumn<Worker, String> idColumn;
     @FXML
-    private TableColumn<Policeman, String> standingColumn;
+    private TableColumn<Worker, String> standingColumn;
     @FXML
     private TextField searchPolicemanTextField;
     @FXML
@@ -36,40 +37,36 @@ public class ShowPolicemanScreenController {
 
 
     private String search;
-    private static Policeman editPoliceman;
-    private List<Policeman> temporaryList = new ArrayList<Policeman>();
- //   public ObservableList<Policeman> specialObservablePolicemanList = FXCollections.observableArrayList();
+    private static Worker editWorker;
+    private List<Worker> temporaryList = new ArrayList<Worker>();
+ //   public ObservableList<Worker> specialObservablePolicemanList = FXCollections.observableArrayList();
 
 
-    public static Policeman getEditPoliceman() {
-        return editPoliceman;
+    public static Worker getEditWorker() {
+        return editWorker;
     }
 
 
     @FXML
     public void initialize() {
-        PolicemanDao.isChangeOnDatabaseProperty().addListener((observable, oldValue, newValue) -> {
+        WorkerDao.isChangeOnDatabaseProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
                 Database date = new Database();
-                PolicemanDao.readPoliceman(date);
-                Policeman.createList();
-                PolicemanDao.isChangeOnDatabaseProperty().setValue(false);
+                WorkerDao.readWorkers(date);
+                WorkerDao.isChangeOnDatabaseProperty().setValue(false);
             }
         });
-        ObservableList<Policeman> observableListPoliceman;
-        observableListPoliceman = FXCollections.observableList(Policeman.createList());
-        setPolicemanTableView(observableListPoliceman);
-        observableListPoliceman.addListener((ListChangeListener.Change<? extends Policeman> c)-> {      //dodanie Listnera na obserwowaną listę
-                while (c.next()) if (c.wasUpdated()) setPolicemanTableView(observableListPoliceman);
+        ObservableList<Worker> observableListWorker;
+        observableListWorker = FXCollections.observableList(Worker.getWorekrList());
+        setPolicemanTableView(observableListWorker);
+        observableListWorker.addListener((ListChangeListener.Change<? extends Worker> c)-> {      //dodanie Listnera na obserwowaną listę
+                while (c.next()) if (c.wasUpdated()) setPolicemanTableView(observableListWorker);
             }
         );
         /**
          * Getting the element from the table on which the cursor is positioned
          */
-            policemanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                        editPoliceman = newValue;
-                    }
-            );
+            policemanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->editWorker = newValue);
 /**
  * Handling tw-click on mouse and opening window with details
  */
@@ -84,7 +81,7 @@ public class ShowPolicemanScreenController {
         searchPolicemanTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     temporaryList = new ArrayList<>();
                     search = newValue.toLowerCase();
-                    for (Policeman x : observableListPoliceman) {
+                    for (Worker x : observableListWorker) {
                         if (x.getName().toLowerCase().contains(newValue.toLowerCase())) {
                             if (!temporaryList.contains(x))
                                 temporaryList.add(x);
@@ -102,7 +99,7 @@ public class ShowPolicemanScreenController {
                                 temporaryList.add(x);
                         }
                     }
-                    ObservableList<Policeman> listResult = FXCollections.observableArrayList(temporaryList);
+                    ObservableList<Worker> listResult = FXCollections.observableArrayList(temporaryList);
                     setPolicemanTableView(listResult);
                 }
         );
@@ -113,12 +110,12 @@ public class ShowPolicemanScreenController {
             toggleButton.setPrefWidth(300);
             toggleButton.setToggleGroup(buttonsgroup);
             toggleButton.setOnAction(event-> {
-                        List <Policeman> policemanSpecialList = new ArrayList<>();
-                for (Policeman policeman:Policeman.getPolicemanList()) {
-                    if(policeman.getPolicemanDepartament()!=null&&policeman.getPolicemanDepartament().getId()==departament.getId())
-                    policemanSpecialList.add(policeman);
+                        List <Worker> workerSpecialList = new ArrayList<>();
+                for (Worker worker : Worker.getWorekrList()) {
+                    if(worker.getPolicemanDepartament()!=null&& worker.getPolicemanDepartament().getId()==departament.getId())
+                    workerSpecialList.add(worker);
                 }
-                setPolicemanTableView(FXCollections.observableArrayList(policemanSpecialList));
+                setPolicemanTableView(FXCollections.observableArrayList(workerSpecialList));
                         });
             vBoxButtons.getChildren().add(toggleButton);
         }
@@ -128,7 +125,7 @@ public class ShowPolicemanScreenController {
      * @param glist - workers list
      */
 
-    public void setPolicemanTableView(ObservableList<Policeman> glist) {
+    public void setPolicemanTableView(ObservableList<Worker> glist) {
         policemanTableView.setItems(glist);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surrnameColumn.setCellValueFactory(new PropertyValueFactory<>("surrname"));
@@ -136,9 +133,10 @@ public class ShowPolicemanScreenController {
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         standingColumn.setCellValueFactory(new PropertyValueFactory<>("namePoliceDepartament"));
     }
+
     @FXML
      void clickShowAll(){
-        ObservableList<Policeman> listResult = FXCollections.observableArrayList(Policeman.getPolicemanList());
+        ObservableList<Worker> listResult = FXCollections.observableArrayList(Worker.getWorekrList());
         setPolicemanTableView(listResult);
-}
+    }
 }

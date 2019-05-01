@@ -31,13 +31,6 @@ public class Ranks {
         this.nameRanks.set(ranksDAO.getNameRanksDao());
     }
 
-    public static void createRanksList(){
-        ranksList.clear();
-        for(RanksDao dao: RanksDao.getRanksDaoList()){
-            ranksList.add(new Ranks(dao));
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

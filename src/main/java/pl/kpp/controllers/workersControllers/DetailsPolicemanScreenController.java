@@ -15,9 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import pl.kpp.CreateWindowAlert;
 import pl.kpp.controllers.MainScreenController;
-import pl.kpp.dao.workersDao.PolicemanDao;
+import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.workers.Departament;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
 import pl.kpp.workers.Range;
 import pl.kpp.workers.Ranks;
 import pl.kpp.converters.workers.DepartamentConverter;
@@ -61,7 +61,7 @@ public class DetailsPolicemanScreenController {
     @FXML
     VBox vBoxHaving;
 
-    private Policeman police;
+    private Worker police;
     private Range newPolicemanRange = null;
     private Ranks newWorkerRanks = null;
     private Departament newPolicemanDepartament = null;
@@ -71,10 +71,11 @@ public class DetailsPolicemanScreenController {
     private CheckBox checkBoxLotus;
     private CheckBox checkBoxIntradok;
     private CheckBox checkBoxIntranet;
+    private  ObservableList<Ranks> ranksObservableList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        police = ShowPolicemanScreenController.getEditPoliceman();
+        police = ShowPolicemanScreenController.getEditWorker();
         lname.setText(police.getName() + " " + police.getSurrname());
         lname.setDisable(true);
         lid.setText(police.getEwidential());
@@ -117,6 +118,7 @@ public class DetailsPolicemanScreenController {
              checkBoxExchange = new CheckBox("Exchange");
             checkBoxList.add(checkBoxExchange);
         }
+        ranksObservableList = createRanksObservableList(police.getPolicemanDepartament().getId());
         }
 
     @FXML
@@ -124,16 +126,16 @@ public class DetailsPolicemanScreenController {
         if(!lname.isDisable()) {
             String[] names = lname.getText().split(" ");
             if(!names[0].equals(police.getName())){
-                PolicemanDao.updateWorkerString("worker_name",names[0],police.getId());
+                WorkerDao.updateWorkerString("worker_name",names[0],police.getId());
             }
             if(!names[1].equals(police.getSurrname())){
-                PolicemanDao.updateWorkerString("worker_surname",names[1],police.getId());
+                WorkerDao.updateWorkerString("worker_surname",names[1],police.getId());
             }
         }
         if(!lpesel.isDisable()){
             if(!lpesel.getText().equals(police.getPesel())){
                 if(lpesel.getText().length() == 11)
-                PolicemanDao.updateWorkerString("worker_pesel",lpesel.getText(),police.getId());
+                WorkerDao.updateWorkerString("worker_pesel",lpesel.getText(),police.getId());
                 else
                     lpesel.setStyle("-fx-background-color: red");
             }
@@ -141,19 +143,19 @@ public class DetailsPolicemanScreenController {
         if(!lid.isDisable()){
             if(!lid.getText().equals(police.getEwidential())){
                 if (lid.getText().length() == 6)
-                PolicemanDao.updateWorkerString("worker_evidential",lid.getText(),police.getId());
+                WorkerDao.updateWorkerString("worker_evidential",lid.getText(),police.getId());
                 else
                     lid.setStyle("-fx-background-color: red");
             }
         }
         if(newPolicemanRange!=null){
-            PolicemanDao.updateWorkerInt("worker_range",newPolicemanRange.getId(),police.getId());
+            WorkerDao.updateWorkerInt("worker_range",newPolicemanRange.getId(),police.getId());
         }
         if(newPolicemanDepartament!=null){
-            PolicemanDao.updateWorkerInt("worker_departament",newPolicemanDepartament.getId(),police.getId());
+            WorkerDao.updateWorkerInt("worker_departament",newPolicemanDepartament.getId(),police.getId());
         }
         if(newWorkerRanks!=null){
-            PolicemanDao.updateWorkerInt("worker_ranks", newWorkerRanks.getRanksId(),police.getId());
+            WorkerDao.updateWorkerInt("worker_ranks", newWorkerRanks.getRanksId(),police.getId());
         }
         MainScreenController.getMainScreenController().createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
     }
@@ -201,11 +203,10 @@ public class DetailsPolicemanScreenController {
     }
     @FXML
     void modifyRanks(){
-        ObservableList<Ranks> ranksObservableList = FXCollections.observableList(Ranks.getRanksList());
-        ChoiceBox<Ranks> choiceRanks = new ChoiceBox<>(ranksObservableList);
+        ChoiceBox<Ranks> choiceRanks = new ChoiceBox<>();
         choiceRanks.setConverter(new RanksConverter());
         choiceRanks.setItems(ranksObservableList);
-        choiceRanks.getSelectionModel().select(ranksObservableList.indexOf(searchRanks(police.getPolicemanRanks())));
+        choiceRanks.getSelectionModel().select(police.getPolicemanRanks());
         choiceRanks.setPrefWidth(230);
         hBoxRanks.getChildren().remove(1);
         hBoxRanks.getChildren().add(1,choiceRanks);
@@ -215,6 +216,17 @@ public class DetailsPolicemanScreenController {
             newWorkerRanks =newValue;
         });
     }
+
+    private ObservableList<Ranks> createRanksObservableList(int idRanks) {
+        ranksObservableList.clear();
+        for(Ranks ranks:Ranks.getRanksList()){
+            if(ranks.getDepartamentRanks().getId()==idRanks){
+                ranksObservableList.add(ranks);
+            }
+        }
+        return ranksObservableList;
+    }
+
     @FXML
     void modifyDepartament(){
         ObservableList<Departament> departamentObservableList = FXCollections.observableList(Departament.getDepartamentList());
@@ -229,6 +241,8 @@ public class DetailsPolicemanScreenController {
         buttonSave.setVisible(true);
         choiceDepartament.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             newPolicemanDepartament = newValue;
+            createRanksObservableList(newPolicemanDepartament.getId());
+            modifyRanks();
         }));
     }
 
@@ -264,7 +278,7 @@ public class DetailsPolicemanScreenController {
         deleteButton.setOnMouseClicked(event -> {
             Optional<ButtonType> result = CreateWindowAlert.CreateWindowConfirmation("Czy na pewno chcesz usunąć dostęp do: "+name);
             if (result.get()== ButtonType.OK) {
-                PolicemanDao.updateWorkerInt(name, 0, police.getId());
+                WorkerDao.updateWorkerInt(name, 0, police.getId());
                 label.setText("usunięto");
                 label.setStyle("-fx-background-color: red");
             }
@@ -287,23 +301,23 @@ public class DetailsPolicemanScreenController {
         Button saveButton = new Button("Zapisz");
         saveButton.setOnMouseClicked(event -> {
             if(checkBoxIntranet!=null && checkBoxIntranet.isSelected()) {
-                PolicemanDao.updateWorkerInt("intranet",1,police.getId());
+                WorkerDao.updateWorkerInt("intranet",1,police.getId());
                 changeNodeInVBox(checkBoxIntranet, "Intranet dodano");
             }
             if(checkBoxIntradok!= null && checkBoxIntradok.isSelected()){
-                PolicemanDao.updateWorkerInt("intradok",1,police.getId());
+                WorkerDao.updateWorkerInt("intradok",1,police.getId());
                 changeNodeInVBox(checkBoxIntradok, "Intradok dodano");
             }
             if(checkBoxExchange!=null && checkBoxExchange.isSelected()){
-                PolicemanDao.updateWorkerInt("exchange",1,police.getId());
+                WorkerDao.updateWorkerInt("exchange",1,police.getId());
                 changeNodeInVBox(checkBoxExchange, "Exchange dodano");
             }
             if(checkBoxLotus!= null && checkBoxLotus.isSelected()){
-                PolicemanDao.updateWorkerInt("lotus",1,police.getId());
+                WorkerDao.updateWorkerInt("lotus",1,police.getId());
                 changeNodeInVBox(checkBoxIntranet, "Lotus dodano");
             }
             if(checkBoxCryptomail!=null && checkBoxCryptomail.isSelected()){
-                PolicemanDao.updateWorkerInt("cryptomail",1,police.getId());
+                WorkerDao.updateWorkerInt("cryptomail",1,police.getId());
                 changeNodeInVBox(checkBoxCryptomail,"Kryptomail dodano");
             }
         });

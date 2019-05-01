@@ -4,14 +4,14 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import pl.kpp.CreateWindowAlert;
 import pl.kpp.dao.Database;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PolicemanDao {
+public class WorkerDao {
 
     private String daoName;
     private String daoSurname;
@@ -27,7 +27,6 @@ public class PolicemanDao {
     private  int daoExchange;
     private  int daoCryptomail;
     private int daoSWD;
-    private static List<PolicemanDao> policemanDaoList = new ArrayList<>();
     private static BooleanProperty isChangeOnDatabase = new SimpleBooleanProperty(false);
 
     public int getDaoId() {
@@ -66,13 +65,10 @@ public class PolicemanDao {
     public void setDaoCryptomail(int daoCryptomail) { this.daoCryptomail = daoCryptomail; }
     public void setDaoSWD(int daoSWD) { this.daoSWD = daoSWD; }
 
-    public static List<PolicemanDao> getPolicemanDAOList() {
-        return policemanDaoList;
-    }
     public static BooleanProperty isChangeOnDatabaseProperty() { return isChangeOnDatabase; }
 
-    public PolicemanDao(int daoid, String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
-                        int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
+    public WorkerDao(int daoid, String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
+                     int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
         this.daoId = daoid;
         this.daoName = daoName;
         this.daoSurname = daoSurname;
@@ -88,8 +84,8 @@ public class PolicemanDao {
         this.daoCryptomail=daoCryptomail;
         this.daoSWD=daoSWD;
     }
-    public PolicemanDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
-                        int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
+    public WorkerDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
+                     int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
         this.daoName = daoName;
         this.daoSurname = daoSurname;
         this.daoEwidential = daoEwidential;
@@ -109,18 +105,19 @@ public class PolicemanDao {
     /**
      *Reading all workers from Database and create list
      */
-    public static void readPoliceman(Database date){
-        policemanDaoList.clear();
+    public static void readWorkers(Database date){
+        Worker.getWorekrList().clear();
         try (ResultSet result = date.select("SELECT * FROM workers")) {
             while (result.next()) {
-                PolicemanDao policeman = new PolicemanDao(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
+                WorkerDao workerDao = new WorkerDao(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
                         result.getString(5),result.getInt(6),result.getInt(7),
                         result.getInt(8), result.getInt(9), result.getInt(10), result.getInt(11),
                         result.getInt(12),result.getInt(13),result.getInt(14));
-                policemanDaoList.add(policeman);
+                Worker worker = new Worker(workerDao);
+                Worker.getWorekrList().add(worker);
             }
         }catch (SQLException e){
-            System.out.println("błąd odczytu tabeli");
+            System.out.println("błąd odczytu tabeli pracownicy");
         }
     }
 
@@ -150,22 +147,6 @@ public class PolicemanDao {
             isChangeOnDatabase.setValue(true);
         } catch (SQLException e) {
             System.out.println("błąd zapytania sql");
-        }
-        date.closeDatabase();
-    }
-
-
-    /**
-     * Delete worker from database
-     * @param policeman  - object to delete
-     */
-    public static void deletePoliceman(Policeman policeman){
-        Database date = new Database();
-        try {
-            PreparedStatement statement = date.getCon().prepareStatement("DELETE FROM workers WHERE id="+policeman.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("błąd zapytania");
         }
         date.closeDatabase();
     }

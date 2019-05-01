@@ -1,16 +1,16 @@
 package pl.kpp.converters.workers;
 
 import javafx.util.StringConverter;
-import pl.kpp.workers.Policeman;
+import pl.kpp.workers.Worker;
 
-public class PolicemanConverter extends StringConverter<Policeman> {
+public class PolicemanConverter extends StringConverter<Worker> {
     @Override
-    public String toString(Policeman policeman) {
-        return policeman.getName()+" "+policeman.getSurrname();
+    public String toString(Worker worker) {
+        return worker.getName()+" "+ worker.getSurrname();
     }
 
     @Override
-    public Policeman fromString(String s) {
+    public Worker fromString(String s) {
         return null;
     }
 }
