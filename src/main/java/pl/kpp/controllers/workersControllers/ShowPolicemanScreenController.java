@@ -107,7 +107,7 @@ public class ShowPolicemanScreenController {
         for(Departament departament:Departament.getDepartamentList()){
             ToggleButton toggleButton = new ToggleButton(departament.getName());
             toggleButton.setWrapText(true);
-            toggleButton.setPrefWidth(300);
+            toggleButton.setPrefWidth(340);
             toggleButton.setToggleGroup(buttonsgroup);
             toggleButton.setOnAction(event-> {
                         List <Worker> workerSpecialList = new ArrayList<>();

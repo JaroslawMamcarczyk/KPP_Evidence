@@ -51,6 +51,6 @@
    </children>
    <stylesheets>
       <URL value="@../../css/showTransactionCss.css" />
-      <URL value="@../../css/AddNewTransaction.css" />
+      <URL value="@../../css/addNewTransaction.css" />
    </stylesheets>
 </AnchorPane>

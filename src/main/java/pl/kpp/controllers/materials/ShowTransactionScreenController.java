@@ -19,6 +19,7 @@ import pl.kpp.CreateWindowAlert;
 import pl.kpp.HandlingFileOperation;
 import pl.kpp.HandlingPdfFiles;
 import pl.kpp.dao.materialsDao.DeliverysDao;
+import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.dao.materialsDao.TransactionDao;
 import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Deliverys;
@@ -85,7 +86,7 @@ public class ShowTransactionScreenController {
             }
         });
         labelPath.setText(path.getValue());
-        Materials.createMaterialsList();
+        MaterialsDao.readEquipment();
         Transaction.createTransactionList();
         ArticleInTransaction.CreateArticleIntransactionList();
         DeliverysDao.readDeliverys();

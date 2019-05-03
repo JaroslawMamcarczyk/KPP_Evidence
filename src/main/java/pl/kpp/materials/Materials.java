@@ -48,18 +48,6 @@ public class Materials {
         }
         return eq;
     }
-    public static void clearWquipmentList(){
-        materialsList.clear();
-    }
-
-    public static void createMaterialsList(){
-        MaterialsDao.readEquipment();
-        materialsList.clear();
-        for (MaterialsDao dao : MaterialsDao.getMaterialsDaoList()) {
-            Materials materials = new Materials(dao);
-            materialsList.add(materials);
-        }
-    }
 
     public static Materials findmaterial(int idMaterial){
         for (Materials material:materialsList){

@@ -30,6 +30,6 @@
    </children>
    <stylesheets>
       <URL value="@../../css/mainScreenCss.css" />
-      <URL value="@../../css/AddNewTransaction.css" />
+      <URL value="@../../css/addNewTransaction.css" />
    </stylesheets>
 </AnchorPane>

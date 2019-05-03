@@ -9,11 +9,11 @@
 
 <AnchorPane id="basicAnchorPane" prefHeight="552.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddMaterialScreenController">
    <children>
-      <Label id="titleLabel" layoutX="23.0" layoutY="14.0" prefHeight="52.0" prefWidth="507.0" text="Dodawanie nowego materiału" />
+      <Label id="titleLabel" layoutX="23.0" layoutY="14.0" prefHeight="52.0" prefWidth="397.0" text="Dodawanie nowego materiału" />
       <Label layoutX="23.0" layoutY="88.0" prefHeight="21.0" prefWidth="69.0" text="Nazwa" />
       <Label layoutX="24.0" layoutY="147.0" prefHeight="21.0" prefWidth="47.0" text="Typ" />
       <Label fx:id="lcount" layoutX="24.0" layoutY="331.0" prefHeight="21.0" prefWidth="81.0" text="Ilość" />
-      <CheckBox fx:id="checkNewValue" layoutX="16.0" layoutY="295.0" mnemonicParsing="false" onAction="#check" prefHeight="21.0" prefWidth="496.0" text="Chcę wprowadzić ilośc bez dowodu zakupu" />
+      <CheckBox fx:id="checkBoxAddNewCount" layoutX="16.0" layoutY="295.0" mnemonicParsing="false" onAction="#check" prefHeight="21.0" prefWidth="496.0" text="Chcę wprowadzić ilośc bez dowodu zakupu" />
       <TextField fx:id="lname" layoutX="134.0" layoutY="88.0" prefHeight="31.0" prefWidth="284.0" />
       <ChoiceBox fx:id="choiceTyp" layoutX="134.0" layoutY="140.0" prefHeight="31.0" prefWidth="284.0" />
       <TextField fx:id="lnewCount" layoutX="127.0" layoutY="326.0" prefHeight="31.0" prefWidth="110.0" />
@@ -21,10 +21,11 @@
       <Label fx:id="lnewType" layoutX="16.0" layoutY="251.0" text="Nowy typ" />
       <Button layoutX="327.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickSaveEquipment" text="Zapisz" />
       <Button fx:id="cancel" layoutX="168.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickCancel" text="Anuluj" />
-      <CheckBox fx:id="checkNewType" layoutX="18.0" layoutY="211.0" mnemonicParsing="false" onAction="#checkNewType" prefHeight="21.0" prefWidth="284.0" text="Chcę dodać nowy typ" />
+      <CheckBox fx:id="checkBoxAddNewType" layoutX="18.0" layoutY="211.0" mnemonicParsing="false" onAction="#checkNewType" prefHeight="21.0" prefWidth="284.0" text="Chcę dodać nowy typ" />
+      <Button fx:id="cancelButton" cancelButton="true" layoutX="476.0" layoutY="25.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />
    </children>
    <stylesheets>
       <URL value="@../../css/mainScreenCss.css" />
-      <URL value="@../../css/AddNewTransaction.css" />
+      <URL value="@../../css/addNewTransaction.css" />
    </stylesheets>
 </AnchorPane>

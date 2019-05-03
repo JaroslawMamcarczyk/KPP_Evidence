@@ -17,9 +17,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pl.kpp.CreateWindowAlert;
 import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.materials.Materials;
-
 import java.io.IOException;
 
 
@@ -38,35 +38,40 @@ public class ShowMaterialScreenController {
 
     private static BooleanProperty isNewMaterials = new SimpleBooleanProperty(false);
     private ObservableList<Materials> list = FXCollections.observableArrayList();
-    private Materials changeEquip =null;
+    private static Materials changeEquip =null;
 
+public static Materials getChangeEquip(){return changeEquip;}
 public static void setIsNewMaterials(){isNewMaterials.set(true);}
 public static BooleanProperty getIsNewMaterials(){return isNewMaterials;}
     @FXML
     public void initialize() {
         isNewMaterials.addListener((observable, oldValue, newValue) -> {
             if(newValue) {
-                Materials.createMaterialsList();
+                createTablematerials();
                 isNewMaterials.set(false);
-                initialize();
             }
         });
-        Materials.createMaterialsList();
-         list = FXCollections.observableArrayList(Materials.getMaterialsList());
-        setTable(list);
+        createTablematerials();
         tableEquipment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                 changeEquip = newValue);
     }
 
+    public void createTablematerials() {
+        MaterialsDao.readEquipment();
+        list = FXCollections.observableArrayList(Materials.getMaterialsList());
+        setTable(list);
+    }
+
     @FXML
     void clickAdd(ActionEvent event) {
-        openAddNewMaterialScreen();
+        openAddNewMaterialScreen(true);
 
     }
 
-    public  void openAddNewMaterialScreen() {
+    public  void openAddNewMaterialScreen(boolean editOrAdd) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/materials/AddMaterialScreen.fxml"));
         try {
+            AddMaterialScreenController.setAddOrEdit(editOrAdd);
             Parent parent = loader.load();
             Stage newStageAddEquipment = new Stage(StageStyle.TRANSPARENT);
             newStageAddEquipment.initModality(Modality.WINDOW_MODAL);
@@ -80,7 +85,11 @@ public static BooleanProperty getIsNewMaterials(){return isNewMaterials;}
 
     @FXML
     void clickEdit(ActionEvent event) {
-
+    if(changeEquip!=null) {
+        openAddNewMaterialScreen(false);
+    }else{
+        CreateWindowAlert.createWindowError("Nie wybrałeś materiału do edycji");
+    }
     }
 
     @FXML

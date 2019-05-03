@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import pl.kpp.converters.materials.MaterialConverter;
 import pl.kpp.dao.materialsDao.MaterialsDao;
@@ -25,11 +26,17 @@ public class AddMaterialScreenController {
     @FXML
     private Button cancel;
     @FXML
-    private CheckBox checkNewValue;
+    private CheckBox checkBoxAddNewCount;
     @FXML
-    private CheckBox checkNewType;
+    private CheckBox checkBoxAddNewType;
     @FXML
     private ChoiceBox<Materials> choiceTyp;
+    @FXML
+    private Button cancelButton;
+
+    private static boolean addOrEdit;
+
+    public static void setAddOrEdit(boolean gaddOrEdit){ addOrEdit=gaddOrEdit;}
 
 
     /**
@@ -47,14 +54,24 @@ public class AddMaterialScreenController {
         }
         if(!lfieldNewType.getText().equals("")) {
            MaterialsDao dao = new MaterialsDao(lname.getText(), count, lfieldNewType.getText());
-            dao.saveEquipment();
+           if(addOrEdit) {
+               dao.saveEquipment();
+           }else{
+               dao.setDaoId(ShowMaterialScreenController.getChangeEquip().getId());
+               MaterialsDao.updateEquipment(dao);
+           }
             ShowMaterialScreenController.setIsNewMaterials();
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
         } else {
             if (lfieldNewType.getText().equals("") && !choiceTyp.getValue().equals("")){
                 MaterialsDao dao = new MaterialsDao(lname.getText(), count, choiceTyp.getValue().getType());
-                dao.saveEquipment();
+                if(addOrEdit) {
+                    dao.saveEquipment();
+                }else{
+                    dao.setDaoId(ShowMaterialScreenController.getChangeEquip().getId());
+                    MaterialsDao.updateEquipment(dao);
+                }
                 ShowMaterialScreenController.setIsNewMaterials();
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
@@ -77,7 +94,7 @@ public class AddMaterialScreenController {
 
     @FXML
     void check(ActionEvent event) {
-        if (checkNewValue.isSelected()) {
+        if (checkBoxAddNewCount.isSelected()) {
             lnewCount.setVisible(true);
             lcount.setVisible(true);
         }else{
@@ -88,7 +105,7 @@ public class AddMaterialScreenController {
     }
     @FXML
     void checkNewType(ActionEvent event){
-        if(checkNewType.isSelected()){
+        if(checkBoxAddNewType.isSelected()){
             lfieldNewType.setVisible(true);
             lnewType.setVisible(true);
             choiceTyp.setValue(null);
@@ -100,22 +117,34 @@ public class AddMaterialScreenController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
+        ObservableList<Materials> listMaterials = FXCollections.observableArrayList();
+        listMaterials.addAll(Materials.getMaterialsList());
+        for (int i = 0; i < listMaterials.size() - 1; i++) {
+            for (int j = i + 1; j < listMaterials.size(); j++) {
+                if (listMaterials.get(i).getType().equals(listMaterials.get(j).getType())) {
+                    listMaterials.remove(j);
+                    j--;
+                }
+            }
+        }
+        choiceTyp.setConverter(new MaterialConverter());
+        choiceTyp.setItems(listMaterials);
+        cancelButton.setGraphic(new ImageView("/pics/cancel.jpg"));
         lnewCount.setVisible(false);
         lcount.setVisible(false);
         lfieldNewType.setVisible(false);
         lnewType.setVisible(false);
-        ObservableList<Materials> listMaterials = FXCollections.observableArrayList();
-        listMaterials.addAll(Materials.getMaterialsList());
-        for(int i=0;i<listMaterials.size()-1;i++){
-            for(int j=i+1;j<listMaterials.size();j++){
-          if(listMaterials.get(i).getType().equals(listMaterials.get(j).getType())){
-              listMaterials.remove(j);
-              j--;
-          }}
+        if (!addOrEdit) {
+            lname.setText(ShowMaterialScreenController.getChangeEquip().getName());
+            for(Materials materials:listMaterials){
+                if (materials.getType().equals(ShowMaterialScreenController.getChangeEquip().getType())) {
+                    choiceTyp.getSelectionModel().select(materials);
+                }
+            }
+            checkBoxAddNewType.setText("Dodaj nowy typ");
+            checkBoxAddNewCount.setText("Zmień ilość w bazie danych");
+            lnewCount.setText(String.valueOf(ShowMaterialScreenController.getChangeEquip().getAmount()));
         }
-    choiceTyp.setConverter(new MaterialConverter());
-    choiceTyp.setItems(listMaterials);
-    }
-
+}
 }

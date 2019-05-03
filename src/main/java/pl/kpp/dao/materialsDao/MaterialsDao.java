@@ -17,7 +17,6 @@ public class MaterialsDao {
     private int daoAmount = 0;
     private String daoType;
     private static PreparedStatement statement;
-    private static List<MaterialsDao> materialsDaoList = new ArrayList<>();
 
 
     public int getDaoId() {
@@ -32,10 +31,8 @@ public class MaterialsDao {
     public String getDaoType() {
         return daoType;
     }
+    public void setDaoId(int daoId){ this.daoId = daoId; }
 
-    public static List<MaterialsDao> getMaterialsDaoList() {
-        return materialsDaoList;
-    }
 
     public MaterialsDao(int gid, String gname, int gamount, String gtype){
         this.daoId = gid;
@@ -51,12 +48,13 @@ public class MaterialsDao {
     }
     public static void readEquipment(){
         Database date = new Database();
-        materialsDaoList.clear();
+        Materials.getMaterialsList().clear();
         try (ResultSet result = date.select("SELECT * from materials")) {
             while (result.next()) {
                 MaterialsDao equipment = new MaterialsDao(result.getInt("id"),result.getString("materials_name"),
                         result.getInt("count"),result.getString("materials_type"));
-                materialsDaoList.add(equipment);
+                Materials materials= new Materials(equipment);
+                Materials.getMaterialsList().add(materials);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
@@ -139,9 +137,9 @@ public class MaterialsDao {
 
     public static int searchMaterialDao(Materials materials){
         int searchingId = 0;
-        for(MaterialsDao materialsDao:materialsDaoList){
-           if(materials.getId()==materialsDao.daoId)
-               searchingId=materialsDao.daoId;
+        for(Materials material:Materials.getMaterialsList()){
+           if(materials.getId()==material.getId())
+               searchingId=material.getId();
         }return searchingId;
     }
 }

@@ -93,7 +93,7 @@ public class AddNewTransactionController {
     }
 
     public void createChoiceEquipmentField() {
-        Materials.createMaterialsList();
+        MaterialsDao.readEquipment();
         observableListMaterials = FXCollections.observableList(Materials.getMaterialsList());
         choiceEquipment.setItems(observableListMaterials);
     }

@@ -62,7 +62,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
         primaryStage.setTitle("KPP Ewidential");
-        primaryStage.setScene(new Scene(root, 1500, 900));
+        primaryStage.setScene(new Scene(root, 1366, 768));
         String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
         root.getStylesheets().add(cssPath);
         primaryStage.show();
