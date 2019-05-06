@@ -11,9 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +37,8 @@ public class ShowMaterialScreenController {
     private TableColumn<Materials, String> type;
     @FXML
     private TableView<Materials> tableEquipment;
+    @FXML
+    private VBox vBoxMenu;
 
     private static BooleanProperty isNewMaterials = new SimpleBooleanProperty(false);
     private ObservableList<Materials> list = FXCollections.observableArrayList();
@@ -48,12 +52,31 @@ public static BooleanProperty getIsNewMaterials(){return isNewMaterials;}
         isNewMaterials.addListener((observable, oldValue, newValue) -> {
             if(newValue) {
                 createTablematerials();
+                createButtonChoiceType();
                 isNewMaterials.set(false);
             }
         });
         createTablematerials();
         tableEquipment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                 changeEquip = newValue);
+        createButtonChoiceType();
+    }
+
+    public void createButtonChoiceType() {
+    vBoxMenu.getChildren().clear();
+        for(Materials materials: AddMaterialScreenController.createTypeList()){
+            Button button = new Button(materials.getType());
+            button.setPrefWidth(142);
+            button.setOnMouseClicked(click->{
+                ObservableList<Materials> temporaryObservableMaterialList = FXCollections.observableArrayList();
+                for(Materials material:Materials.getMaterialsList()){
+                    if(material.getType().equals(materials.getType())){
+                        temporaryObservableMaterialList.add(material);
+                    }
+                }setTable(temporaryObservableMaterialList);
+            });
+            vBoxMenu.getChildren().add(button);
+        }
     }
 
     public void createTablematerials() {
@@ -94,10 +117,12 @@ public static BooleanProperty getIsNewMaterials(){return isNewMaterials;}
 
     @FXML
     void clickDelete(ActionEvent event) {
-        if(changeEquip!=null){
-            MaterialsDao.deleteEquipment(changeEquip);
-            setIsNewMaterials();
-        }
+//        PrinterJob job = PrinterJob.createPrinterJob();
+//        if(job != null){
+//           // job.sh
+//            job.printPage(MainScreenController.getPane());
+//            job.endJob();
+//        }
 
     }
 

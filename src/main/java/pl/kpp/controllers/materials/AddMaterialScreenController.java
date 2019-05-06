@@ -60,26 +60,26 @@ public class AddMaterialScreenController {
                dao.setDaoId(ShowMaterialScreenController.getChangeEquip().getId());
                MaterialsDao.updateEquipment(dao);
            }
-            ShowMaterialScreenController.setIsNewMaterials();
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
         } else {
-            if (lfieldNewType.getText().equals("") && !choiceTyp.getValue().equals("")){
+            if (lfieldNewType.getText().equals("") && !choiceTyp.getValue().equals("")) {
                 MaterialsDao dao = new MaterialsDao(lname.getText(), count, choiceTyp.getValue().getType());
-                if(addOrEdit) {
+                if (addOrEdit) {
                     dao.saveEquipment();
-                }else{
+                } else {
                     dao.setDaoId(ShowMaterialScreenController.getChangeEquip().getId());
                     MaterialsDao.updateEquipment(dao);
                 }
-                ShowMaterialScreenController.setIsNewMaterials();
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
-            }else{
+            }
+            else{
                 System.out.println("Coś nie poszło tak, sprawdź wszytskie pola");
             }
         }
-
+        ShowMaterialScreenController.setIsNewMaterials();
+        AddNewGetInController.setIsNewMaterials();
     }
 
     /**
@@ -118,16 +118,7 @@ public class AddMaterialScreenController {
 
     @FXML
     public void initialize() {
-        ObservableList<Materials> listMaterials = FXCollections.observableArrayList();
-        listMaterials.addAll(Materials.getMaterialsList());
-        for (int i = 0; i < listMaterials.size() - 1; i++) {
-            for (int j = i + 1; j < listMaterials.size(); j++) {
-                if (listMaterials.get(i).getType().equals(listMaterials.get(j).getType())) {
-                    listMaterials.remove(j);
-                    j--;
-                }
-            }
-        }
+        ObservableList<Materials> listMaterials = createTypeList();
         choiceTyp.setConverter(new MaterialConverter());
         choiceTyp.setItems(listMaterials);
         cancelButton.setGraphic(new ImageView("/pics/cancel.jpg"));
@@ -147,4 +138,18 @@ public class AddMaterialScreenController {
             lnewCount.setText(String.valueOf(ShowMaterialScreenController.getChangeEquip().getAmount()));
         }
 }
+
+    public static ObservableList<Materials> createTypeList() {
+        ObservableList<Materials> listMaterials = FXCollections.observableArrayList();
+        listMaterials.addAll(Materials.getMaterialsList());
+        for (int i = 0; i < listMaterials.size() - 1; i++) {
+            for (int j = i + 1; j < listMaterials.size(); j++) {
+                if (listMaterials.get(i).getType().equals(listMaterials.get(j).getType())) {
+                    listMaterials.remove(j);
+                    j--;
+                }
+            }
+        }
+        return listMaterials;
+    }
 }

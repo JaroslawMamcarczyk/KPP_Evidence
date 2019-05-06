@@ -1,19 +1,27 @@
 package pl.kpp.controllers.workersControllers;
 
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.scenario.effect.ImageData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import pl.kpp.CreateWindowAlert;
+import pl.kpp.HandlingFileOperation;
+import pl.kpp.HandlingPdfFiles;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.workers.Departament;
@@ -24,6 +32,11 @@ import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RangeConverter;
 import pl.kpp.converters.workers.RanksConverter;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

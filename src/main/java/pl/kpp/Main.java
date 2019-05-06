@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.kpp.dao.Database;
+import pl.kpp.dao.licenseDao.KsipTypeDao;
 import pl.kpp.dao.workersDao.DepartamentDao;
 import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.dao.workersDao.RangeDao;
@@ -48,11 +49,14 @@ public class Main extends Application {
         date.createTable("create table if not exists article_in_transaction (id INTEGER not null constraint article_in_transaction_pk primary key,"+
                             "transaction_id int references transaction_list, material_id int references materials on delete set null,article_in_transaction_count int );"+
                             "create unique index article_in_transaction_id_uindex on article_in_transaction (id);");
+    //    date.createTable("create table if not exists ksip_type(id INTEGER not null constraint ksip_type_pk primary key," +
+           //                 "ksip_name VARCHAR(100) not null ksip_descript VARCHAR(200) not null);");
         DepartamentDao.readDepartament(date);
         RanksDao.readRanks(date);
         RangeDao.readRange(date);
         Range.createRangeList();
         WorkerDao.readWorkers(date);
+      //  KsipTypeDao.readKsip();
 
         date.closeDatabase();
         Parent root = null;

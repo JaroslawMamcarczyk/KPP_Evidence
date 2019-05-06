@@ -107,7 +107,7 @@ public class WorkerDao {
      */
     public static void readWorkers(Database date){
         Worker.getWorekrList().clear();
-        try (ResultSet result = date.select("SELECT * FROM workers")) {
+        try (ResultSet result = date.select("SELECT * FROM workers order by worker_name, worker_surname")) {
             while (result.next()) {
                 WorkerDao workerDao = new WorkerDao(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
                         result.getString(5),result.getInt(6),result.getInt(7),

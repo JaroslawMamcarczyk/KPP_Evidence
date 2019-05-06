@@ -1,6 +1,8 @@
 package pl.kpp.controllers.materials;
 
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +72,7 @@ public class AddNewTransactionController {
                 if(flagIfCreateNextCheckbox) {
                     flagIfCreateNextCheckbox = false;
                     ChoiceBox<Materials> secondChoice = new ChoiceBox<>();
-                    secondChoice.setPrefSize(246,44);
+                    secondChoice.setPrefSize(376,44);
                     secondChoice.setConverter(new EquipmentNameConverter());
                     secondChoice.setItems(observableListMaterials);
                     addListener(secondChoice);
@@ -90,6 +92,7 @@ public class AddNewTransactionController {
         choiceEquipment.setConverter(new EquipmentNameConverter());
         createChoiceEquipmentField();
         addListener(choiceEquipment);
+
     }
 
     public void createChoiceEquipmentField() {

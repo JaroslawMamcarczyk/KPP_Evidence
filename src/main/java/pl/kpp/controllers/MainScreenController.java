@@ -13,7 +13,8 @@ public class MainScreenController {
     @FXML
     private BorderPane general;
 
-    private Node pane = null;
+    private static Node pane = null;
+    public static Node getPane(){return  pane;}
     private static MainScreenController mainScreenController;
 
     public static MainScreenController getMainScreenController(){ return mainScreenController;}

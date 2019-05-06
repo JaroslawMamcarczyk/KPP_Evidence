@@ -8,14 +8,17 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import pl.kpp.controllers.materials.ShowTransactionScreenController;
 import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Transaction;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -95,6 +98,43 @@ public class HandlingPdfFiles extends Application {
         hostServices.showDocument(file.getAbsolutePath());
     }
 
+    public static void createPdfWithKsip(String path){
+        Document document = new Document();
+        try {
+            PdfWriter pdf = PdfWriter.getInstance(document,new FileOutputStream("pdf.pdf"));
+            document.open();
+            Image image = null;
+            try {
+                image = Image.getInstance(path);
+                image.scaleAbsolute(PageSize.A4.rotate());
+                image.setAbsolutePosition(0,0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            document.add(image);
+            document.close();
+            pdf.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createImage(Node node){
+        WritableImage image = node.snapshot(new SnapshotParameters(), null);
+        File file = new File("screenshot.png");
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image,null),"png",file);
+        }catch (IOException e){
+            System.out.println("ależ babol");
+        }
+        FileInputStream inputstream = null;
+        try {
+            inputstream = new FileInputStream("screenshot.png");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void start(Stage stage) throws Exception {
 

@@ -87,6 +87,9 @@
           <Tab text="Uprawnienia KSIP">
                <content>
 
+               </content>
+               <content>
+                  <fx:include source="../license/KsipForms.fxml" />
                </content></Tab>
         </tabs>
          <opaqueInsets>

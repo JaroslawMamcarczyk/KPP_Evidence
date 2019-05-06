@@ -66,7 +66,7 @@ public class TransactionDao {
     public static void readTransaction(){
         Database date = new Database();
         Transaction.getTransactionList().clear();
-        try (ResultSet result = date.select("SELECT * FROM transaction_list ORDER BY transaction_date DESC")) {
+        try (ResultSet result = date.select("SELECT * FROM transaction_list ORDER BY transaction_date DESC, transaction_number DESC")) {
            while (result.next()) {
                 TransactionDao transactionDao = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
                 result.getString(4), result.getDate(5), result.getInt(6));
@@ -134,11 +134,9 @@ public class TransactionDao {
         try{
             Statement stat = date.getCon().createStatement();
             ResultSet result= stat.executeQuery("SELECT * from transaction_list WHERE type=1 ORDER BY id DESC LIMIT 1");
-            while(result.next()) {
                 TransactionDao transaction = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
                         result.getString(4),result.getDate(5),result.getInt(6));
                 return transaction;
-            }
         }catch(SQLException s){
             System.out.println("Błąd zapytania - nie pobrano danych z tabeli");
         }
