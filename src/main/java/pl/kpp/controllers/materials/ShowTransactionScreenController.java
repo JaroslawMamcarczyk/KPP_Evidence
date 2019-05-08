@@ -23,7 +23,6 @@ import pl.kpp.dao.materialsDao.MaterialsDao;
 import pl.kpp.dao.materialsDao.TransactionDao;
 import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Deliverys;
-import pl.kpp.materials.Materials;
 import pl.kpp.materials.Transaction;
 import pl.kpp.workers.Worker;
 

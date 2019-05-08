@@ -39,19 +39,21 @@ public class AddNewTransactionController {
     public List<Integer> listCount = new ArrayList<>();
     private int numberOfChoiceBox = -1;
     private int finalCount;
-    private ObservableList<Materials> observableListMaterials = FXCollections.observableArrayList();
+    private static ObservableList<Materials> observableListMaterials = FXCollections.observableArrayList();
     private boolean flagIfCreateNextCheckbox=true;
     private boolean flagIfCreateNextTexfield=true;
+    private static BooleanProperty isNewMaterials=new SimpleBooleanProperty(false);
     private ObservableList<ArticleInTransaction> articleInTransactionObservableList = FXCollections.observableArrayList();
 
     public ObservableList<ArticleInTransaction> getArticleInTransactionObservableList(){ return articleInTransactionObservableList;}
     public AddNewTransactionController() {
     }
+    public static void setIsNewMaterials(){isNewMaterials.set(true);}
 
     private void addListener(ChoiceBox<Materials> gchoice) {
         gchoice.getSelectionModel().selectedIndexProperty().addListener((observable) -> {
             flagIfCreateNextCheckbox=true;
-               if(flagIfCreateNextTexfield&& flagIfCreateNextCheckbox) {
+               if(flagIfCreateNextTexfield) {
                    flagIfCreateNextTexfield=false;
                    TextField secondCount = new TextField();
                    secondCount.setPrefHeight(44);
@@ -89,15 +91,24 @@ public class AddNewTransactionController {
     @FXML
     void initialize() {
         cancelButton.setGraphic(new ImageView("/pics/cancel.jpg"));
-        choiceEquipment.setConverter(new EquipmentNameConverter());
         createChoiceEquipmentField();
         addListener(choiceEquipment);
-
+        isNewMaterials.addListener(observable -> {
+            if(isNewMaterials.get()){
+                boxCount.getChildren().removeIf(node->node instanceof TextField);
+                boxArticle.getChildren().removeIf(node -> node instanceof ChoiceBox);
+                createChoiceEquipmentField();
+                addListener(choiceEquipment);
+                boxArticle.getChildren().add(choiceEquipment);
+                isNewMaterials.set(false);
+            }
+        });
     }
 
     public void createChoiceEquipmentField() {
         MaterialsDao.readEquipment();
         observableListMaterials = FXCollections.observableList(Materials.getMaterialsList());
+        choiceEquipment.setConverter(new EquipmentNameConverter());
         choiceEquipment.setItems(observableListMaterials);
     }
 

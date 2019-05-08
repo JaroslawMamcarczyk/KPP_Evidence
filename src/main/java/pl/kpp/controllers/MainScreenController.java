@@ -4,7 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import pl.kpp.Works;
+import pl.kpp.dao.Database;
+import pl.kpp.dao.WorksDao;
 import java.io.IOException;
 
 
@@ -12,6 +18,10 @@ public class MainScreenController {
 
     @FXML
     private BorderPane general;
+    @FXML
+    private VBox VBoxJobList;
+    @FXML
+    private TextArea textAreaNewJob;
 
     private static Node pane = null;
     public static Node getPane(){return  pane;}
@@ -38,8 +48,21 @@ public class MainScreenController {
     void clickShowTransaction(ActionEvent event) {
         createCenter("/FXML/materials/ShowTransactionScreen.fxml");
     }
+    @FXML
+   void clickListKryptomail(){}
+   @FXML
+   void clickAddJob(){
+        WorksDao worksDao = new WorksDao(textAreaNewJob.getText());
+        worksDao.saveWorks();
+   }
 public void initialize(){
-mainScreenController = this;
+        mainScreenController = this;
+    Database date = new Database();
+    WorksDao.readWorks(date);
+    for(Works works: WorksDao.getWorksList()){
+        Label label = new Label(works.getJob());
+        VBoxJobList.getChildren().add(label);
+    }
 }
     public void createCenter(String path) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));

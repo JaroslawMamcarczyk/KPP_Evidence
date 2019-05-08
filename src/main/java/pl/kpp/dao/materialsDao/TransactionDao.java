@@ -117,10 +117,8 @@ public class TransactionDao {
         int lastGeneratedID=0;
         try{
         Statement stat = date.getCon().createStatement();
-        ResultSet result= stat.executeQuery("SELECT MAX(id) from transaction_list");
-           while(result.next()) {
+        ResultSet result= stat.executeQuery("SELECT MAX(id) from transaction_list DESC LIMIT 1");
                 lastGeneratedID = result.getInt(1);
-           }
         }catch (SQLException e){
             System.out.println("Nie pobrałem ostatniego ID");
         }
@@ -134,12 +132,16 @@ public class TransactionDao {
         try{
             Statement stat = date.getCon().createStatement();
             ResultSet result= stat.executeQuery("SELECT * from transaction_list WHERE type=1 ORDER BY id DESC LIMIT 1");
-                TransactionDao transaction = new TransactionDao(result.getInt(1),result.getInt(2),result.getInt(3),
-                        result.getString(4),result.getDate(5),result.getInt(6));
+            if(result!=null) {
+                TransactionDao transaction = new TransactionDao(result.getInt(1), result.getInt(2), result.getInt(3),
+                        result.getString(4), result.getDate(5), result.getInt(6));
+                date.closeDatabase();
                 return transaction;
+            }
         }catch(SQLException s){
             System.out.println("Błąd zapytania - nie pobrano danych z tabeli");
         }
+        date.closeDatabase();
         return null;
     }
 }

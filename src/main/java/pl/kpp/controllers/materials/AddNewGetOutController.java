@@ -49,15 +49,19 @@ public class AddNewGetOutController extends AddNewTransactionController{
     void clickSave(ActionEvent e){
         if(choiceEmployer.getValue()!=null) {
             if (SaveNewTransaction(1)!=0) {
-                Transaction transactionToPdf = new Transaction(TransactionDao.getLastSavedTransaction());
+                int number;
+                if(TransactionDao.getLastSavedTransaction()!=null) {
+                    Transaction transactionToPdf = new Transaction(TransactionDao.getLastSavedTransaction());
+                    number = Integer.parseInt(transactionToPdf.getNameTransaction().split("/")[0]);
+                    number++;
+                }else{
+                    number=1;
+                }
                 Worker police = choiceEmployer.getValue();
-                int number = Integer.parseInt(transactionToPdf.getNameTransaction().split("/")[0]);
-                number++;
                 String numberOfTransaction = number+ "/" + LocalDate.now().getYear();
-                System.out.println(numberOfTransaction+police.getId());
                 TransactionDao transaction = new TransactionDao(police.getId(), numberOfTransaction);
                 transaction.saveTransaction(1);
-                transactionToPdf=new Transaction(TransactionDao.getLastSavedTransaction());
+                Transaction transactionToPdf=new Transaction(TransactionDao.getLastSavedTransaction());
                 HandlingPdfFiles pdfFiles = new HandlingPdfFiles();
                 pdfFiles.showPdfFile(pdfFiles.print(transactionToPdf,getArticleInTransactionObservableList()));
                 ShowTransactionScreenController.setIsNewTransaction();

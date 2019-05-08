@@ -1,8 +1,6 @@
 package pl.kpp.controllers.materials;
 
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,9 +25,8 @@ public class AddNewGetInController extends AddNewTransactionController {
     private ChoiceBox<Deliverys> choiceDelivery = new ChoiceBox<>();
     private boolean isButtonNewDeliveryPush = false;
     private Deliverys choseDelivery = null;
-    private static BooleanProperty isNewMaterials=new SimpleBooleanProperty(false);
 
-    public static void setIsNewMaterials(){isNewMaterials.set(true);}
+
 
     @FXML
     VBox vBoxChangeDeliverer;
@@ -45,12 +42,6 @@ public class AddNewGetInController extends AddNewTransactionController {
     @FXML
     void initialize(){
         super.initialize();
-        isNewMaterials.addListener(observable -> {
-            if(isNewMaterials.get()){
-                super.initialize();
-                isNewMaterials.set(false);
-            }
-        });
     }
 
     @FXML
