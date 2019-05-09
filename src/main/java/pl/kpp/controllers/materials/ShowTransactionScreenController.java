@@ -86,17 +86,15 @@ public class ShowTransactionScreenController {
         });
         labelPath.setText(path.getValue());
         MaterialsDao.readEquipment();
-        Transaction.createTransactionList();
-        ArticleInTransaction.CreateArticleIntransactionList();
         DeliverysDao.readDeliverys();
         Deliverys.createDeliverysList();
         createObservableList();
+        ArticleInTransaction.CreateArticleIntransactionList();
         clickShowAll();
         addListenerToTable();
-        isNewTransaction.addListener((Observable, oldValue, newValue)->{
-            if (newValue){
+        isNewTransaction.addListener((Observable)->{
+            if (isNewTransaction.getValue()){
                 isNewTransaction.set(false);
-                TransactionDao.readTransaction();
                 createObservableList();
                 ArticleInTransaction.CreateArticleIntransactionList();
                 clickShowAll();
@@ -187,7 +185,7 @@ public class ShowTransactionScreenController {
             transactionOutObservableList.clear();
         if (transactionObservableList.size() != 0)
             transactionObservableList.clear();
-        Transaction.createTransactionList();
+        TransactionDao.readTransaction();
         transactionObservableList =FXCollections.observableArrayList(Transaction.getTransactionList());
         for (Transaction transaction : Transaction.getTransactionList()) {
             if (transaction.getType() == 1)

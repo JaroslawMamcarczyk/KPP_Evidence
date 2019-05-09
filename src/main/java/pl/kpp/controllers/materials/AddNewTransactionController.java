@@ -82,7 +82,7 @@ public class AddNewTransactionController {
                     flagIfCreateNextTexfield = true;
                 }
             } catch (NumberFormatException e) {
-                CreateWindowAlert.CreateWindowConfirmation("Podana wartość jest błędna");
+                CreateWindowAlert.createWindowConfirmation("Podana wartość jest błędna");
             }}
         });
 

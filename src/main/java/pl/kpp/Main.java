@@ -51,6 +51,14 @@ public class Main extends Application {
                             "create unique index article_in_transaction_id_uindex on article_in_transaction (id);");
     //    date.createTable("create table if not exists ksip_type(id INTEGER not null constraint ksip_type_pk primary key," +
            //                 "ksip_name VARCHAR(100) not null ksip_descript VARCHAR(200) not null);");
+        date.createTable("create table if not exists works(\n" +
+                "    id         INTEGER not null\n" +
+                "        constraint works_pk\n" +
+                "            primary key,\n" +
+                "    job        TEXT,\n" +
+                "    status     int,\n" +
+                "    works_data date\n" +
+                ");");
         DepartamentDao.readDepartament(date);
         RanksDao.readRanks(date);
         RangeDao.readRange(date);

@@ -1,8 +1,6 @@
 package pl.kpp;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 
 import java.util.Optional;
 
@@ -15,9 +13,17 @@ public class CreateWindowAlert {
         alert.showAndWait();
     }
 
-    public static Optional<ButtonType> CreateWindowConfirmation(String message) {
+    public static Optional<ButtonType> createWindowConfirmation(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(message);
         return alert.showAndWait();
+    }
+
+
+    public static Optional<String> createWindow(String title){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(title);
+        dialog.setContentText(title);
+        return dialog.showAndWait();
     }
 }

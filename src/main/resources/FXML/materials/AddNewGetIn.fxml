@@ -10,19 +10,8 @@
    <children>
       <Label id="newDelivery" layoutX="36.0" layoutY="21.0" prefHeight="51.0" prefWidth="523.0" text="Nowe Przyjęcie" />
       <Button fx:id="cancelButton" cancelButton="true" layoutX="902.0" layoutY="34.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />
-      <VBox fx:id="boxArticle" layoutX="13.0" layoutY="107.0" prefHeight="551.0" prefWidth="375.0" spacing="3.0" stylesheets="@../../css/showTransactionCss.css">
-         <children>
-            <Label prefHeight="30.0" prefWidth="245.0" text="Towar" />
-            <ChoiceBox fx:id="choiceEquipment" prefHeight="44.0" prefWidth="376.0" />
-         </children>
-      </VBox>
-      <VBox fx:id="boxCount" layoutX="389.0" layoutY="107.0" prefHeight="393.0" prefWidth="67.0" spacing="3.0">
-         <children>
-            <Label prefHeight="30.0" prefWidth="70.0" text="ilość" />
-         </children>
-      </VBox>
       <Button layoutX="382.0" layoutY="680.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="59.0" prefWidth="128.0" text="Zapisz" />
-      <VBox fx:id="vBoxChangeDeliverer" layoutX="488.0" layoutY="107.0" prefHeight="638.0" prefWidth="466.0" spacing="10.0">
+      <VBox fx:id="vBoxChangeDeliverer" layoutX="510.0" layoutY="107.0" prefHeight="638.0" prefWidth="466.0" spacing="10.0">
          <children>
             <Label id="labelDeliveryName" prefHeight="21.0" prefWidth="327.0" stylesheets="@../../css/showTransactionCss.css" text="Dostawca" />
             <Label prefHeight="30.0" prefWidth="400.0" text="Komenda Wojewódzka Policji w Krakowie" />
@@ -48,6 +37,25 @@
          </children>
       </VBox>
       <Button layoutX="25.0" layoutY="678.0" mnemonicParsing="false" onAction="#clickAddNewMaterials" text="Dodaj nowy towar" />
+      <ScrollPane layoutX="25.0" layoutY="101.0" prefHeight="540.0" prefWidth="479.0">
+         <content>
+            <HBox prefHeight="538.0" prefWidth="477.0" spacing="5.0">
+               <children>
+                  <VBox fx:id="boxArticle" spacing="3.0" stylesheets="@../../css/showTransactionCss.css">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="245.0" text="Towar" />
+                        <ChoiceBox fx:id="choiceEquipment" prefHeight="44.0" prefWidth="376.0" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="boxCount" prefHeight="538.0" prefWidth="73.0" spacing="3.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="70.0" text="ilość" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
    </children>
    <stylesheets>
       <URL value="@../../css/showTransactionCss.css" />

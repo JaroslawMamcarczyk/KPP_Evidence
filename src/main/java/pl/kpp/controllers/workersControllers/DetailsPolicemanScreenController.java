@@ -289,7 +289,7 @@ public class DetailsPolicemanScreenController {
         hBox.setSpacing(5);
         Button deleteButton = new Button("Usuń");
         deleteButton.setOnMouseClicked(event -> {
-            Optional<ButtonType> result = CreateWindowAlert.CreateWindowConfirmation("Czy na pewno chcesz usunąć dostęp do: "+name);
+            Optional<ButtonType> result = CreateWindowAlert.createWindowConfirmation("Czy na pewno chcesz usunąć dostęp do: "+name);
             if (result.get()== ButtonType.OK) {
                 WorkerDao.updateWorkerInt(name, 0, police.getId());
                 label.setText("usunięto");

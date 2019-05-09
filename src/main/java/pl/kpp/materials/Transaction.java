@@ -58,9 +58,6 @@ public class Transaction {
         return transactionList;
     }
 
-    public static void createTransactionList(){
-        TransactionDao.readTransaction();
-    }
 
     public static Transaction findTransaction(int idTransaction){
         for (Transaction transaction:transactionList){

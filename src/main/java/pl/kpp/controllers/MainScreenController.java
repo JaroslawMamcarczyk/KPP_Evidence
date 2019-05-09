@@ -49,7 +49,7 @@ public class MainScreenController {
         createCenter("/FXML/materials/ShowTransactionScreen.fxml");
     }
     @FXML
-   void clickListKryptomail(){}
+   void clickListKryptomail(){createCenter("/FXML/WorksScreen.fxml");}
    @FXML
    void clickAddJob(){
         WorksDao worksDao = new WorksDao(textAreaNewJob.getText());
@@ -57,12 +57,6 @@ public class MainScreenController {
    }
 public void initialize(){
         mainScreenController = this;
-    Database date = new Database();
-    WorksDao.readWorks(date);
-    for(Works works: WorksDao.getWorksList()){
-        Label label = new Label(works.getJob());
-        VBoxJobList.getChildren().add(label);
-    }
 }
     public void createCenter(String path) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(path));
