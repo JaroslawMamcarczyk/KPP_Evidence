@@ -1,0 +1,68 @@
+.root{
+    -fx-font-size  : 14pt;
+    -fx-font-family: "Tahoma";
+    -fx-base       : #66ccff;
+    -fx-background : #003366;
+    -fx-focus-color: #33ffff;
+}
+.button {
+    font-family: arial;
+    color: #14396A !important;
+    font-size: 14px;
+    -moz-border-radius: 14px;
+    -webkit-border-radius: 14px;
+    border-radius: 14px;
+    background: #63B8EE;
+}
+.button:hover {
+    color: #6A495B ;
+    background: #468CCF;
+}
+
+
+
+.table .table-cell{
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+}
+
+
+.label{
+    -fx-border-width: 5px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.check-box{
+    -fx-border-width: 5px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+#VBoxHaving.label{
+   -fx-border-style: solid;
+    -fx-border-color: #000000;
+    -fx-border-width: 5px;
+}
+
+#tableRange .table-cell{
+    -fx-alignment: Center;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.list-view{
+    -fx-alignment: Center;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+#labelListDepartament, #labelListRanks{
+    -fx-border-width: 5px;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane> .content.label{
+    -fx-background : #003366;
+}

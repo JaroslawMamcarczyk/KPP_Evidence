@@ -1,0 +1,12 @@
+#materialsTable{
+
+}
+
+#materialsTable .table-cell{
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+#nameColumn{
+    -fx-font-weight: bold;
+}

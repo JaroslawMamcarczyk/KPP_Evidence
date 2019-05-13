@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import pl.kpp.dao.materialsDao.TransactionDao;
 import pl.kpp.workers.Worker;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

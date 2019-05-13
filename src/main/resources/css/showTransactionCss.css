@@ -1,0 +1,30 @@
+
+
+.root{
+    -fx-font-size  : 14pt;
+    -fx-font-family: "Tahoma";
+    -fx-base       : #66ccff;
+    -fx-background : #003366;
+    -fx-focus-color: #33ffff;
+}
+
+.label{
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+}
+
+#labelDeliveryName{
+    -fx-font-size: 30px;
+    -fx-font-style: oblique;
+    -fx-font-weight: bold;
+}
+
+#newDelivery{
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+#tableTransaction .table-cell{
+    -fx-alignment: center;
+    -fx-font-size: 17px;
+}

@@ -1,0 +1,9 @@
+.root{
+    -fx-background-color: #666699;
+    -fx-border-style: solid;
+    -fx-border-width: 8px;
+    -fx-border-color: black;
+}
+.titleLabel{
+    -fx-font-size: 50px;
+}
