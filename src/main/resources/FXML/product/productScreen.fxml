@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="587.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.product.ProductScreenController">
+   <children>
+      <TableView fx:id="tableViewProduct" layoutX="4.0" layoutY="25.0" prefHeight="554.0" prefWidth="862.0">
+        <columns>
+          <TableColumn fx:id="tableID" prefWidth="32.0" text="ID" />
+          <TableColumn fx:id="tableKind" prefWidth="45.5999755859375" text="Rodzaj" />
+            <TableColumn fx:id="tableProduct" prefWidth="95.99993896484375" text="Produkt" />
+            <TableColumn fx:id="tableSerial" prefWidth="75.0" text="Nr. fabr." />
+            <TableColumn fx:id="tableInventory" prefWidth="99.19996643066406" text="nr. inwentarz" />
+            <TableColumn fx:id="tableEwidential" prefWidth="70.4000244140625" text="nr. ewid." />
+            <TableColumn fx:id="tablePrice" prefWidth="68.0" text="Cena" />
+            <TableColumn fx:id="tableYear" prefWidth="84.79998779296875" text="Rok prod." />
+            <TableColumn fx:id="tableType" prefWidth="49.60003662109375" text="Typ" />
+            <TableColumn fx:id="tableRoom" prefWidth="67.199951171875" text="pokoj" />
+            <TableColumn fx:id="tableDepartment" prefWidth="102.4000244140625" text="departament" />
+            <TableColumn fx:id="tableComments" prefWidth="72.0001220703125" text="Uwagi" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

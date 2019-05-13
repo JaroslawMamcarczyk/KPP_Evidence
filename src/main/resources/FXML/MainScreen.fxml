@@ -21,7 +21,7 @@
                   <ToggleGroup fx:id="menu_button" />
                </toggleGroup></ToggleButton>
             <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickAddPoliceman" prefHeight="31.0" prefWidth="186.0" text="Dodaj Policjanta" toggleGroup="$menu_button" />
-            <ToggleButton layoutX="10.0" layoutY="209.0" mnemonicParsing="false" onAction="#clickListKryptomail" prefHeight="31.0" prefWidth="186.0" text="Lista Kryptomail" toggleGroup="$menu_button" />
+            <ToggleButton layoutX="10.0" layoutY="209.0" mnemonicParsing="false" onAction="#clickListKryptomail" prefHeight="31.0" prefWidth="186.0" text="Zadania" toggleGroup="$menu_button" />
             <Separator prefHeight="68.0" prefWidth="140.0" />
             <ToggleButton layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#clickMaterials" prefHeight="31.0" prefWidth="185.0" text="Materiały" toggleGroup="$menu_button" />
             <ToggleButton layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#clickShowTransaction" prefHeight="31.0" prefWidth="185.0" text="Transakcje" />

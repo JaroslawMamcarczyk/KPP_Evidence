@@ -49,16 +49,12 @@ public class Main extends Application {
         date.createTable("create table if not exists article_in_transaction (id INTEGER not null constraint article_in_transaction_pk primary key,"+
                             "transaction_id int references transaction_list, material_id int references materials on delete set null,article_in_transaction_count int );"+
                             "create unique index article_in_transaction_id_uindex on article_in_transaction (id);");
-    //    date.createTable("create table if not exists ksip_type(id INTEGER not null constraint ksip_type_pk primary key," +
+    //    date.createTable("create table if not exists ksip_type(id INTEGER not null constraint ksip_type_pk primary key,"+
            //                 "ksip_name VARCHAR(100) not null ksip_descript VARCHAR(200) not null);");
-        date.createTable("create table if not exists works(\n" +
-                "    id         INTEGER not null\n" +
-                "        constraint works_pk\n" +
-                "            primary key,\n" +
-                "    job        TEXT,\n" +
-                "    status     int,\n" +
-                "    works_data date\n" +
-                ");");
+        date.createTable("create table if not exists works(id INTEGER not null constraint works_pk primary key,job TEXT,status int,works_data date);");
+        date.createTable("create table if not exists cards(id INTEGER not null constraint cards_pk primary key, card_number VARCHAR(16),"+
+                            "card_worker int references workers on delete set null);"+
+                            "create unique index cards_id_uindex on cards (id);");
         DepartamentDao.readDepartament(date);
         RanksDao.readRanks(date);
         RangeDao.readRange(date);
@@ -75,8 +71,8 @@ public class Main extends Application {
         }
         primaryStage.setTitle("KPP Ewidential");
         primaryStage.setScene(new Scene(root, 1366, 768));
-        String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
-        root.getStylesheets().add(cssPath);
+       /// String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
+      //  root.getStylesheets().add(cssPath);
         primaryStage.show();
 
     }
