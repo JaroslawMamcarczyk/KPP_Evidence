@@ -30,6 +30,11 @@ public class CardsDao {
         this.cardWorkerDao = cardWorker;
     }
 
+    public CardsDao(String cardDaoNumber,int cardWorker){
+        this.cardDaoNumber = cardDaoNumber;
+        this.cardWorkerDao = cardWorker;
+    }
+
     public static void readCards(Database date){
         try (ResultSet result = date.select("SELECT * from cards")) {
             while (result.next()) {

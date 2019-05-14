@@ -1,6 +1,5 @@
-package pl.kpp.controllers.product;
+package pl.kpp.controllers.productControllers;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

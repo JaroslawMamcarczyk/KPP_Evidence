@@ -12,17 +12,20 @@ public class Cards {
     private int id;
     private int cardWorkerId;
     private StringProperty cardNumber = new SimpleStringProperty();
-    private Worker worker;
+    private Worker cardWorker;
     private static List<Cards> cardsList = new ArrayList<>();
 
     public static List<Cards> getCardsList(){return cardsList;}
+    public int getId(){return id;}
+    public String getCardNumber(){return cardNumber.get();}
+    public Worker getCardWorker(){return cardWorker;}
 
     public Cards(CardsDao cardsDao) {
         this.id=cardsDao.getIdDao();
         this.cardNumber.set(cardsDao.getCardDaoNumber());
         this.cardWorkerId = cardsDao.getCardWorker();
         if(cardWorkerId!=0){
-           worker=Worker.findWorker(cardWorkerId);
+           cardWorker =Worker.findWorker(cardWorkerId);
         }
     }
 }

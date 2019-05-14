@@ -1,4 +1,4 @@
-package pl.kpp.controllers.materials;
+package pl.kpp.controllers.materialsControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,7 +40,7 @@ public class AddMaterialScreenController {
 
 
     /**
-     * Method saving new materials to database
+     * Method saving new materialsControllers to database
      * @param e
      */
     public void clickSaveEquipment(ActionEvent e){

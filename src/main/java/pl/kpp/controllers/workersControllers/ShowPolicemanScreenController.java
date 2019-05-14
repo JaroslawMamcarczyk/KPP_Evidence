@@ -72,7 +72,7 @@ public class ShowPolicemanScreenController {
  */
         policemanTableView.setOnMouseClicked(click ->{
             if (click.getClickCount()==2){
-               MainScreenController.getMainScreenController().createCenter("/FXML/policeman/DetailsPolicemanScreen.fxml");
+               MainScreenController.getMainScreenController().createCenter("/FXML/workers/DetailsPolicemanScreen.fxml");
             }
         });
         /**

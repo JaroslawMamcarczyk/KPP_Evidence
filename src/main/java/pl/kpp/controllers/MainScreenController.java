@@ -4,12 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import pl.kpp.Works;
-import pl.kpp.dao.Database;
 import pl.kpp.dao.WorksDao;
 import java.io.IOException;
 
@@ -31,7 +28,7 @@ public class MainScreenController {
 
     @FXML
     void clickShowPoliceman(ActionEvent event) {
-        createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
+        createCenter("/FXML/workers/ShowPolicemanScreen.fxml");
     }
     @FXML
     void clickConfiguration(ActionEvent event) {
@@ -42,7 +39,7 @@ public class MainScreenController {
     }
     @FXML
     void clickAddPoliceman(ActionEvent event){
-        createCenter("/FXML/policeman/AddPolicemanScreen.fxml");
+        createCenter("/FXML/workers/AddPolicemanScreen.fxml");
     }
     @FXML
     void clickShowTransaction(ActionEvent event) {
@@ -51,9 +48,11 @@ public class MainScreenController {
     @FXML
    void clickListKryptomail(){createCenter("/FXML/WorksScreen.fxml");}
    @FXML
-    void clickShowProduct(){createCenter("/FXML/product/productScreen.fxml");}
+    void clickShowProduct(){createCenter("/FXML/product/ProductScreen.fxml");}
     @FXML
-    void clickCards(){createCenter("/FXML/policeman/cardsScreen.fxml");}
+    void clickCards(){createCenter("/FXML/product/CardsScreen.fxml");}
+    @FXML
+    void clickShowBuilding(){createCenter("/FXML/building/BuildingScreen.fxml");}
    @FXML
    void clickAddJob(){
         WorksDao worksDao = new WorksDao(textAreaNewJob.getText());

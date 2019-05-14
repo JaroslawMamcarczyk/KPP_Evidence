@@ -42,7 +42,7 @@ public class WorksScreenController {
                 Label label = new Label(works.getJob());
                 hBox.getChildren().add(label);
                 label.setWrapText(true);
-                label.setPrefWidth(450);
+                label.setPrefWidth(470);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 String data = dateFormat.format(works.getWorksDate());
                 Label labelDate = new Label(data);

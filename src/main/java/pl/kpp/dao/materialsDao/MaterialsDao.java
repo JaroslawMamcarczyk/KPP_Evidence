@@ -49,7 +49,7 @@ public class MaterialsDao {
     public static void readEquipment(){
         Database date = new Database();
         Materials.getMaterialsList().clear();
-        try (ResultSet result = date.select("SELECT * from materials")) {
+        try (ResultSet result = date.select("SELECT * from materialsControllers")) {
             while (result.next()) {
                 MaterialsDao equipment = new MaterialsDao(result.getInt("id"),result.getString("materials_name"),
                         result.getInt("count"),result.getString("materials_type"));

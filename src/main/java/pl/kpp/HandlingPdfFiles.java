@@ -13,15 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import pl.kpp.controllers.materials.ShowTransactionScreenController;
+import pl.kpp.controllers.materialsControllers.ShowTransactionScreenController;
 import pl.kpp.materials.ArticleInTransaction;
 import pl.kpp.materials.Transaction;
 
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 
 public class HandlingPdfFiles extends Application {

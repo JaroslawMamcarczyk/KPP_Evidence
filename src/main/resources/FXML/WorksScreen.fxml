@@ -8,19 +8,19 @@
 <AnchorPane prefHeight="768.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.WorksScreenController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="152.0" text="Zadania:" />
-      <ScrollPane layoutX="14.0" layoutY="42.0" prefHeight="714.0" prefWidth="692.0">
+      <ScrollPane layoutX="14.0" layoutY="42.0" prefHeight="708.0" prefWidth="767.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="50.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <content>
-            <VBox fx:id="vBoxWorks" prefHeight="694.0" prefWidth="672.0" spacing="5.0" />
+            <VBox fx:id="vBoxWorks" prefHeight="677.0" prefWidth="716.0" spacing="5.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="857.0" layoutY="665.0" mnemonicParsing="false" onAction="#clickNewJob" prefHeight="91.0" prefWidth="152.0" text="Dodaj nowe zadanie" wrapText="true" />
-      <Label layoutX="728.0" layoutY="8.0" prefHeight="34.0" prefWidth="152.0" text="Wykonane:" />
-      <ScrollPane layoutX="728.0" layoutY="42.0" prefHeight="610.0" prefWidth="420.0">
+      <Button layoutX="922.0" layoutY="663.0" mnemonicParsing="false" onAction="#clickNewJob" prefHeight="91.0" prefWidth="152.0" text="Dodaj nowe zadanie" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="125.0" />
+      <Label layoutX="793.0" layoutY="14.0" prefHeight="34.0" prefWidth="152.0" text="Wykonane:" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="14.0" />
+      <ScrollPane layoutX="728.0" layoutY="42.0" prefHeight="603.0" prefWidth="397.0" AnchorPane.bottomAnchor="115.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
          <content>
-            <VBox fx:id="vBoxWorksEnding" maxHeight="610.0" maxWidth="-Infinity" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="603.0" prefWidth="395.0" />
+            <VBox fx:id="vBoxWorksEnding" maxHeight="610.0" maxWidth="-Infinity" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="596.0" prefWidth="381.0" />
          </content>
       </ScrollPane>
    </children>

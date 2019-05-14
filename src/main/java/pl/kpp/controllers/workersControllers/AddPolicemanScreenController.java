@@ -130,7 +130,7 @@ public class AddPolicemanScreenController {
             policeman.savePoliceman();
                 WorkerDao.isChangeOnDatabaseProperty().setValue(true);
                 CreateWindowAlert.createWindowConfirmation("Dodano Nowego Pracownika");
-           MainScreenController.getMainScreenController().createCenter("/FXML/policeman/ShowPolicemanScreen.fxml");
+           MainScreenController.getMainScreenController().createCenter("/FXML/workers/ShowPolicemanScreen.fxml");
             }else CreateWindowAlert.createWindowError("Błąd dodawania nowego policjanta - popraw pola świecące na czerowno");
     }
 

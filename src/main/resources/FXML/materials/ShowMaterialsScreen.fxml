@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1200.0" stylesheets="@../../css/showMaterialsScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.ShowMaterialScreenController">
+<AnchorPane prefHeight="768.0" prefWidth="1200.0" stylesheets="@../../css/showMaterialsScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materialsControllers.ShowMaterialScreenController">
    <children>
       <TableView id="materialsTable" fx:id="tableEquipment" layoutX="20.0" layoutY="14.0" prefHeight="734.0" prefWidth="778.0">
         <columns>

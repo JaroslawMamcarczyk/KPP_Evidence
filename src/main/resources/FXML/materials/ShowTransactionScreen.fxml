@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="771.0" prefWidth="1224.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.ShowTransactionScreenController">
+<AnchorPane prefHeight="771.0" prefWidth="1224.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materialsControllers.ShowTransactionScreenController">
    <children>
       <TableView id="tableTransaction" fx:id="tableTransaction" layoutX="51.0" layoutY="70.0" prefHeight="671.0" prefWidth="760.0" stylesheets="@../../css/showTransactionCss.css">
         <columns>

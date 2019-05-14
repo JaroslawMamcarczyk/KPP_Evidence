@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchorPane" prefHeight="767.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materials.AddNewGetInController">
+<AnchorPane id="anchorPane" prefHeight="767.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.materialsControllers.AddNewGetInController">
    <children>
       <Label id="newDelivery" layoutX="36.0" layoutY="21.0" prefHeight="51.0" prefWidth="523.0" text="Nowe Przyjęcie" />
       <Button fx:id="cancelButton" cancelButton="true" layoutX="902.0" layoutY="34.0" mnemonicParsing="false" onAction="#clickCancel" prefHeight="21.0" prefWidth="36.0" />

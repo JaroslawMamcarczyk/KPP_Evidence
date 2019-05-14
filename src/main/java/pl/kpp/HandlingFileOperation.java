@@ -1,6 +1,6 @@
 package pl.kpp;
 
-import pl.kpp.controllers.materials.ShowTransactionScreenController;
+import pl.kpp.controllers.materialsControllers.ShowTransactionScreenController;
 
 import java.io.*;
 

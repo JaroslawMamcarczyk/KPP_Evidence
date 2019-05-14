@@ -17,7 +17,7 @@
       </TableView>
       <TextField fx:id="searchPolicemanTextField" layoutX="356.0" layoutY="35.0" prefHeight="31.0" prefWidth="257.0" />
       <Label id="labelSearch" layoutX="207.0" layoutY="40.0" prefHeight="21.0" prefWidth="141.0" text="Szukaj" />
-      <ToggleButton layoutX="846.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickShowAll" prefHeight="31.0" prefWidth="329.0" text="Wszyscy" wrapText="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0" />
-      <VBox id="VBoxListDepartament" fx:id="vBoxButtons" layoutX="846.0" layoutY="100.0" prefHeight="656.0" prefWidth="329.0" spacing="5.0" stylesheets="@../../css/showPolicemanScreen.css" AnchorPane.rightAnchor="14.0" />
+      <ToggleButton layoutX="846.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickShowAll" prefHeight="31.0" prefWidth="329.0" text="Wszyscy" wrapText="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0" />
+      <VBox id="VBoxListDepartament" fx:id="vBoxButtons" layoutX="846.0" layoutY="100.0" prefHeight="656.0" prefWidth="329.0" spacing="5.0" stylesheets="@../../css/showPolicemanScreen.css" AnchorPane.rightAnchor="10.0" />
    </children>
 </AnchorPane>

@@ -119,8 +119,8 @@ public class ProducktDao {
     public void saveProduckt(){
         Database date = new Database();
         try {
-            statement = date.getCon().prepareStatement("INSERT INTO materials (product_kind,product_name,product_serial,product_inventory,product_evidential,product_price," +
-                    "product_year,product_type,product_room,product_department,product_comments) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            statement = date.getCon().prepareStatement("INSERT INTO product (product_kind,product_name,product_serial,product_inventory,product_evidential,product_price," +
+                    "product_year,product_type,product_room,product_department,product_comment) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             statement.setInt(1,this.kindDao);
             statement.setString(2,this.nameDao);
             statement.setString(3, this.serialNumberDao);

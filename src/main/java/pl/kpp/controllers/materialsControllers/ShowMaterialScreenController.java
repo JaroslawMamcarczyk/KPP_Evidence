@@ -1,4 +1,4 @@
-package pl.kpp.controllers.materials;
+package pl.kpp.controllers.materialsControllers;
 
 
 
