@@ -51,6 +51,10 @@ public class MainScreenController {
     @FXML
    void clickListKryptomail(){createCenter("/FXML/WorksScreen.fxml");}
    @FXML
+    void clickShowProduct(){createCenter("/FXML/product/productScreen.fxml");}
+    @FXML
+    void clickCards(){createCenter("/FXML/policeman/cardsScreen.fxml");}
+   @FXML
    void clickAddJob(){
         WorksDao worksDao = new WorksDao(textAreaNewJob.getText());
         worksDao.saveWorks();
