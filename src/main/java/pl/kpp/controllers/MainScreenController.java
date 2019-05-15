@@ -32,7 +32,7 @@ public class MainScreenController {
     }
     @FXML
     void clickConfiguration(ActionEvent event) {
-       createCenter("/FXML/ConfigurationScreen.fxml");
+       createCenter("/FXML/configuration/ConfigurationScreen.fxml");
     }
    public void clickMaterials(ActionEvent event){
         createCenter("/FXML/materials/ShowMaterialsScreen.fxml");

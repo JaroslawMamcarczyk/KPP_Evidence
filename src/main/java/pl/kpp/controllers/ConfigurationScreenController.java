@@ -13,9 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pl.kpp.building.Building;
+import pl.kpp.converters.building.BuildingConverter;
 import pl.kpp.converters.workers.DepartamentConverter;
 import pl.kpp.converters.workers.RanksConverter;
 import pl.kpp.dao.Database;
+import pl.kpp.dao.buildingDao.BuildingDao;
 import pl.kpp.dao.workersDao.DepartamentDao;
 import pl.kpp.dao.workersDao.RanksDao;
 import pl.kpp.workers.Departament;
@@ -35,8 +38,6 @@ public class ConfigurationScreenController {
     private ListView<Departament> departamentListView;
    @FXML
     private ListView<Ranks> ranksListView;
-   @FXML
-   private VBox vBox;
 
     private static BooleanProperty isNewDepartament= new SimpleBooleanProperty(false);
     private static BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
@@ -76,12 +77,6 @@ public class ConfigurationScreenController {
 //        decriptKsip.setCellValueFactory(new PropertyValueFactory< >("synopsis"));
 //
 //    }
-        HBox hbox = new HBox();
-        Label label = new Label("Podaj ilość budynków");
-        TextField textField = new TextField();
-        hbox.getChildren().addAll(label,textField);
-        hbox.setSpacing(10);
-        vBox.getChildren().add(hbox);
     }
 
     private void createListViewDepartament() {

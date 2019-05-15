@@ -1,5 +1,6 @@
 package pl.kpp.dao.buildingDao;
 
+import pl.kpp.building.Building;
 import pl.kpp.dao.Database;
 
 import java.sql.PreparedStatement;
@@ -43,11 +44,26 @@ public class BuildingDao {
 
     public static void readBuilding(Database date){
         try (ResultSet result = date.select("SELECT * from building")) {
-            //worksList.clear();
+            Building.getBuildingList().clear();
+            Building.getFloorList().clear();
+            Building.getRoomList().clear();
             while (result.next()) {
                 BuildingDao buildingDao = new BuildingDao(result.getInt("id"),result.getString("building_name"),result.getInt("building_type"), result.getInt("building_parent"));
-             //   Works works= new Works(worksDao);
-             //   worksList.add(works);
+             Building building = new Building(buildingDao);
+             switch (buildingDao.getBuildingTypeDao()){
+                 case 1:{
+                     Building.getBuildingList().add(building);
+                     break;
+                 }
+                 case 2:{
+                     Building.getFloorList().add(building);
+                     break;
+                 }
+                 case 3:{
+                     Building.getRoomList().add(building);
+                     break;
+                 }
+             }
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");

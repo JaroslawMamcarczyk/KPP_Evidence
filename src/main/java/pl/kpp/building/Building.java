@@ -12,10 +12,32 @@ public class Building {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty type = new SimpleStringProperty();
     private Building parent;
-    private List<Building> buildingList = new ArrayList<>();
+    private static List<Building> buildingList = new ArrayList<>();
+    private static List<Building> roomList = new ArrayList<>();
+    private  static  List<Building> floorList = new ArrayList<>();
 
-    public List<Building> getBuildingList() {
+    public String getName() {
+        return name.get();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Building getParent() {
+        return parent;
+    }
+
+    public static List<Building> getBuildingList() {
         return buildingList;
+    }
+
+    public static List<Building> getRoomList() {
+        return roomList;
+    }
+
+    public static List<Building> getFloorList() {
+        return floorList;
     }
 
     public Building(BuildingDao buildingDao){
