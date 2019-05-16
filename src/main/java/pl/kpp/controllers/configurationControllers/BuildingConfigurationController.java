@@ -32,6 +32,7 @@ public class BuildingConfigurationController {
     @FXML
     private HBox hBoxBuilding;
     private Building chosenbuilding = null;
+    private Building chosenFloor = null;
 
     @FXML
     public void initialize(){
@@ -53,6 +54,7 @@ public class BuildingConfigurationController {
             choiceFloor.setConverter(new BuildingConverter());
             choiceFloor.getSelectionModel().selectedItemProperty().addListener((observable2, oldValue2, newValue2)->{
                 hBoxRoom.setVisible(true);
+                chosenFloor = newValue2;
             });
         });
     }
@@ -60,14 +62,14 @@ public class BuildingConfigurationController {
     @FXML
     void clickNewBuilding() {
         if (textFieldNewBuilding.getText() != null) {
-            BuildingDao buildingDao = new BuildingDao(textFieldNewBuilding.getText(),1,0);
+            BuildingDao buildingDao = new BuildingDao(textFieldNewBuilding.getText(),1,0,0,0);
             buildingDao.saveBuilding();
         }
     }
     @FXML
     void clickNewFloor() {
         if(textFieldNewFloor.getText()!=" "&& chosenbuilding!=null){
-            BuildingDao buildingDao = new BuildingDao(textFieldNewFloor.getText(),2,chosenbuilding.getId());
+            BuildingDao buildingDao = new BuildingDao(textFieldNewFloor.getText(),2,chosenbuilding.getId(),0,0);
             buildingDao.saveBuilding();
             Building.getBuildingList().add(new Building(buildingDao));
         }
@@ -75,6 +77,11 @@ public class BuildingConfigurationController {
 
     @FXML
     void clickNewRoom() {
+        if(textFieldNewRoom.getText()!=" "&&chosenFloor!=null){
+            BuildingDao buildingDao = new BuildingDao(textFieldNewRoom.getText(),3,chosenFloor.getId(),0,0);
+            buildingDao.saveBuilding();
+            Building.getBuildingList().add(new Building((buildingDao)));
+        }
 
     }
 }

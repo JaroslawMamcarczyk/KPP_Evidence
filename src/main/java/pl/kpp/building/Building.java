@@ -12,6 +12,8 @@ public class Building {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty type = new SimpleStringProperty();
     private Building parent;
+    private Integer positionX;
+    private Integer getPositionY;
     private static List<Building> buildingList = new ArrayList<>();
     private static List<Building> roomList = new ArrayList<>();
     private  static  List<Building> floorList = new ArrayList<>();
@@ -26,6 +28,14 @@ public class Building {
 
     public Building getParent() {
         return parent;
+    }
+
+    public Integer getPositionX() {
+        return positionX;
+    }
+
+    public Integer getGetPositionY() {
+        return getPositionY;
     }
 
     public static List<Building> getBuildingList() {
@@ -46,23 +56,27 @@ public class Building {
         switch (buildingDao.getBuildingTypeDao()){
             case 1:{
                 this.type.set("Budynek");
+                this.parent = null;
                 break;
             }
             case 2:{
                 this.type.set("Piętro");
+                this.parent = searchBuilding(buildingDao.getBuildingParentDao(),buildingList);
                 break;
             }
             case 3:{
                 this.type.set("Pokój");
+                this.parent = searchBuilding(buildingDao.getBuildingParentDao(),floorList);
+                positionX = buildingDao.getPositionX();
+                getPositionY = buildingDao.getPositionY();
                 break;
             }
         }
-                this.parent = searchBuilding(buildingDao.getBuildingParentDao());
     }
 
-    public Building searchBuilding(int id){
+    public Building searchBuilding(int id, List<Building> typeList){
         Building result = null;
-        for(Building building:buildingList){
+        for(Building building:typeList){
             if(building.id==id)
                result = building;
         }
