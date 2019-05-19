@@ -7,13 +7,17 @@
 <AnchorPane prefHeight="768.0" prefWidth="1200.0" stylesheets="@../../css/showPolicemanScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.workersControllers.ShowPolicemanScreenController">
    <children>
       <TableView id="tablePoliceman" fx:id="policemanTableView" layoutX="14.0" layoutY="79.0" prefHeight="656.0" prefWidth="836.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="100.0">
-        <columns>
+          <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"></TableView></columnResizePolicy>
+          <columns>
           <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="118.0" text="Imię" />
           <TableColumn id="surnameColumn" fx:id="surrnameColumn" prefWidth="198.0" text="Nazwisko" />
             <TableColumn fx:id="idColumn" prefWidth="83.0" text="ID" />
             <TableColumn fx:id="peselColumn" prefWidth="141.0" text="Pesel" />
             <TableColumn fx:id="standingColumn" prefWidth="258.0" text="Wydział" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <TextField fx:id="searchPolicemanTextField" layoutX="356.0" layoutY="35.0" prefHeight="31.0" prefWidth="257.0" />
       <Label id="labelSearch" layoutX="207.0" layoutY="40.0" prefHeight="21.0" prefWidth="141.0" text="Szukaj" />

@@ -1,4 +1,4 @@
-package pl.kpp.produckt;
+package pl.kpp.product;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

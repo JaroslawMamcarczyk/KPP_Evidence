@@ -5,56 +5,61 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import pl.kpp.produckt.Produckt;
+import javafx.scene.layout.AnchorPane;
+import pl.kpp.dao.Database;
+import pl.kpp.dao.productDao.ProductDao;
+import pl.kpp.product.Product;
 import javafx.fxml.FXML;
 
 public class ProductScreenController {
     @FXML
-    private TableView<Produckt> tableViewProduct;
+    private AnchorPane anchorGeneral;
     @FXML
-    private TableColumn<Integer, Produckt> tableID;
+    private TableView<Product> tableViewProduct;
+    @FXML
+    private TableColumn<Integer, Product> tableID;
 
     @FXML
-    private TableColumn<String, Produckt> tableKind;
+    private TableColumn<String, Product> tableKind;
 
     @FXML
-    private TableColumn<String, Produckt> tableProduct;
+    private TableColumn<String, Product> tableProduct;
 
     @FXML
-    private TableColumn<String, Produckt> tableSerial;
+    private TableColumn<String, Product> tableSerial;
 
     @FXML
-    private TableColumn<String, Produckt> tableInventory;
+    private TableColumn<String, Product> tableInventory;
 
     @FXML
-    private TableColumn<Integer, Produckt> tableEwidential;
+    private TableColumn<Integer, Product> tableEwidential;
 
     @FXML
-    private TableColumn<Integer, Produckt> tablePrice;
+    private TableColumn<Integer, Product> tablePrice;
 
     @FXML
-    private TableColumn<Integer, Produckt> tableYear;
+    private TableColumn<Integer, Product> tableYear;
 
     @FXML
-    private TableColumn<String, Produckt> tableType;
+    private TableColumn<String, Product> tableType;
 
     @FXML
-    private TableColumn<Integer, Produckt> tableRoom;
+    private TableColumn<Integer, Product> tableRoom;
 
     @FXML
-    private TableColumn<Integer, Produckt> tableDepartment;
+    private TableColumn<Integer, Product> tableDepartment;
 
     @FXML
-    private TableColumn<String, Produckt> tableComments;
+    private TableColumn<String, Product> tableComments;
 
-    public void setProductTable(ObservableList<Produckt> glist) {
+    public void setProductTable(ObservableList<Product> glist) {
         tableViewProduct.setItems(glist);
         tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableKind.setCellValueFactory(new PropertyValueFactory<>("kind"));
         tableProduct.setCellValueFactory(new PropertyValueFactory<>("productName"));
         tableSerial.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         tableInventory.setCellValueFactory(new PropertyValueFactory<>("inventoryNumber"));
-        tableEwidential.setCellValueFactory(new PropertyValueFactory<>("evidentaialNumber"));
+        tableEwidential.setCellValueFactory(new PropertyValueFactory<>("evidentialNumber"));
         tablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableYear.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
         tableType.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -64,7 +69,8 @@ public class ProductScreenController {
     }
 
     public void initialize(){
-        ObservableList<Produckt> producktObservableList= FXCollections.observableList(Produckt.getProducktList());
-        setProductTable(producktObservableList);
+        ProductDao.readProduckt();
+        ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
+        setProductTable(productObservableList);
     }
 }

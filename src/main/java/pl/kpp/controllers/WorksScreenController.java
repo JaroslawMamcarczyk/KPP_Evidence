@@ -46,11 +46,11 @@ public class WorksScreenController {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 String data = dateFormat.format(works.getWorksDate());
                 Label labelDate = new Label(data);
-                labelDate.setPrefWidth(100);
+                labelDate.setPrefWidth(200);
                 labelDate.setMaxHeight(Double.MAX_VALUE);
                 hBox.getChildren().add(labelDate);
             Button button = new Button("wykonano");
-            button.setPrefWidth(100);
+            button.setPrefWidth(200);
             button.setMaxHeight(Double.MAX_VALUE);
             button.setOnMouseClicked(clik->{
                 WorksDao.deleteWorks(works.getId());

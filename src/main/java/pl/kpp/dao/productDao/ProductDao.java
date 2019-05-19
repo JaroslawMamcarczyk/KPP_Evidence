@@ -1,13 +1,13 @@
 package pl.kpp.dao.productDao;
 
 import pl.kpp.dao.Database;
-import pl.kpp.produckt.Produckt;
+import pl.kpp.product.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class ProducktDao {
+public class ProductDao {
     private int idDao;
     private int kindDao;
     private String nameDao;
@@ -70,7 +70,7 @@ public class ProducktDao {
         return commentsDao;
     }
 
-    public ProducktDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
         this.idDao = idDao;
         this.kindDao = kindDao;
         this.nameDao = nameDao;
@@ -85,7 +85,7 @@ public class ProducktDao {
         this.commentsDao = commentsDao;
     }
 
-    public ProducktDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
         this.kindDao = kindDao;
         this.nameDao = nameDao;
         this.serialNumberDao = serialNumberDao;
@@ -101,14 +101,14 @@ public class ProducktDao {
 
     public static void readProduckt(){
         Database date = new Database();
-        Produckt.getProducktList().clear();
-        try (ResultSet result = date.select("SELECT * from produckts")) {
+        Product.getProductList().clear();
+        try (ResultSet result = date.select("SELECT * from product")) {
             while (result.next()) {
-                ProducktDao producktDao = new ProducktDao(result.getInt("id"),result.getInt("product_kind"),result.getString("product_name"),
-                        result.getString("product_serial"),result.getString("product_inventory"),result.getInt("product_evidential"),result.getInt("produckt_price"),
-                        result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comments"));
-                Produckt produckt= new Produckt(producktDao);
-                Produckt.getProducktList().add(produckt);
+                ProductDao productDao = new ProductDao(result.getInt("id"),result.getInt("product_kind"),result.getString("product_name"),
+                        result.getString("product_serial"),result.getString("product_inventory"),result.getInt("product_evidential"),result.getInt("product_price"),
+                        result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comment"));
+                Product product = new Product(productDao);
+                Product.getProductList().add(product);
             }
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");

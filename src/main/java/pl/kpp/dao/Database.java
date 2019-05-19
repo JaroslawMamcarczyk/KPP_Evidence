@@ -28,7 +28,7 @@ public class Database {
                         "worker_evidential  VARCHAR(6),worker_pesel VARCHAR(11),worker_range int" +
                         "references range,worker_departament int references departament," +
                         "worker_ranks int references ranks,intranet int,intradok int,lotus int,exchange int,"+
-                        "cryptomail int,ksip int sespol int,swd int,column_17 int);" +
+                        "cryptomail int,ksip int sespol int,swd int);" +
                         "create unique index workers_id_uindex on workers (id);");
                 createTable("create table if not exists range(id INTEGER not null constraint range_pk primary key,"+
                         "range_name VARCHAR(200) not null, pagons     VARCHAR(200) );"+

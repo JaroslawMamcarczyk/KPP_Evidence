@@ -1,7 +1,7 @@
 package pl.kpp.dao.productDao;
 
 import pl.kpp.dao.Database;
-import pl.kpp.produckt.Cards;
+import pl.kpp.product.Cards;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

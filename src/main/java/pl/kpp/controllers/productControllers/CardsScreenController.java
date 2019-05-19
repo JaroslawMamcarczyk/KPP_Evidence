@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.productDao.CardsDao;
-import pl.kpp.produckt.Cards;
+import pl.kpp.product.Cards;
 import pl.kpp.workers.Worker;
 
 import java.io.IOException;

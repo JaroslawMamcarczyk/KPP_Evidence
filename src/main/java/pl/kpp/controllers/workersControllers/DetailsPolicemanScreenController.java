@@ -82,10 +82,10 @@ public class DetailsPolicemanScreenController {
         lid.setDisable(true);
         lpesel.setText(police.getPesel());
         lpesel.setDisable(true);
-        ldepartament.setText(police.getNamePoliceDepartament());
         ldepartament.setDisable(true);
         lrange.setDisable(true);
         lranks.setDisable(true);
+        if(police.getPolicemanDepartament()!=null)ldepartament.setText(police.getNamePoliceDepartament());
         if (police.getPolicemanRange()!=null) {
             lrange.setText(police.getPolicemanRange().getRangeName());
             lpagons.setImage(new Image(police.getPolicemanRange().getPath()));

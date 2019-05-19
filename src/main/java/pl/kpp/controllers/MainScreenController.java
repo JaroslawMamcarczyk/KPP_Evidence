@@ -58,6 +58,8 @@ public class MainScreenController {
         WorksDao worksDao = new WorksDao(textAreaNewJob.getText());
         worksDao.saveWorks();
    }
+   @FXML
+   void clickAddProduct(){createCenter("/FXML/product/AddProductScreen.fxml"); }
 public void initialize(){
         mainScreenController = this;
 }

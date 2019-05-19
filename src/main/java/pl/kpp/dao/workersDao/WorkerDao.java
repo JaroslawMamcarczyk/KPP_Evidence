@@ -83,6 +83,7 @@ public class WorkerDao {
         this.daoExchange=daoExchange;
         this.daoCryptomail=daoCryptomail;
         this.daoSWD=daoSWD;
+
     }
     public WorkerDao(String daoName, String daoSurname, String daoEwidential, String daoPesel, int daoRange, int daoDepartament, int daoRanks,
                      int daoIntranet, int daoIntradok, int daoLotus, int daoExchange, int daoCryptomail, int daoSWD) {
@@ -109,7 +110,7 @@ public class WorkerDao {
         Worker.getWorekrList().clear();
         try (ResultSet result = date.select("SELECT * FROM workers order by worker_name, worker_surname")) {
             while (result.next()) {
-                WorkerDao workerDao = new WorkerDao(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
+                WorkerDao workerDao = new WorkerDao(result.getInt("id"),result.getString(2),result.getString(3),result.getString(4),
                         result.getString(5),result.getInt(6),result.getInt(7),
                         result.getInt(8), result.getInt(9), result.getInt(10), result.getInt(11),
                         result.getInt(12),result.getInt(13),result.getInt(14));
@@ -129,7 +130,7 @@ public class WorkerDao {
         Database date = new Database();
         try {
             statement = date.getCon().prepareStatement("INSERT INTO workers (worker_name,worker_surname,worker_evidential,worker_pesel,worker_range,worker_departament,worker_ranks," +
-                    "intranet,intradok,lotus,exchange,cryptomail,swd)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    "intranet,intradok,lotus,exchange,cryptomail,swd)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,)");
             statement.setString(1, this.daoName);
             statement.setString(2, this.daoSurname);
             statement.setString(3, this.daoEwidential);
