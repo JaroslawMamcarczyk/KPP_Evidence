@@ -3,7 +3,7 @@ package pl.kpp.converters.product;
 import javafx.util.StringConverter;
 import pl.kpp.product.Product;
 
-public class ProductConverter extends StringConverter <Product.ProductKind> {
+public class ProductKindConverter extends StringConverter <Product.ProductKind> {
 
     @Override
     public String toString(Product.ProductKind productKind) {

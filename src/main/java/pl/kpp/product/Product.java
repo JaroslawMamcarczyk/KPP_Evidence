@@ -19,7 +19,7 @@ public class Product {
     private StringProperty evidentialNumber = new SimpleStringProperty();
     private BigDecimal price;
     private int productionYear;
-    private StringProperty type = new SimpleStringProperty();
+    private ProductType type;
     private Building roomNumber;
     private Departament department;
     private StringProperty comments = new SimpleStringProperty();
@@ -47,7 +47,33 @@ public class Product {
             else
                 return 2;
         }
+    }
+    public enum ProductType{
+        UNMATERIAL("N", "niematerialny"),
+        PERMANENT("T", "Środek Trwały"),
+        REMAINING("P","Pozostały środek trwały");
+        private String code;
+        private String name;
 
+        ProductType(String code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public String getName(){return name;}
+        public String getCode(){return code;}
+        @Override
+        public String toString(){
+            return this.code;
+        }
+
+        public int fromString(){
+            if(this.equals(UNMATERIAL))
+                return 1;
+            else if(this.equals(PERMANENT))
+                return 2;
+            else return 3;
+        }
     }
     public static List<Product> getProductList(){return productList;}
 
@@ -83,13 +109,10 @@ public class Product {
         return productionYear;
     }
 
-    public String getType() {
-        return type.get();
-    }
-
-    public StringProperty typeProperty() {
+   public ProductType getType(){
         return type;
-    }
+   }
+
 
     public Building getRoomNumber() {
         return roomNumber;
@@ -127,15 +150,15 @@ public class Product {
         this.productionYear = productDao.getProductionYearDao();
         switch (productDao.getTypeDao()){
             case 1: {
-                this.type.set("Pozostałe środki trwałe");
+                this.type=ProductType.UNMATERIAL;
                 break;
             }
             case 2:{
-                this.type.set("Środki trwałe");
+                this.type=ProductType.PERMANENT;
                 break;
             }
             case 3:{
-                this.type.set("Niematerialne środki trwałe");
+                this.type=ProductType.REMAINING;
                 break;
             }
         }
