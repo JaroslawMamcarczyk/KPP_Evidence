@@ -36,6 +36,7 @@ public class CardsDao {
     }
 
     public static void readCards(Database date){
+        Cards.getCardsList().clear();
         try (ResultSet result = date.select("SELECT * from cards")) {
             while (result.next()) {
                CardsDao cardDao = new CardsDao(result.getInt("id"),result.getString("card_number"),result.getInt("card_worker"));

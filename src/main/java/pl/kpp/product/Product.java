@@ -2,8 +2,11 @@ package pl.kpp.product;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import pl.kpp.building.Building;
 import pl.kpp.dao.productDao.ProductDao;
+import pl.kpp.workers.Departament;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +16,12 @@ public class Product {
     private StringProperty productName = new SimpleStringProperty();
     private StringProperty serialNumber =new SimpleStringProperty();
     private StringProperty inventoryNumber = new SimpleStringProperty();
-    private int evidentialNumber;
-    private int price;
+    private StringProperty evidentialNumber = new SimpleStringProperty();
+    private BigDecimal price;
     private int productionYear;
     private StringProperty type = new SimpleStringProperty();
-    private int roomNumber;
-    private int department;
+    private Building roomNumber;
+    private Departament department;
     private StringProperty comments = new SimpleStringProperty();
     private static List<Product> productList = new ArrayList<>();
     public enum ProductKind {
@@ -68,11 +71,11 @@ public class Product {
         return inventoryNumber.get();
     }
 
-    public int getEvidentialNumber() {
-        return evidentialNumber;
+    public String getEvidentialNumber() {
+        return evidentialNumber.get();
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -88,11 +91,11 @@ public class Product {
         return type;
     }
 
-    public int getRoomNumber() {
+    public Building getRoomNumber() {
         return roomNumber;
     }
 
-    public int getDepartment() {
+    public Departament getDepartment() {
         return department;
     }
 
@@ -119,7 +122,7 @@ public class Product {
         this.productName.set(productDao.getNameDao());
         this.serialNumber.set(productDao.getSerialNumberDao());
         this.inventoryNumber.set(productDao.getInventoryNumberDao());
-        this.evidentialNumber = productDao.getEvidentaialNumberDao();
+        this.evidentialNumber.set(productDao.getEvidentaialNumberDao());
         this.price = productDao.getPriceDao();
         this.productionYear = productDao.getProductionYearDao();
         switch (productDao.getTypeDao()){
@@ -136,8 +139,13 @@ public class Product {
                 break;
             }
         }
-        this.roomNumber = productDao.getRoomNumberDao();
-        this.department = productDao.getDepartamentDao();
+        if(productDao.getRoomNumberDao()!=0){
+            this.roomNumber = Building.searchBuilding(productDao.getRoomNumberDao(),Building.getRoomList());
+        }else
+            this.roomNumber = null;
+        if(productDao.getDepartamentDao()!=0){
+            this.department = Departament.findDepartament(productDao.getDepartamentDao());
+        }else this.department = null;
         this.comments.set(productDao.getCommentsDao());
     }
 }

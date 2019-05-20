@@ -74,7 +74,7 @@ public class Building {
         }
     }
 
-    public Building searchBuilding(int id, List<Building> typeList){
+    public static Building searchBuilding(int id, List<Building> typeList){
         Building result = null;
         for(Building building:typeList){
             if(building.id==id)

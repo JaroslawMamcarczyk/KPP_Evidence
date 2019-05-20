@@ -1,15 +1,12 @@
 package pl.kpp.dao.materialsDao;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+
 import pl.kpp.dao.Database;
 import pl.kpp.materials.Materials;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class MaterialsDao {
     private int daoId;
@@ -49,7 +46,7 @@ public class MaterialsDao {
     public static void readEquipment(){
         Database date = new Database();
         Materials.getMaterialsList().clear();
-        try (ResultSet result = date.select("SELECT * from materialsControllers")) {
+        try (ResultSet result = date.select("SELECT * from materials")) {
             while (result.next()) {
                 MaterialsDao equipment = new MaterialsDao(result.getInt("id"),result.getString("materials_name"),
                         result.getInt("count"),result.getString("materials_type"));

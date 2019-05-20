@@ -2,6 +2,8 @@ package pl.kpp.dao.productDao;
 
 import pl.kpp.dao.Database;
 import pl.kpp.product.Product;
+
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +15,8 @@ public class ProductDao {
     private String nameDao;
     private String serialNumberDao;
     private String inventoryNumberDao;
-    private int evidentaialNumberDao;
-    private int priceDao;
+    private String evidentaialNumberDao;
+    private BigDecimal priceDao;
     private int productionYearDao;
     private int typeDao;
     private int roomNumberDao;
@@ -42,11 +44,11 @@ public class ProductDao {
         return inventoryNumberDao;
     }
 
-    public int getEvidentaialNumberDao() {
+    public String getEvidentaialNumberDao() {
         return evidentaialNumberDao;
     }
 
-    public int getPriceDao() {
+    public BigDecimal getPriceDao() {
         return priceDao;
     }
 
@@ -70,7 +72,7 @@ public class ProductDao {
         return commentsDao;
     }
 
-    public ProductDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
         this.idDao = idDao;
         this.kindDao = kindDao;
         this.nameDao = nameDao;
@@ -85,7 +87,7 @@ public class ProductDao {
         this.commentsDao = commentsDao;
     }
 
-    public ProductDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, int evidentaialNumberDao, int priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
         this.kindDao = kindDao;
         this.nameDao = nameDao;
         this.serialNumberDao = serialNumberDao;
@@ -105,7 +107,7 @@ public class ProductDao {
         try (ResultSet result = date.select("SELECT * from product")) {
             while (result.next()) {
                 ProductDao productDao = new ProductDao(result.getInt("id"),result.getInt("product_kind"),result.getString("product_name"),
-                        result.getString("product_serial"),result.getString("product_inventory"),result.getInt("product_evidential"),result.getInt("product_price"),
+                        result.getString("product_serial"),result.getString("product_inventory"),result.getString("product_evidential"),result.getBigDecimal("product_price"),
                         result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comment"));
                 Product product = new Product(productDao);
                 Product.getProductList().add(product);
@@ -125,8 +127,8 @@ public class ProductDao {
             statement.setString(2,this.nameDao);
             statement.setString(3, this.serialNumberDao);
             statement.setString(4,this.inventoryNumberDao);
-            statement.setInt(5,this.evidentaialNumberDao);
-            statement.setInt(6,this.priceDao);
+            statement.setString(5,this.evidentaialNumberDao);
+            statement.setBigDecimal(6,this.priceDao);
             statement.setInt(7,this.productionYearDao);
             statement.setInt(8,this.typeDao);
             statement.setInt(9,this.roomNumberDao);

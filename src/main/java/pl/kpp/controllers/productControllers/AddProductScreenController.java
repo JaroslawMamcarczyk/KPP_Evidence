@@ -10,6 +10,8 @@ import pl.kpp.converters.product.ProductConverter;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
 
+import java.math.BigDecimal;
+
 public class AddProductScreenController {
     @FXML
     private TextField textFieldName;
@@ -39,13 +41,12 @@ public class AddProductScreenController {
     @FXML
     public void clickSave(){
         ProductDao productDao = new ProductDao(choiceboxKind.getSelectionModel().getSelectedItem().fromString(),textFieldName.getText(),textFieldSerial.getText(),
-                textFieldInventory.getText(),Integer.parseInt(textFieldEvidential.getText()),Integer.parseInt(textFieldPrice.getText()),Integer.parseInt(textFieldYear.getText()),1,0,0,textFieldComment.getText());
+                textFieldInventory.getText(),textFieldEvidential.getText(),new BigDecimal(textFieldPrice.getText()),Integer.parseInt(textFieldYear.getText()),1,0,0,textFieldComment.getText());
     productDao.saveProduckt();
     }
 
     @FXML
     public void clickCancel(){
-
     }
 
 
