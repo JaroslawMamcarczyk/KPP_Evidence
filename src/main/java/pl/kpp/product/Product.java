@@ -22,6 +22,7 @@ public class Product {
     private ProductType type;
     private Building roomNumber;
     private Departament department;
+    private StringProperty category = new SimpleStringProperty();
     private StringProperty comments = new SimpleStringProperty();
     private static List<Product> productList = new ArrayList<>();
     public enum ProductKind {
@@ -80,7 +81,9 @@ public class Product {
     public int getId() {
         return id;
     }
-
+    public String getCategory(){
+        return category.getValue();
+    }
     public ProductKind getKind() {
         return kind;
     }
@@ -132,6 +135,7 @@ public class Product {
 
     public Product(ProductDao productDao) {
         this.id = productDao.getIdDao();
+        this.category.set(productDao.getCategoryDao());
         switch (productDao.getKindDao()){
             case 1:{
                 this.kind = ProductKind.INFORMATICS;
@@ -171,4 +175,5 @@ public class Product {
         }else this.department = null;
         this.comments.set(productDao.getCommentsDao());
     }
+    public Product(){}
 }

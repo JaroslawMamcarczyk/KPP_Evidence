@@ -55,7 +55,7 @@ public class Main extends Application {
         date.createTable("create table if not exists cards(id INTEGER not null constraint cards_pk primary key,card_number VARCHAR(16)," +
                 " card_worker int references workers on delete set null);");
         date.createTable("create table if not exists product(id INTEGER not null constraint product_pk primary key, product_kind int,product_name TEXT not null,"+
-                "product_serial TEXT,product_inventory  TEXT,product_evidential TEXT,product_price NUMERIC,product_year int,product_type int,"+
+                "product_serial TEXT,product_inventory  TEXT,product_evidential TEXT,product_price NUMERIC,product_year int,product_type int,product_category TEXT,"+
                 "product_room VARCHAR(4),product_department int references departament on delete set null, product_comment TEXT);");
         date.createTable("create table if not exists building( id INTEGER not null constraint building_pk primary key,building_name TEXT not null,"+
                 "building_type int,building_parent int,building_x int,building_y int);");

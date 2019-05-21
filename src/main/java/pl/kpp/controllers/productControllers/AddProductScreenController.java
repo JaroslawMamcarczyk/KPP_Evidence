@@ -5,12 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
+import pl.kpp.CreateWindowAlert;
 import pl.kpp.converters.product.ProductKindConverter;
 import pl.kpp.converters.product.ProductTypeConverter;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class AddProductScreenController {
     @FXML
@@ -31,6 +33,8 @@ public class AddProductScreenController {
     private TextField textFieldSerial;
     @FXML
     private TextField textFieldYear;
+    @FXML
+    private ChoiceBox<String> choiceBoxCategory;
 
     @FXML
     public void clickSave(){
@@ -76,7 +80,7 @@ public class AddProductScreenController {
             }
         if(isGood) {
             ProductDao productDao = new ProductDao(productKind, textFieldName.getText(), textFieldSerial.getText(),
-                    textFieldInventory.getText(), textFieldEvidential.getText(), productPrice, productYear, productType, 0, 0,productComment);
+                    textFieldInventory.getText(), textFieldEvidential.getText(), productPrice, productYear, productType, 0, 0,productComment,choiceBoxCategory.getSelectionModel().getSelectedItem());
             productDao.saveProduckt();
         }
     }
@@ -86,12 +90,42 @@ public class AddProductScreenController {
     }
 
 
-    public void initialize(){
+    public void initialize() {
         ObservableList<Product.ProductKind> productKindObservableList = FXCollections.observableArrayList(Product.ProductKind.values());
         choiceboxKind.setItems(productKindObservableList);
         choiceboxKind.setConverter(new ProductKindConverter());
-        ObservableList<Product.ProductType> productTypeObservableList= FXCollections.observableArrayList(Product.ProductType.values());
+        ObservableList<Product.ProductType> productTypeObservableList = FXCollections.observableArrayList(Product.ProductType.values());
         choiceBoxType.setItems(productTypeObservableList);
         choiceBoxType.setConverter(new ProductTypeConverter());
-    }
+        ArrayList<String> categoryList = new ArrayList<>();
+        for (Product product : Product.getProductList()) {
+            if (product.getCategory() != null) {
+                if (categoryList.size() == 0) {
+                    categoryList.add(product.getCategory());
+                } else {
+                    for (String string : categoryList) {
+                        if (string.equals(product.getCategory()))
+                            break;
+                        else {
+                            categoryList.add(product.getCategory());
+                        }
+                    }
+                }
+            }
+        }
+        categoryList.add("Dodaj nową");
+        ObservableList<String> categoryObservableList = FXCollections.observableArrayList(categoryList);
+        choiceBoxCategory.setItems(categoryObservableList);
+        choiceBoxCategory.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
+            if(newValue.equals("Dodaj nową")){
+                CreateWindowAlert.createWindow("Podaj nową kategorię").ifPresent(category->{
+                    if(!category.equals("")){
+                        categoryObservableList.add(category);
+                        choiceBoxCategory.getSelectionModel().select(category);
+                    }
+                });
+            }
+        });
+
+        }
 }

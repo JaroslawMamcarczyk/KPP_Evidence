@@ -1,5 +1,6 @@
 package pl.kpp.dao.productDao;
 
+import javafx.beans.property.StringProperty;
 import pl.kpp.dao.Database;
 import pl.kpp.product.Product;
 
@@ -22,6 +23,7 @@ public class ProductDao {
     private int roomNumberDao;
     private int departamentDao;
     private String commentsDao;
+    private String categoryDao;
     private PreparedStatement statement;
 
     public int getIdDao() {
@@ -71,8 +73,9 @@ public class ProductDao {
     public String getCommentsDao() {
         return commentsDao;
     }
+    public String getCategoryDao() {return categoryDao;}
 
-    public ProductDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int idDao, int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao, String categoryDao) {
         this.idDao = idDao;
         this.kindDao = kindDao;
         this.nameDao = nameDao;
@@ -85,9 +88,10 @@ public class ProductDao {
         this.roomNumberDao = roomNumberDao;
         this.departamentDao = departamentDao;
         this.commentsDao = commentsDao;
+        this.categoryDao = categoryDao;
     }
 
-    public ProductDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao) {
+    public ProductDao(int kindDao, String nameDao, String serialNumberDao, String inventoryNumberDao, String evidentaialNumberDao, BigDecimal priceDao, int productionYearDao, int typeDao, int roomNumberDao, int departamentDao, String commentsDao, String categoryDao) {
         this.kindDao = kindDao;
         this.nameDao = nameDao;
         this.serialNumberDao = serialNumberDao;
@@ -99,7 +103,10 @@ public class ProductDao {
         this.roomNumberDao = roomNumberDao;
         this.departamentDao = departamentDao;
         this.commentsDao = commentsDao;
+        this.categoryDao = categoryDao;
     }
+
+    public ProductDao(){}
 
     public static void readProduckt(){
         Database date = new Database();
@@ -108,7 +115,7 @@ public class ProductDao {
             while (result.next()) {
                 ProductDao productDao = new ProductDao(result.getInt("id"),result.getInt("product_kind"),result.getString("product_name"),
                         result.getString("product_serial"),result.getString("product_inventory"),result.getString("product_evidential"),result.getBigDecimal("product_price"),
-                        result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comment"));
+                        result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comment"),result.getString("product_category"));
                 Product product = new Product(productDao);
                 Product.getProductList().add(product);
             }
@@ -122,7 +129,7 @@ public class ProductDao {
         Database date = new Database();
         try {
             statement = date.getCon().prepareStatement("INSERT INTO product (product_kind,product_name,product_serial,product_inventory,product_evidential,product_price," +
-                    "product_year,product_type,product_room,product_department,product_comment) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                    "product_year,product_type,product_room,product_department,product_comment,product_category) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setInt(1,this.kindDao);
             statement.setString(2,this.nameDao);
             statement.setString(3, this.serialNumberDao);
@@ -134,6 +141,7 @@ public class ProductDao {
             statement.setInt(9,this.roomNumberDao);
             statement.setInt(10,this.departamentDao);
             statement.setString(11,this.commentsDao);
+            statement.setString(12,this.categoryDao);
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Nie zapisałem - cos nie pykło");
