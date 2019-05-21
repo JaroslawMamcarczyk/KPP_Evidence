@@ -4,10 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import pl.kpp.dao.WorksDao;
 import java.io.IOException;
 
 
@@ -16,10 +14,7 @@ public class MainScreenController {
     @FXML
     private BorderPane general;
     @FXML
-    private VBox VBoxJobList;
-    @FXML
-    private TextArea textAreaNewJob;
-
+    AnchorPane anchorGeneral;
     private static Node pane = null;
     public static Node getPane(){return  pane;}
     private static MainScreenController mainScreenController;
@@ -54,11 +49,6 @@ public class MainScreenController {
     @FXML
     void clickShowBuilding(){createCenter("/FXML/building/BuildingScreen.fxml");}
    @FXML
-   void clickAddJob(){
-        WorksDao worksDao = new WorksDao(textAreaNewJob.getText());
-        worksDao.saveWorks();
-   }
-   @FXML
    void clickAddProduct(){createCenter("/FXML/product/AddProductScreen.fxml"); }
 public void initialize(){
         mainScreenController = this;
@@ -70,7 +60,12 @@ public void initialize(){
         } catch (IOException e) {
             System.out.println("Nie stworzyłem okna" + e);
         }
-        general.setCenter(pane);
+        anchorGeneral.getChildren().clear();
+        anchorGeneral.getChildren().add(pane);
+        anchorGeneral.setTopAnchor(pane,0.0);
+        anchorGeneral.setBottomAnchor(pane,0.0);
+        anchorGeneral.setLeftAnchor(pane,0.0);
+        anchorGeneral.setRightAnchor(pane,0.0);
     }
 
 }

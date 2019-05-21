@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 import pl.kpp.building.Building;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.workers.Departament;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,18 +1,17 @@
 package pl.kpp.controllers.configurationControllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import pl.kpp.building.Building;
 import pl.kpp.converters.building.BuildingConverter;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.buildingDao.BuildingDao;
+
+
 
 public class BuildingConfigurationController {
     @FXML
