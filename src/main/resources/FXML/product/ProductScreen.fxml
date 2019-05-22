@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorGeneral" prefHeight="715.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.ProductScreenController">
+<AnchorPane fx:id="anchorGeneral" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.ProductScreenController">
    <children>
-      <TableView id="table" fx:id="tableViewProduct" layoutX="4.0" layoutY="25.0" prefHeight="683.0" prefWidth="984.0" stylesheets="@../../css/productScreen.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
-          <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"></TableView></columnResizePolicy>
+      <TableView id="table" fx:id="tableViewProduct" layoutX="4.0" layoutY="25.0" stylesheets="@../../css/productScreen.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
           <columns>
-          <TableColumn fx:id="tableID" prefWidth="20.0"  text="ID" />
-          <TableColumn fx:id="tableKind" prefWidth="20.0" text="Rodzaj" />
-            <TableColumn fx:id="tableProduct" prefWidth="20.0" text="Produkt" />
-            <TableColumn fx:id="tableSerial" prefWidth="20.0" text="Nr. fabr." />
-            <TableColumn fx:id="tableInventory" prefWidth="20.0" text="nr. inwentarzowy" />
-            <TableColumn fx:id="tableEwidential" prefWidth="20.0" text="nr. ewid." />
-            <TableColumn fx:id="tablePrice" prefWidth="20.0" text="Cena" />
-            <TableColumn fx:id="tableYear" prefWidth="20.0" text="Rok prod." />
-            <TableColumn fx:id="tableType" prefWidth="20.0" text="Typ" />
-            <TableColumn fx:id="tableRoom" prefWidth="20.0" text="Pokój" />
-            <TableColumn fx:id="tableDepartment" prefWidth="20.0" text="Departament" />
-            <TableColumn fx:id="tableComments" prefWidth="20.0" text="Uwagi" />
+          <TableColumn fx:id="tableID" prefWidth="20.0" text="ID" />
+          <TableColumn fx:id="tableKind" prefWidth="55.999996185302734" text="Rodzaj" />
+            <TableColumn fx:id="tableProduct" minWidth="0.0" prefWidth="42.399993896484375" text="Produkt" />
+            <TableColumn fx:id="tableSerial" prefWidth="70.4000244140625" text="Nr. fabr." />
+            <TableColumn fx:id="tableInventory" prefWidth="114.39996337890625" text="nr. inwentarzowy" />
+            <TableColumn fx:id="tableEwidential" prefWidth="117.5999755859375" text="nr. ewid." />
+            <TableColumn fx:id="tablePrice" prefWidth="88.0" text="Cena" />
+            <TableColumn fx:id="tableYear" prefWidth="96.79998779296875" text="Rok prod." />
+            <TableColumn fx:id="tableType" prefWidth="73.59991455078125" text="Typ" />
+            <TableColumn fx:id="tableComments" prefWidth="56.800048828125" text="Uwagi" />
         </columns>
       </TableView>
    </children>

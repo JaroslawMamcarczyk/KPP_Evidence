@@ -43,11 +43,11 @@ public class ProductScreenController {
     @FXML
     private TableColumn<String, Product> tableType;
 
-    @FXML
-    private TableColumn<Integer, Product> tableRoom;
-
-    @FXML
-    private TableColumn<Integer, Product> tableDepartment;
+//    @FXML
+//    private TableColumn<Integer, Product> tableRoom;
+//
+//    @FXML
+//    private TableColumn<Integer, Product> tableDepartment;
 
     @FXML
     private TableColumn<String, Product> tableComments;
@@ -63,8 +63,8 @@ public class ProductScreenController {
         tablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableYear.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
         tableType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tableRoom.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-        tableDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
+  //      tableRoom.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+   //     tableDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
         tableComments.setCellValueFactory(new PropertyValueFactory<>("comments"));
     }
 
@@ -72,5 +72,8 @@ public class ProductScreenController {
         ProductDao.readProduckt();
         ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
         setProductTable(productObservableList);
+        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
+                subtract(tableSerial.widthProperty()).subtract(tableInventory.widthProperty()).subtract(tablePrice.widthProperty()).subtract(tableYear.widthProperty()).subtract(tableType.widthProperty()).
+                subtract(tableComments.widthProperty()).subtract(2))));
     }
 }
