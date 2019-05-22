@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 
 
@@ -15,6 +17,8 @@ public class MainScreenController {
     private BorderPane general;
     @FXML
     AnchorPane anchorGeneral;
+    @FXML
+    VBox vBoxMenu;
     private static Node pane = null;
     public static Node getPane(){return  pane;}
     private static MainScreenController mainScreenController;
@@ -68,6 +72,11 @@ public void initialize(){
         anchorGeneral.setRightAnchor(pane,0.0);
     }
 
+    public void createLeft(Node node){
+        general.setLeft(node);
+    }
+
+    public void setLeftMenu(){ general.setLeft(vBoxMenu);}
 }
 
 

@@ -8,7 +8,7 @@
 
 <BorderPane fx:id="general" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.MainScreenController">
    <left>
-      <VBox prefHeight="758.0" prefWidth="128.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vBoxMenu" prefHeight="758.0" prefWidth="128.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>

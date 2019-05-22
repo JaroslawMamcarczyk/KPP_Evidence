@@ -55,25 +55,36 @@ public class ProductScreenController {
     public void setProductTable(ObservableList<Product> glist) {
         tableViewProduct.setItems(glist);
         tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableID.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.03));
         tableKind.setCellValueFactory(new PropertyValueFactory<>("kind"));
+        tableKind.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.05));
         tableProduct.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.285));
         tableSerial.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
+        tableSerial.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.1));
         tableInventory.setCellValueFactory(new PropertyValueFactory<>("inventoryNumber"));
+        tableInventory.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.1));
         tableEwidential.setCellValueFactory(new PropertyValueFactory<>("evidentialNumber"));
+        tableEwidential.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.1));
         tablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tablePrice.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.05));
         tableYear.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
+        tableYear.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.05));
         tableType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tableType.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.03));
   //      tableRoom.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
    //     tableDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
         tableComments.setCellValueFactory(new PropertyValueFactory<>("comments"));
+        tableComments.prefWidthProperty().bind(tableViewProduct.widthProperty().multiply(0.2));
     }
 
     public void initialize(){
         ProductDao.readProduckt();
         ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
         setProductTable(productObservableList);
-        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
-                subtract(tableSerial.widthProperty()).subtract(tableInventory.widthProperty()).subtract(tablePrice.widthProperty()).subtract(tableYear.widthProperty()).subtract(tableType.widthProperty()).
-                subtract(tableComments.widthProperty()).subtract(2))));
+//        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
+//        subtract(tableSerial.widthProperty()).subtract(tableInventory.widthProperty()).subtract(tablePrice.widthProperty()).subtract(tableYear.widthProperty()).subtract(tableType.widthProperty()).
+//        subtract(tableComments.widthProperty()).subtract(2))));
+//        System.out.println(tableComments.widthProperty());
     }
 }

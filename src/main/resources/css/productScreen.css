@@ -1,11 +1,15 @@
 .table-view .column-header .label{
     -fx-text-fill: black;
     -fx-font-weight: bold;
-    -fx-font-size: 14;
+    -fx-font-size: 12;
 }
 
 .table-view .table-cell{
     -fx-text-alignment: center;
     -fx-alignment: center;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
+}
+
+.table-view #tableProduct{
+    -fx-font-weight: bold;
 }

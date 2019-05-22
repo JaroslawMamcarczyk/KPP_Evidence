@@ -7,25 +7,13 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="824.0" prefWidth="1117.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.ProductBoxScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="36.0" layoutY="1.0" prefHeight="39.0" prefWidth="350.0" text="Sprzęt" AnchorPane.leftAnchor="10.0" />
-      <ScrollPane layoutX="14.0" layoutY="48.0" prefHeight="770.0" prefWidth="350.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="10.0">
-         <content>
-            <VBox fx:id="vBoxProduct" prefHeight="755.0" prefWidth="330.0" />
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="384.0" layoutY="60.0" prefHeight="770.0" prefWidth="350.0">
-         <content>
-            <VBox fx:id="vBoxComputers" prefHeight="755.0" prefWidth="330.0" />
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="753.0" layoutY="60.0" prefHeight="770.0" prefWidth="350.0">
-         <content>
-            <VBox fx:id="vBoxEmployer" prefHeight="755.0" prefWidth="330.0" />
-         </content>
-      </ScrollPane>
-      <Label layoutX="384.0" layoutY="14.0" prefHeight="39.0" prefWidth="350.0" text="Komputery" />
-      <Label layoutX="753.0" layoutY="14.0" prefHeight="39.0" prefWidth="350.0" text="Pracownicy" />
+      <MenuButton mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
    </children>
-</AnchorPane>
+</VBox>

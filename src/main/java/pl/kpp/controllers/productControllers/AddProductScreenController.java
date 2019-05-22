@@ -97,6 +97,24 @@ public class AddProductScreenController {
         ObservableList<Product.ProductType> productTypeObservableList = FXCollections.observableArrayList(Product.ProductType.values());
         choiceBoxType.setItems(productTypeObservableList);
         choiceBoxType.setConverter(new ProductTypeConverter());
+        ArrayList<String> categoryList = createListProductType();
+        categoryList.add("Dodaj nową");
+        ObservableList<String> categoryObservableList = FXCollections.observableArrayList(categoryList);
+        choiceBoxCategory.setItems(categoryObservableList);
+        choiceBoxCategory.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
+            if(newValue.equals("Dodaj nową")){
+                CreateWindowAlert.createWindow("Podaj nową kategorię").ifPresent(category->{
+                    if(!category.equals("")){
+                        categoryObservableList.add(category);
+                        choiceBoxCategory.getSelectionModel().select(category);
+                    }
+                });
+            }
+        });
+
+        }
+
+    public static ArrayList<String> createListProductType() {
         ArrayList<String> categoryList = new ArrayList<>();
         for (Product product : Product.getProductList()) {
             if (product.getCategory() != null) {
@@ -113,19 +131,6 @@ public class AddProductScreenController {
                 }
             }
         }
-        categoryList.add("Dodaj nową");
-        ObservableList<String> categoryObservableList = FXCollections.observableArrayList(categoryList);
-        choiceBoxCategory.setItems(categoryObservableList);
-        choiceBoxCategory.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
-            if(newValue.equals("Dodaj nową")){
-                CreateWindowAlert.createWindow("Podaj nową kategorię").ifPresent(category->{
-                    if(!category.equals("")){
-                        categoryObservableList.add(category);
-                        choiceBoxCategory.getSelectionModel().select(category);
-                    }
-                });
-            }
-        });
-
-        }
+        return categoryList;
+    }
 }
