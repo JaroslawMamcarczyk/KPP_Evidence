@@ -1,30 +1,23 @@
 package pl.kpp.controllers.buildingController;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import pl.kpp.building.Building;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.controllers.productControllers.AddProductScreenController;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.buildingDao.BuildingDao;
+import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
 
-import java.io.IOException;
-import java.util.ArrayList;
+
 
 
 public class BuildingScreenController {
@@ -34,8 +27,6 @@ public class BuildingScreenController {
 
     public void initialize(){
         MainScreenController.getMainScreenController().createLeft(createVBox());
-        Database date = new Database();
-        BuildingDao.readBuilding(date);
         for (Building building:Building.getBuildingList()) {
             Tab tabBuilding = new Tab(building.getName());
             tabPaneGeneral.getTabs().add(tabBuilding);
@@ -77,9 +68,39 @@ public class BuildingScreenController {
                                 vBoxWorkers.getChildren().addAll(label,labelWorkers);
                                 label.setStyle("-fx-background-color: red");
                                 labelWorkers.setStyle("-fx-text-fill: black");
-                                anchorPane.getChildren().add(vBoxWorkers);
+                                VBox vBoxProduct = new VBox();
+                                vBoxProduct.setSpacing(10);
+                                Label labelProduct = new Label("Sprzęt:");
+                                labelProduct.setStyle("-fx-background-color: red");
+                                labelProduct.setStyle("-fx-text-fill: black");
+                                vBoxProduct.getChildren().add(labelProduct);
+                                System.out.println("pokój: "+room);
+                                for(Product product:Product.getProductList()){
+                                    System.out.println("produkt: "+product.getRoomNumber());
+                                    if(product.getRoomNumber()!=null&&product.getRoomNumber().equals(room)){
+                                        Label labelProductNew = new Label(product.getProductName());
+                                        labelProductNew.setStyle("-fx-background-color: red");
+                                        labelProductNew.setStyle("-fx-text-fill: black");
+                                        vBoxProduct.getChildren().add(labelProductNew);
+                                    }
+                                }
+                                anchorPane.getChildren().addAll(vBoxWorkers,vBoxProduct);
                                 AnchorPane.setTopAnchor(vBoxWorkers,5.0);
                                 AnchorPane.setLeftAnchor(vBoxWorkers,5.0);
+                                AnchorPane.setRightAnchor(vBoxProduct,5.0);
+                                AnchorPane.setTopAnchor(vBoxProduct,5.0);
+                                anchorPane.setOnDragOver(event->{
+                                    if (event.getDragboard().hasString()) {
+                                        event.acceptTransferModes(TransferMode.ANY);
+                                    }
+                                });
+                                anchorPane.setOnDragDropped(event->{
+                                    for(Product product:Product.getProductList()){
+                                        if(Integer.parseInt(event.getDragboard().getString())==product.getId()){
+                                            ProductDao.updateProduct(product);
+                                        }
+                                    }
+                                });
                                 gridPane.add(anchorPane,room.getPositionX(),room.getGetPositionY());
 
                             }
@@ -102,21 +123,18 @@ public class BuildingScreenController {
           menuProduct.getItems().add(menuItem);
           for(Product product:Product.getProductList()){
               if (product.getCategory().equals(string)&&product.getRoomNumber()==null){
-                  MenuItem subMenuProduct = new MenuItem(product.getProductName());
+                  Label labelProduct = new Label(product.getProductName()+" "+product.getEvidentialNumber());
+                  CustomMenuItem subMenuProduct = new CustomMenuItem();
+                  subMenuProduct.setContent(labelProduct);
                   menuItem.getItems().add(subMenuProduct);
-                  subMenuProduct.setOnAction(click->{
-                      System.out.println("klik");
+                  labelProduct.setOnDragDetected(event-> {
+                          Dragboard db = labelProduct.startDragAndDrop(TransferMode.ANY);
+                          ClipboardContent content = new ClipboardContent();
+                          content.putString(labelProduct.getId());
+                          db.setContent(content);
+                          event.consume();
+
                   });
-//                  setOnDragDetected(new EventHandler<MouseEvent>() {
-//                      @Override
-//                      public void handle(MouseEvent event) {
-//                          Dragboard db = label.startDragAndDrop(TransferMode.ANY);
-//                          ClipboardContent content = new ClipboardContent();
-//                          content.putString(label.getText());
-//                          db.setContent(content);
-//                          event.consume();
-//                      }
-//                  });
               }
           }
         }

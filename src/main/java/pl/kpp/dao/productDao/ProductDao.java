@@ -148,4 +148,17 @@ public class ProductDao {
         }
         date.closeDatabase();
     }
+
+    public static void updateProduct(Product product){
+        Database date = new Database();
+        PreparedStatement statementUpdate;
+        try{
+            statementUpdate = date.getCon().prepareStatement("UPDATE product SET product_room =? WHERE id=?");
+            statementUpdate.setInt(1,product.getRoomNumber().getId());
+            statementUpdate.setInt(2,product.getId());
+            statementUpdate.execute();
+        }catch (SQLException e){
+            System.out.println("Nie zapisałem - cos nie pykło");
+        }
+    }
 }

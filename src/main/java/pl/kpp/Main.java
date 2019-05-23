@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.kpp.dao.Database;
+import pl.kpp.dao.buildingDao.BuildingDao;
 import pl.kpp.dao.licenseDao.KsipTypeDao;
+import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.dao.workersDao.DepartamentDao;
 import pl.kpp.dao.workersDao.WorkerDao;
 import pl.kpp.dao.workersDao.RangeDao;
@@ -64,6 +66,8 @@ public class Main extends Application {
         RangeDao.readRange(date);
         Range.createRangeList();
         WorkerDao.readWorkers(date);
+        BuildingDao.readBuilding(date);
+        ProductDao.readProduckt();
       //  KsipTypeDao.readKsip();
         date.closeDatabase();
         Parent root = null;

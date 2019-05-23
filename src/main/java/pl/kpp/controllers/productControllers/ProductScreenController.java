@@ -79,7 +79,6 @@ public class ProductScreenController {
     }
 
     public void initialize(){
-        ProductDao.readProduckt();
         ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
         setProductTable(productObservableList);
 //        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
