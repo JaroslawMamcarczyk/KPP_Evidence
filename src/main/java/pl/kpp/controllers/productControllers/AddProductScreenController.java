@@ -35,6 +35,9 @@ public class AddProductScreenController {
     private TextField textFieldYear;
     @FXML
     private ChoiceBox<String> choiceBoxCategory;
+    private static ArrayList<String> categoryList = new ArrayList<>();
+
+    public static ArrayList<String> getCategoryList(){return  categoryList;}
 
     @FXML
     public void clickSave(){
@@ -97,9 +100,9 @@ public class AddProductScreenController {
         ObservableList<Product.ProductType> productTypeObservableList = FXCollections.observableArrayList(Product.ProductType.values());
         choiceBoxType.setItems(productTypeObservableList);
         choiceBoxType.setConverter(new ProductTypeConverter());
-        ArrayList<String> categoryList = createListProductType();
-        categoryList.add("Dodaj nową");
+        createListProductType();
         ObservableList<String> categoryObservableList = FXCollections.observableArrayList(categoryList);
+        categoryObservableList.add("Dodaj nową");
         choiceBoxCategory.setItems(categoryObservableList);
         choiceBoxCategory.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
             if(newValue.equals("Dodaj nową")){
@@ -114,23 +117,24 @@ public class AddProductScreenController {
 
         }
 
-    public static ArrayList<String> createListProductType() {
-        ArrayList<String> categoryList = new ArrayList<>();
+    public static void createListProductType() {
+        boolean isOnList =false;
         for (Product product : Product.getProductList()) {
             if (product.getCategory() != null) {
                 if (categoryList.size() == 0) {
                     categoryList.add(product.getCategory());
                 } else {
-                    for (String string : categoryList) {
-                        if (string.equals(product.getCategory()))
-                            break;
-                        else {
-                            categoryList.add(product.getCategory());
-                        }
+                    for (int i=0;i<categoryList.size();i++){
+                       if(product.getCategory().equals(categoryList.get(i))){
+                           isOnList = true;
+                       }
                     }
+                    if (!isOnList){
+                        categoryList.add(product.getCategory());
+                    }
+                    isOnList = false;
                 }
             }
         }
-        return categoryList;
     }
 }
