@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
 import pl.kpp.CreateWindowAlert;
 import pl.kpp.converters.product.ProductKindConverter;
 import pl.kpp.converters.product.ProductTypeConverter;
@@ -35,6 +36,34 @@ public class AddProductScreenController {
     private TextField textFieldYear;
     @FXML
     private ChoiceBox<String> choiceBoxCategory;
+    @FXML
+    private TextField textFieldSwitch;
+    @FXML
+    private TextField textFieldIp;
+    @FXML
+    private TextField textFieldComputerName;
+    @FXML
+    private ChoiceBox<?> choiceBoxComputerType;
+    @FXML
+    private TextField textFieldMask;
+    @FXML
+    private TextField textFieldKey;
+    @FXML
+    private TextField textFieldSystem;
+    @FXML
+    private TextField textFieldSocket;
+    @FXML
+    private TextField textFieldworkGroup;
+    @FXML
+    private TextField textFieldMac;
+    @FXML
+    private ChoiceBox<?>choiceBoxOwner;
+    @FXML
+    private TextField textFieldPort;
+    @FXML
+    private TextField textFieldGate;
+    @FXML
+    private HBox hBoxComputer;
     private static ArrayList<String> categoryList = new ArrayList<>();
 
     public static ArrayList<String> getCategoryList(){return  categoryList;}
@@ -94,6 +123,7 @@ public class AddProductScreenController {
 
 
     public void initialize() {
+        hBoxComputer.setVisible(false);
         ObservableList<Product.ProductKind> productKindObservableList = FXCollections.observableArrayList(Product.ProductKind.values());
         choiceboxKind.setItems(productKindObservableList);
         choiceboxKind.setConverter(new ProductKindConverter());
@@ -113,6 +143,9 @@ public class AddProductScreenController {
                     }
                 });
             }
+            if(newValue.equals("Komputer")){
+                hBoxComputer.setVisible(true);
+            }else{hBoxComputer.setVisible(false);}
         });
 
         }

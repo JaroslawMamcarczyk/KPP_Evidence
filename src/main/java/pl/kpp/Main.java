@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.buildingDao.BuildingDao;
 import pl.kpp.dao.licenseDao.KsipTypeDao;
+import pl.kpp.dao.productDao.ComputerDao;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.dao.workersDao.DepartamentDao;
 import pl.kpp.dao.workersDao.WorkerDao;
@@ -28,7 +29,7 @@ public class Main extends Application {
                 "worker_evidential  VARCHAR(6),worker_pesel VARCHAR(11),worker_range int" +
                 "references range,worker_departament int references departament," +
                 "worker_ranks int references ranks,intranet int,intradok int,lotus int,exchange int,"+
-                "cryptomail int,ksip int sespol int,swd int);" +
+                "cryptomail int,ksip int, sespol int,swd int);" +
                 "create unique index workers_id_uindex on workers (id);");
         date.createTable("create table if not exists range(id INTEGER not null constraint range_pk primary key,"+
                 "range_name VARCHAR(200) not null, pagons     VARCHAR(200) );"+
@@ -61,6 +62,10 @@ public class Main extends Application {
                 "product_room VARCHAR(4),product_department int references departament on delete set null, product_comment TEXT);");
         date.createTable("create table if not exists building( id INTEGER not null constraint building_pk primary key,building_name TEXT not null,"+
                 "building_type int,building_parent int,building_x int,building_y int);");
+        date.createTable("create table if not exists computers(id INTEGER not null constraint computers_pk primary key,\n" +
+                "computer_type int,computer_product int references product on delete set null,computer_ip TEXT,computer_mask TEXT,\n" +
+                "computer_gate TEXT,computer_mac TEXT,computer_name TEXT,computer_work_group TEXT,computer_system TEXT,computer_worker int\n" +
+                "references workers on delete set null,computer_switch TEXT,computer_port TEXT,computer_socket TEXT,computer_key TEXT);");
         DepartamentDao.readDepartament(date);
         RanksDao.readRanks(date);
         RangeDao.readRange(date);
@@ -68,6 +73,7 @@ public class Main extends Application {
         WorkerDao.readWorkers(date);
         BuildingDao.readBuilding(date);
         ProductDao.readProduckt();
+        ComputerDao.readComputer();
       //  KsipTypeDao.readKsip();
         date.closeDatabase();
         Parent root = null;

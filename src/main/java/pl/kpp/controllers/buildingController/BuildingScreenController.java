@@ -4,10 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import pl.kpp.building.Building;
 import pl.kpp.controllers.MainScreenController;
@@ -23,6 +20,7 @@ import pl.kpp.product.Product;
 public class BuildingScreenController {
     @FXML
     private TabPane tabPaneGeneral;
+    private DataFormat productFormat = new DataFormat("product");
 
 
     public void initialize(){
@@ -89,7 +87,15 @@ public class BuildingScreenController {
                                 AnchorPane.setLeftAnchor(vBoxWorkers,5.0);
                                 AnchorPane.setRightAnchor(vBoxProduct,5.0);
                                 AnchorPane.setTopAnchor(vBoxProduct,5.0);
-                                anchorPane.setOnDragOver(event->{
+                                anchorPane.setOnDragEntered(dragEvent -> {
+                                    if(dragEvent.getDragboard().hasString()){
+                                        anchorPane.setStyle("-fx-background-color: green");
+                                    }
+                                });
+                                anchorPane.setOnDragExited(dragEvent -> {
+
+                                });
+                            anchorPane.setOnDragOver(event->{
                                     if (event.getDragboard().hasString()) {
                                         event.acceptTransferModes(TransferMode.ANY);
                                     }
@@ -130,7 +136,8 @@ public class BuildingScreenController {
                   labelProduct.setOnDragDetected(event-> {
                           Dragboard db = labelProduct.startDragAndDrop(TransferMode.ANY);
                           ClipboardContent content = new ClipboardContent();
-                          content.putString(labelProduct.getId());
+                          content.put(productFormat,product);
+                          //content.putString(labelProduct.getId());
                           db.setContent(content);
                           event.consume();
 
