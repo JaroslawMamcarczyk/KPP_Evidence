@@ -9,8 +9,12 @@ import javafx.scene.layout.HBox;
 import pl.kpp.CreateWindowAlert;
 import pl.kpp.converters.product.ProductKindConverter;
 import pl.kpp.converters.product.ProductTypeConverter;
+import pl.kpp.converters.workers.PolicemanConverter;
+import pl.kpp.dao.Database;
+import pl.kpp.dao.productDao.ComputerDao;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
+import pl.kpp.workers.Worker;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -57,7 +61,7 @@ public class AddProductScreenController {
     @FXML
     private TextField textFieldMac;
     @FXML
-    private ChoiceBox<?>choiceBoxOwner;
+    private ChoiceBox<Worker>choiceBoxOwner;
     @FXML
     private TextField textFieldPort;
     @FXML
@@ -114,6 +118,12 @@ public class AddProductScreenController {
             ProductDao productDao = new ProductDao(productKind, textFieldName.getText(), textFieldSerial.getText(),
                     textFieldInventory.getText(), textFieldEvidential.getText(), productPrice, productYear, productType, 0, 0,productComment,choiceBoxCategory.getSelectionModel().getSelectedItem());
             productDao.saveProduckt();
+            if(choiceBoxCategory.getSelectionModel().getSelectedItem().equals("Komputer")) {
+                Database date = new Database();
+                ComputerDao computerDao = new ComputerDao(1,date.getLastUsingId("SELECT MAX(id) from product DESC LIMIT 1"),textFieldIp.getText(),textFieldMask.getText(),textFieldGate.getText(),
+                        textFieldMac.getText(),textFieldComputerName.getText(),textFieldworkGroup.getText(),textFieldSystem.getText(),choiceBoxOwner.getSelectionModel().getSelectedItem().getId(),textFieldSwitch.getText(),textFieldPort.getText(),textFieldSocket.getText(),textFieldKey.getText());
+                computerDao.saveComputer();
+            }
         }
     }
 
@@ -143,10 +153,13 @@ public class AddProductScreenController {
                     }
                 });
             }
-            if(newValue.equals("Komputer")){
+            if(newValue.equals("Komputer")||newValue.equals("Komputery")){
                 hBoxComputer.setVisible(true);
             }else{hBoxComputer.setVisible(false);}
         });
+        ObservableList<Worker> workerObservableList = FXCollections.observableArrayList(Worker.getWorekrList());
+        choiceBoxOwner.setItems(workerObservableList);
+        choiceBoxOwner.setConverter(new PolicemanConverter());
 
         }
 
@@ -170,4 +183,5 @@ public class AddProductScreenController {
             }
         }
     }
+
 }

@@ -76,4 +76,16 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public int getLastUsingId(String query){
+        int lastGeneratedID=0;
+        try{
+            Statement stat = con.createStatement();
+            ResultSet result= stat.executeQuery(query);
+            lastGeneratedID = result.getInt(1);
+        }catch (SQLException e){
+            System.out.println("Nie pobrałem ostatniego ID");
+        }
+        return lastGeneratedID;
+    }
 }

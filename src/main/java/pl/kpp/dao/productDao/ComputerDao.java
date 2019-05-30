@@ -27,7 +27,127 @@ public class ComputerDao  {
     private static List<ComputerDao> computerDaoList = new ArrayList<>();
     private PreparedStatement statement;
 
-    public ComputerDao(int idDao, int computerDaoType,int computerDaoProduct, String computerDaoIP, String computerDaoMask, String computerDaoGate, String computerDaoMAC, String computerDaoName, String computerDaoWorkGroup, String computerDaoSystem, int computerDaoWorker, String computerDaoSwitch, String computerDaoPort, String computerDaoSocket, String computerDaoKey) {
+    public int getComputerDaoID() {
+        return computerDaoID;
+    }
+
+    public void setComputerDaoID(int computerDaoID) {
+        this.computerDaoID = computerDaoID;
+    }
+
+    public int getComputerDaoType() {
+        return computerDaoType;
+    }
+
+    public void setComputerDaoType(int computerDaoType) {
+        this.computerDaoType = computerDaoType;
+    }
+
+    public int getComputerDaoProduct() {
+        return computerDaoProduct;
+    }
+
+    public void setComputerDaoProduct(int computerDaoProduct) {
+        this.computerDaoProduct = computerDaoProduct;
+    }
+
+    public String getComputerDaoIP() {
+        return computerDaoIP;
+    }
+
+    public void setComputerDaoIP(String computerDaoIP) {
+        this.computerDaoIP = computerDaoIP;
+    }
+
+    public String getComputerDaoMask() {
+        return computerDaoMask;
+    }
+
+    public void setComputerDaoMask(String computerDaoMask) {
+        this.computerDaoMask = computerDaoMask;
+    }
+
+    public String getComputerDaoGate() {
+        return computerDaoGate;
+    }
+
+    public void setComputerDaoGate(String computerDaoGate) {
+        this.computerDaoGate = computerDaoGate;
+    }
+
+    public String getComputerDaoMAC() {
+        return computerDaoMAC;
+    }
+
+    public void setComputerDaoMAC(String computerDaoMAC) {
+        this.computerDaoMAC = computerDaoMAC;
+    }
+
+    public String getComputerDaoName() {
+        return computerDaoName;
+    }
+
+    public void setComputerDaoName(String computerDaoName) {
+        this.computerDaoName = computerDaoName;
+    }
+
+    public String getComputerDaoWorkGroup() {
+        return computerDaoWorkGroup;
+    }
+
+    public void setComputerDaoWorkGroup(String computerDaoWorkGroup) {
+        this.computerDaoWorkGroup = computerDaoWorkGroup;
+    }
+
+    public String getComputerDaoSystem() {
+        return computerDaoSystem;
+    }
+
+    public void setComputerDaoSystem(String computerDaoSystem) {
+        this.computerDaoSystem = computerDaoSystem;
+    }
+
+    public int getComputerDaoWorker() {
+        return computerDaoWorker;
+    }
+
+    public void setComputerDaoWorker(int computerDaoWorker) {
+        this.computerDaoWorker = computerDaoWorker;
+    }
+
+    public String getComputerDaoSwitch() {
+        return computerDaoSwitch;
+    }
+
+    public void setComputerDaoSwitch(String computerDaoSwitch) {
+        this.computerDaoSwitch = computerDaoSwitch;
+    }
+
+    public String getComputerDaoPort() {
+        return computerDaoPort;
+    }
+
+    public void setComputerDaoPort(String computerDaoPort) {
+        this.computerDaoPort = computerDaoPort;
+    }
+
+    public String getCompuetrDaoSocket() {
+        return compuetrDaoSocket;
+    }
+
+    public void setCompuetrDaoSocket(String compuetrDaoSocket) {
+        this.compuetrDaoSocket = compuetrDaoSocket;
+    }
+
+    public String getComputerDaoKey() {
+        return computerDaoKey;
+    }
+
+    public void setComputerDaoKey(String computerDaoKey) {
+        this.computerDaoKey = computerDaoKey;
+    }
+
+    public ComputerDao(int idDao, int computerDaoType, int computerDaoProduct, String computerDaoIP, String computerDaoMask, String computerDaoGate, String computerDaoMAC, String computerDaoName, String computerDaoWorkGroup, String computerDaoSystem, int computerDaoWorker, String computerDaoSwitch, String computerDaoPort, String computerDaoSocket, String computerDaoKey) {
         this.computerDaoID = idDao;
         this.computerDaoType = computerDaoType;
         this.computerDaoProduct = computerDaoProduct;

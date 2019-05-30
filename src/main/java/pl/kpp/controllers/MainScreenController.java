@@ -52,6 +52,8 @@ public class MainScreenController {
     void clickCards(){createCenter("/FXML/product/CardsScreen.fxml");}
     @FXML
     void clickShowBuilding(){createCenter("/FXML/building/BuildingScreen.fxml");}
+    @FXML
+    void clickShowComputers(){createCenter("/FXML/product/ComputersScreen.fxml");}
    @FXML
    void clickAddProduct(){createCenter("/FXML/product/AddProductScreen.fxml"); }
 public void initialize(){
