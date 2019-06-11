@@ -1,5 +1,7 @@
 package pl.kpp.controllers.productControllers;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -42,6 +44,9 @@ public class ProductScreenController {
 
     @FXML
     private TableColumn<String, Product> tableType;
+    private static BooleanProperty isNewProduct = new SimpleBooleanProperty(false);
+
+    public static void setIsNewProduct(){ isNewProduct.set(true);}
 
 //    @FXML
 //    private TableColumn<Integer, Product> tableRoom;
@@ -79,8 +84,14 @@ public class ProductScreenController {
     }
 
     public void initialize(){
-        ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
-        setProductTable(productObservableList);
+        isNewProduct.addListener(observable -> {
+            if(isNewProduct.get()){
+                isNewProduct.set(false);
+                ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
+                setProductTable(productObservableList);
+            }
+        });
+        setIsNewProduct();
 //        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
 //        subtract(tableSerial.widthProperty()).subtract(tableInventory.widthProperty()).subtract(tablePrice.widthProperty()).subtract(tableYear.widthProperty()).subtract(tableType.widthProperty()).
 //        subtract(tableComments.widthProperty()).subtract(2))));

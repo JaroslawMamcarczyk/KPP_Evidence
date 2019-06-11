@@ -61,14 +61,14 @@ public class BuildingConfigurationController {
     @FXML
     void clickNewBuilding() {
         if (textFieldNewBuilding.getText() != null) {
-            BuildingDao buildingDao = new BuildingDao(textFieldNewBuilding.getText(),1,0,0,0);
+            BuildingDao buildingDao = new BuildingDao(textFieldNewBuilding.getText(),1,0,0,0,"");
             buildingDao.saveBuilding();
         }
     }
     @FXML
     void clickNewFloor() {
         if(textFieldNewFloor.getText()!=" "&& chosenbuilding!=null){
-            BuildingDao buildingDao = new BuildingDao(textFieldNewFloor.getText(),2,chosenbuilding.getId(),0,0);
+            BuildingDao buildingDao = new BuildingDao(textFieldNewFloor.getText(),2,chosenbuilding.getId(),0,0,"");
             buildingDao.saveBuilding();
             Building.getBuildingList().add(new Building(buildingDao));
         }
@@ -77,7 +77,7 @@ public class BuildingConfigurationController {
     @FXML
     void clickNewRoom() {
         if(textFieldNewRoom.getText()!=" "&&chosenFloor!=null){
-            BuildingDao buildingDao = new BuildingDao(textFieldNewRoom.getText(),3,chosenFloor.getId(),0,0);
+            BuildingDao buildingDao = new BuildingDao(textFieldNewRoom.getText(),3,chosenFloor.getId(),0,0,"");
             buildingDao.saveBuilding();
             Building.getBuildingList().add(new Building((buildingDao)));
         }

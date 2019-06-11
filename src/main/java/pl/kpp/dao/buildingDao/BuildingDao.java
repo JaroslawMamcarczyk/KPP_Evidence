@@ -15,46 +15,45 @@ public class BuildingDao {
     private int buildingParentDao;
     private Integer positionX;
     private Integer positionY;
+    private String telephone;
 
     public int getIdDao() {
         return idDao;
     }
-
     public String getNameDao() {
         return nameDao;
     }
-
     public int getBuildingTypeDao() {
         return buildingTypeDao;
     }
-
     public int getBuildingParentDao() {
         return buildingParentDao;
     }
-
     public int getPositionX() {
         return positionX;
     }
-
+    public String getTelephone() {return telephone;}
     public Integer getPositionY() {
         return positionY;
     }
 
-    public BuildingDao(int idDao, String nameDao, int buildingTypeDao, int buildingParentDao, Integer x, Integer y) {
+    public BuildingDao(int idDao, String nameDao, int buildingTypeDao, int buildingParentDao, Integer x, Integer y, String telephone) {
         this.idDao = idDao;
         this.nameDao = nameDao;
         this.buildingTypeDao = buildingTypeDao;
         this.buildingParentDao = buildingParentDao;
         this.positionX = x;
         this.positionY = y;
+        this.telephone = telephone;
     }
 
-    public BuildingDao(String nameDao, int buildingTypeDao, int buildingParentDao, Integer x, Integer y) {
+    public BuildingDao(String nameDao, int buildingTypeDao, int buildingParentDao, Integer x, Integer y, String telephone) {
         this.nameDao = nameDao;
         this.buildingTypeDao = buildingTypeDao;
         this.buildingParentDao = buildingParentDao;
         this.positionX = x;
         this.positionY = y;
+        this.telephone = telephone;
     }
 
     public static void readBuilding(Database date) {
@@ -64,7 +63,7 @@ public class BuildingDao {
             Building.getRoomList().clear();
             while (result.next()) {
                 BuildingDao buildingDao = new BuildingDao(result.getInt("id"), result.getString("building_name"), result.getInt("building_type"), result.getInt("building_parent"),
-                        result.getInt("building_x"), result.getInt("building_y"));
+                        result.getInt("building_x"), result.getInt("building_y"), result.getString("building_telephone"));
                 Building building = new Building(buildingDao);
                 switch (buildingDao.getBuildingTypeDao()) {
                     case 1: {

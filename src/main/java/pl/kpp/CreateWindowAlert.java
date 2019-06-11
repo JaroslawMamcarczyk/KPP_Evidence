@@ -26,4 +26,14 @@ public class CreateWindowAlert {
         dialog.setContentText(title);
         return dialog.showAndWait();
     }
+
+    public static Optional<ButtonType> createWindowChoice(String message){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(message);
+        ButtonType ok = new ButtonType("OK");
+        ButtonType stay = new ButtonType("Dodaj kolejny");
+        ButtonType cancel = new ButtonType("Wróć", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().addAll(ok,stay,cancel);
+        return alert.showAndWait();
+    }
 }
