@@ -6,7 +6,6 @@ import javafx.beans.property.StringProperty;
 import pl.kpp.dao.productDao.ComputerDao;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.workers.Worker;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +13,20 @@ public class Computer extends Product {
     private int computerID;
     private int computerType;
     private int computerProduct;
-    private String computerIP;
-    private String computerMask;
-    private String computerGate;
-    private String computerMAC;
-    private String computerName;
-    private String computerWorkGroup;
-    private String computerSystem;
+    private StringProperty computerIP= new SimpleStringProperty();
+    private StringProperty computerMask= new SimpleStringProperty();
+    private StringProperty computerGate= new SimpleStringProperty();
+    private StringProperty computerMAC= new SimpleStringProperty();
+    private StringProperty computerName= new SimpleStringProperty();
+    private StringProperty computerWorkGroup= new SimpleStringProperty();
+    private StringProperty computerSystem= new SimpleStringProperty();
     private Worker computerWorker;
-    private String computerSwitch;
-    private String computerPort;
-    private String compuetrSocket;
-    private String computerKey;
+    private StringProperty computerSwitch= new SimpleStringProperty();
+    private StringProperty computerPort= new SimpleStringProperty();
+    private StringProperty computerSocket= new SimpleStringProperty();
+    private StringProperty computerKey= new SimpleStringProperty();
     private StringProperty computerOwner = new SimpleStringProperty();
+    private StringProperty computerEwidential = new SimpleStringProperty();
     private static List<Computer> computerList = new ArrayList<>();
 
     public int getComputerID() {
@@ -39,42 +39,42 @@ public class Computer extends Product {
         return computerProduct;
     }
     public String getComputerIP() {
-        return computerIP;
+        return computerIP.get();
     }
     public String getComputerMask() {
-        return computerMask;
+        return computerMask.get();
     }
-
     public String getComputerGate() {
-        return computerGate;
+        return computerGate.get();
     }
     public String getComputerMAC() {
-        return computerMAC;
+        return computerMAC.get();
     }
     public String getComputerName() {
-        return computerName;
+        return computerName.get();
     }
     public String getComputerWorkGroup() {
-        return computerWorkGroup;
+        return computerWorkGroup.get();
     }
     public String getComputerSystem() {
-        return computerSystem;
+        return computerSystem.get();
     }
     public String getComputerSwitch() {
-        return computerSwitch;
+        return computerSwitch.get();
     }
     public String getComputerPort() {
-        return computerPort;
+        return computerPort.get();
     }
-    public String getCompuetrSocket() {
-        return compuetrSocket;
+    public String getComputerSocket() {
+        return computerSocket.get();
     }
     public String getComputerKey() {
-        return computerKey;
+        return computerKey.get();
     }
     public String getComputerOwner(){
         return computerOwner.get();
     }
+    public String getComputerEwidential(){return computerEwidential.get();}
     public static List<Computer> getComputerList(){
         return computerList;
     }
@@ -84,22 +84,24 @@ public class Computer extends Product {
         this.computerID = computerDao.getComputerDaoID();
         this.computerType = computerDao.getComputerDaoType();
         this.computerProduct = computerDao.getComputerDaoProduct();
-        this.computerIP = computerDao.getComputerDaoIP();
-        this.computerMask = computerDao.getComputerDaoMask();
-        this.computerGate = computerDao.getComputerDaoGate();
-        this.computerMAC = computerDao.getComputerDaoMAC();
-        this.computerName = computerDao.getComputerDaoName();
-        this.computerWorkGroup = computerDao.getComputerDaoWorkGroup();
-        this.computerSystem = computerDao.getComputerDaoSystem();
+        this.computerIP.set(computerDao.getComputerDaoIP());
+        this.computerMask.set(computerDao.getComputerDaoMask());
+        this.computerGate.set(computerDao.getComputerDaoGate());
+        this.computerMAC.set(computerDao.getComputerDaoMAC());
+        this.computerName.set(computerDao.getComputerDaoName());
+        this.computerWorkGroup.set(computerDao.getComputerDaoWorkGroup());
+        this.computerSystem.set(computerDao.getComputerDaoSystem());
+        this.computerEwidential.set(productDao.getEvidentaialNumberDao());
         if(computerDao.getComputerDaoWorker()!=0){
           this.computerWorker= Worker.findWorker(computerDao.getComputerDaoWorker());
         }else {this.computerWorker=null;}
-        this.computerSwitch = computerDao.getComputerDaoSwitch();
-        this.computerPort = computerDao.getComputerDaoPort();
-        this.compuetrSocket = computerDao.getCompuetrDaoSocket();
-        this.computerKey = computerDao.getComputerDaoKey();
+        this.computerSwitch.set(computerDao.getComputerDaoSwitch());
+        this.computerPort.set(computerDao.getComputerDaoPort());
+        this.computerSocket.set(computerDao.getCompuetrDaoSocket());
+        this.computerKey.set(computerDao.getComputerDaoKey());
         this.computerOwner.set(this.computerWorker.getName()+" "+this.computerWorker.getSurrname());
     }
+
 
 }
 

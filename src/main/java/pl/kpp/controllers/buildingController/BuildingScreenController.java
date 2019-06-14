@@ -9,7 +9,6 @@ import javafx.scene.layout.*;
 import pl.kpp.building.Building;
 import pl.kpp.controllers.MainScreenController;
 import pl.kpp.controllers.productControllers.AddProductScreenController;
-import pl.kpp.dao.Database;
 import pl.kpp.dao.buildingDao.BuildingDao;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
@@ -55,10 +54,6 @@ public class BuildingScreenController {
                                 }
                                 AnchorPane anchorPane = new AnchorPane();
                                anchorPane.setStyle("-fx-border-color:black;-fx-border-width: 2px;-fx-background-color: white");
-//                                anchorPane.setPrefSize(900/countX,800/countY);
-//                                ColumnConstraints columnConstraints = new ColumnConstraints();
-//                                columnConstraints.setHgrow(Priority.ALWAYS);
-//                                gridPane.getColumnConstraints().add(columnConstraints);
                                 VBox vBoxWorkers=new VBox();
                                 vBoxWorkers.setSpacing(10);
                                 Label label = new Label(room.getName());
@@ -110,8 +105,7 @@ public class BuildingScreenController {
                                 gridPane.add(anchorPane,room.getPositionX(),room.getGetPositionY());
 
                             }
-                        }System.out.println(gridPane.getColumnConstraints().size());
-                        System.out.println(gridPane.getRowConstraints().size());
+                        }
                     }
                 }
             }

@@ -223,4 +223,13 @@ public class ComputerDao  {
         }
         date.closeDatabase();
     }
+
+    public static ComputerDao findCompuetrDao(int searchingId) {
+        ComputerDao result = null;
+        for (ComputerDao computerDao : computerDaoList) {
+            if (computerDao.computerDaoProduct == searchingId)
+                result = computerDao;
+        }
+        return result;
+    }
 }

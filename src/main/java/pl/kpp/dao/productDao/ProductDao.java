@@ -2,6 +2,7 @@ package pl.kpp.dao.productDao;
 
 import javafx.beans.property.StringProperty;
 import pl.kpp.dao.Database;
+import pl.kpp.product.Computer;
 import pl.kpp.product.Product;
 
 import java.math.BigDecimal;
@@ -116,9 +117,20 @@ public class ProductDao {
                 ProductDao productDao = new ProductDao(result.getInt("id"),result.getInt("product_kind"),result.getString("product_name"),
                         result.getString("product_serial"),result.getString("product_inventory"),result.getString("product_evidential"),result.getBigDecimal("product_price"),
                         result.getInt("product_year"),result.getInt("product_type"),result.getInt("product_room"),result.getInt("product_department"),result.getString("product_comment"),result.getString("product_category"));
-                Product product = new Product(productDao);
+                if(productDao.getCategoryDao().equals("Komputer")||productDao.getCategoryDao().equals("komputer")||productDao.getCategoryDao().equals("Komputery")||productDao.getCategoryDao().equals("komputery")){
+                    ComputerDao computerDao = ComputerDao.findCompuetrDao(result.getInt("id"));
+                    if(computerDao!=null) {
+                        Computer computer = new Computer(productDao,computerDao);
+                        Product.getProductList().add(computer);
+                        Computer.getComputerList().add(computer);
+                    }else{
+                        Product product = new Product(productDao);
+                        Product.getProductList().add(product);
+                    }
+                }else{
+                    Product product = new Product(productDao);
                 Product.getProductList().add(product);
-            }
+            }}
         }catch (SQLException e){
             System.out.println("błąd odczytu tabeli");
         }

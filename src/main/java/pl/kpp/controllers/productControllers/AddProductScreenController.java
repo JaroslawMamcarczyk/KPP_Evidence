@@ -118,6 +118,7 @@ public class AddProductScreenController {
             ProductDao productDao = new ProductDao(productKind, textFieldName.getText(), textFieldSerial.getText(),
                     textFieldInventory.getText(), textFieldEvidential.getText(), productPrice, productYear, productType, 0, 0,productComment,choiceBoxCategory.getSelectionModel().getSelectedItem());
             productDao.saveProduckt();
+            ProductScreenController.setIsNewProduct();
             if(choiceBoxCategory.getSelectionModel().getSelectedItem().equals("Komputer")) {
                 Database date = new Database();
                 ComputerDao computerDao = new ComputerDao(1,date.getLastUsingId("SELECT MAX(id) from product DESC LIMIT 1"),textFieldIp.getText(),textFieldMask.getText(),textFieldGate.getText(),
@@ -165,11 +166,9 @@ public class AddProductScreenController {
 
     public static void createListProductType() {
         boolean isOnList =false;
+        categoryList.add("Komputer");
         for (Product product : Product.getProductList()) {
             if (product.getCategory() != null) {
-                if (categoryList.size() == 0) {
-                    categoryList.add(product.getCategory());
-                } else {
                     for (int i=0;i<categoryList.size();i++){
                        if(product.getCategory().equals(categoryList.get(i))){
                            isOnList = true;
@@ -184,4 +183,3 @@ public class AddProductScreenController {
         }
     }
 
-}

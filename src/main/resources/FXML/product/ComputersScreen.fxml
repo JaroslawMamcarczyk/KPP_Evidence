@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="656.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.ComputersScreenController">
+<AnchorPane prefHeight="656.0" prefWidth="1083.0" stylesheets="@../../css/productScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.ComputersScreenController">
    <children>
-      <TabPane layoutX="125.0" layoutY="115.0" prefHeight="656.0" prefWidth="1059.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-74.0" AnchorPane.topAnchor="0.0">
+      <TabPane layoutX="125.0" layoutY="115.0" prefHeight="656.0" prefWidth="1083.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Untitled Tab 1">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0" fx:id="tableViewComputers">
+                  <TableView fx:id="tableViewComputers" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Adres IP" fx:id="columnIp"/>
-                      <TableColumn prefWidth="75.0" text="Maska" fx:id="columnMask"/>
-                        <TableColumn prefWidth="75.0" text="Brama" fx:id="columnGate"/>
-                        <TableColumn prefWidth="75.0" text="MAC" fx:id="columnMac"/>
-                        <TableColumn prefWidth="75.0" text="Typ" fx:id="columnType"/>
-                        <TableColumn prefWidth="75.0" text="Nazwa" fx:id="columnName"/>
-                        <TableColumn prefWidth="75.0" text="Grupa robocza" fx:id="columnWorkGroup"/>
-                        <TableColumn prefWidth="75.0" text="Nr. ewid." fx:id="columnEwidential"/>
-                        <TableColumn prefWidth="75.0" text="System" fx:id="columnSystem"/>
-                        <TableColumn prefWidth="75.0" text="Właściciel" fx:id="columnOwner"/>
-                        <TableColumn prefWidth="75.0" text="Przełącznik" fx:id="columnSwitch"/>
-                        <TableColumn prefWidth="75.0" text="Port" fx:id="columnPort"/>
-                        <TableColumn prefWidth="75.0" text="Gniazdo" fx:id="columnSocket"/>
-                        <TableColumn prefWidth="75.0" text="Licencja" fx:id="columnKey"/>
+                      <TableColumn fx:id="columnIp" prefWidth="75.0" text="Adres IP" />
+                      <TableColumn fx:id="columnMask" prefWidth="75.0" text="Maska" />
+                        <TableColumn fx:id="columnGate" prefWidth="75.0" text="Brama" />
+                        <TableColumn fx:id="columnMac" prefWidth="75.0" text="MAC" />
+                        <TableColumn fx:id="columnName" prefWidth="75.0" text="Nazwa" />
+                        <TableColumn fx:id="columnWorkGroup" prefWidth="75.0" text="Grupa &#10;robocza" />
+                        <TableColumn fx:id="columnEwidential" prefWidth="75.0" text="Nr. ewid." />
+                        <TableColumn fx:id="columnSystem" prefWidth="75.0" text="System" />
+                        <TableColumn fx:id="columnOwner" prefWidth="75.0" text="Właściciel" />
+                        <TableColumn fx:id="columnSwitch" prefWidth="75.0" text="Przełącznik" />
+                        <TableColumn fx:id="columnPort" prefWidth="75.0" text="Port" />
+                        <TableColumn fx:id="columnSocket" prefWidth="75.0" text="Gniazdo" />
+                        <TableColumn fx:id="columnKey" prefWidth="75.0" text="Licencja" />
                     </columns>
                   </TableView>
                </content>
