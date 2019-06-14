@@ -130,7 +130,7 @@ public class WorkerDao {
         Database date = new Database();
         try {
             statement = date.getCon().prepareStatement("INSERT INTO workers (worker_name,worker_surname,worker_evidential,worker_pesel,worker_range,worker_departament,worker_ranks," +
-                    "intranet,intradok,lotus,exchange,cryptomail,swd)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,)");
+                    "intranet,intradok,lotus,exchange,cryptomail,swd)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, this.daoName);
             statement.setString(2, this.daoSurname);
             statement.setString(3, this.daoEwidential);

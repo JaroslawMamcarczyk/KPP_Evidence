@@ -175,4 +175,14 @@ public class Product {
         this.comments.set(productDao.getCommentsDao());
     }
     public Product(){}
+
+    public static Product findProduct(int id){
+        Product findingProduct = null;
+        for(Product product:productList){
+            if (product.id==id){
+                findingProduct = product;
+            }
+        }
+    return findingProduct;
+    }
 }
