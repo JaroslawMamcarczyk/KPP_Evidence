@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import pl.kpp.controllers.MainScreenController;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.product.Product;
@@ -45,6 +46,8 @@ public class ProductScreenController {
     @FXML
     private TableColumn<String, Product> tableType;
     private static BooleanProperty isNewProduct = new SimpleBooleanProperty(false);
+    private static Product chosenProduct;
+    public static Product getChosenProduct(){return chosenProduct;}
 
     public static void setIsNewProduct(){ isNewProduct.set(true);}
 
@@ -84,17 +87,24 @@ public class ProductScreenController {
     }
 
     public void initialize(){
+        ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
+        setProductTable(productObservableList);
         isNewProduct.addListener(observable -> {
             if(isNewProduct.get()){
                 isNewProduct.set(false);
-                ObservableList<Product> productObservableList = FXCollections.observableList(Product.getProductList());
-                setProductTable(productObservableList);
+                ProductDao.readProduckt();
+                ObservableList<Product> productObservableList2 = FXCollections.observableList(Product.getProductList());
+                setProductTable(productObservableList2);
             }
         });
         setIsNewProduct();
-//        tableProduct.prefWidthProperty().bind(tableViewProduct.widthProperty().subtract(tableID.widthProperty()).subtract(tableKind.widthProperty().subtract(tableEwidential.widthProperty().
-//        subtract(tableSerial.widthProperty()).subtract(tableInventory.widthProperty()).subtract(tablePrice.widthProperty()).subtract(tableYear.widthProperty()).subtract(tableType.widthProperty()).
-//        subtract(tableComments.widthProperty()).subtract(2))));
-//        System.out.println(tableComments.widthProperty());
+        tableViewProduct.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->
+            chosenProduct = newValue);
+        tableViewProduct.setOnMouseClicked(click ->{
+            if (click.getClickCount()==2){
+                MainScreenController.getMainScreenController().createCenter("/FXML/product/DetailsProductScreen.fxml");
+            }
+        });
+
     }
 }

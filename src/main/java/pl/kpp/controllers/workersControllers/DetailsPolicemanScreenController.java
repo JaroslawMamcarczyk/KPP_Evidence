@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import pl.kpp.CreateWindowAlert;
@@ -29,7 +30,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class DetailsPolicemanScreenController {
-
+    @FXML
+    private Pane general;
     @FXML
     private TextField ldepartament;
     @FXML
@@ -85,7 +87,7 @@ public class DetailsPolicemanScreenController {
         ldepartament.setDisable(true);
         lrange.setDisable(true);
         lranks.setDisable(true);
-        if(police.getPolicemanDepartament()!=null)ldepartament.setText(police.getNamePoliceDepartament());
+        ldepartament.setText(police.getNamePoliceDepartament());
         if (police.getPolicemanRange()!=null) {
             lrange.setText(police.getPolicemanRange().getRangeName());
             lpagons.setImage(new Image(police.getPolicemanRange().getPath()));
@@ -115,11 +117,12 @@ public class DetailsPolicemanScreenController {
         }
         if(police.getPolicemanExchange()==1)createLabel(policemanAdres+"@","exchange");
         else {
-             checkBoxExchange = new CheckBox("Exchange");
+            checkBoxExchange = new CheckBox("Exchange");
             checkBoxList.add(checkBoxExchange);
         }
+        if(police.getPolicemanDepartament()!=null)
         ranksObservableList = createRanksObservableList(police.getPolicemanDepartament().getId());
-        }
+       }
 
     @FXML
     void clickSave(ActionEvent event) {

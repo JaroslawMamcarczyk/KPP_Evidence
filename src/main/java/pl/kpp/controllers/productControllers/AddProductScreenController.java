@@ -2,11 +2,14 @@ package pl.kpp.controllers.productControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import pl.kpp.CreateWindowAlert;
+import pl.kpp.controllers.MainScreenController;
 import pl.kpp.converters.product.ProductKindConverter;
 import pl.kpp.converters.product.ProductTypeConverter;
 import pl.kpp.converters.workers.PolicemanConverter;
@@ -119,6 +122,11 @@ public class AddProductScreenController {
                     textFieldInventory.getText(), textFieldEvidential.getText(), productPrice, productYear, productType, 0, 0,productComment,choiceBoxCategory.getSelectionModel().getSelectedItem());
             productDao.saveProduckt();
             ProductScreenController.setIsNewProduct();
+            CreateWindowAlert.createWindowChoice("Dodano nowy sprzęt. Kliknij OK aby przejść do tabeli lub dodaj nowy sprzęt").ifPresent(buttonType -> {
+                if (buttonType==ButtonType.OK){
+                    MainScreenController.getMainScreenController().createCenter("/FXML/product/ProductScreen.fxml");
+                }
+            });
             if(choiceBoxCategory.getSelectionModel().getSelectedItem().equals("Komputer")) {
                 Database date = new Database();
                 ComputerDao computerDao = new ComputerDao(1,date.getLastUsingId("SELECT MAX(id) from product DESC LIMIT 1"),textFieldIp.getText(),textFieldMask.getText(),textFieldGate.getText(),

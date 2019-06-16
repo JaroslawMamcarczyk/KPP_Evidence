@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pl.kpp.HandlingFileOperation;
 import pl.kpp.building.Building;
 import pl.kpp.converters.building.BuildingConverter;
 import pl.kpp.converters.workers.DepartamentConverter;
@@ -38,6 +39,10 @@ public class ConfigurationScreenController {
     private ListView<Departament> departamentListView;
    @FXML
     private ListView<Ranks> ranksListView;
+   @FXML
+   private ListView<String> listViewCategory;
+
+
 
     private static BooleanProperty isNewDepartament= new SimpleBooleanProperty(false);
     private static BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
@@ -71,6 +76,8 @@ public class ConfigurationScreenController {
                 isNewRanks.set(false);
             }
         });
+        ObservableList<String> observableListCategory = FXCollections.observableArrayList(HandlingFileOperation.getTableString());
+        listViewCategory.setItems(observableListCategory);
 //        ObservableList<Ksip> ksipList = FXCollections.observableList(listKsip);
 //        ksipTable.setItems(ksipList);
 //        nameKsip.setCellValueFactory((new PropertyValueFactory<>("name")));
@@ -186,5 +193,18 @@ private void createListViewRanks(ObservableList<Ranks> ranksObservableList){
     void clickDeleteDepartament(){
         DepartamentDao.deleteDepartament(departamentListView.getSelectionModel().getSelectedItem().getName());
         isNewDepartament.set(true);
+    }
+
+    @FXML
+    void clickAddCategory(){
+        Optional<String> result = callInputDialog("Dodawanie nowej kategorii", "Podaj nazwę nowej kategorii", "Wpisz nazwę");
+        result.ifPresent(name ->{
+            HandlingFileOperation handle = new HandlingFileOperation();
+            handle.saveFile(name);
+        });
+    }
+    @FXML
+    void clickEditCategory(){
+
     }
 }

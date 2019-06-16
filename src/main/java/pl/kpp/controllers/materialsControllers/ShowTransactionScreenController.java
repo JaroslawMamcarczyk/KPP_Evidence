@@ -75,8 +75,6 @@ public class ShowTransactionScreenController {
                 clickShowAll();
             }
         });
-        HandlingFileOperation file = new HandlingFileOperation();
-        file.readFile();
         path.addListener((observable, oldValue, newValue) -> {
             if(newValue.equals("")){
                 CreateWindowAlert.createWindowError("Użyj przycisku do ustawienia folderu gdzie zapisywane będą dokumenty wydania");

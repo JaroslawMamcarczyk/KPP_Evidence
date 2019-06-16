@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.kpp.dao.Database;
 import pl.kpp.dao.buildingDao.BuildingDao;
-import pl.kpp.dao.licenseDao.KsipTypeDao;
 import pl.kpp.dao.productDao.ComputerDao;
 import pl.kpp.dao.productDao.ProductDao;
 import pl.kpp.dao.workersDao.DepartamentDao;
@@ -66,6 +65,10 @@ public class Main extends Application {
                 "computer_type int,computer_product int references product on delete set null,computer_ip TEXT,computer_mask TEXT,\n" +
                 "computer_gate TEXT,computer_mac TEXT,computer_name TEXT,computer_work_group TEXT,computer_system TEXT,computer_worker int\n" +
                 "references workers on delete set null,computer_switch TEXT,computer_port TEXT,computer_socket TEXT,computer_key TEXT);");
+        date.createTable("create table if not exists port(id INTEGER not null constraint port_pk primary key,port_socket  int,port_product int references product" +
+                ",port_switch  int references product);");
+        HandlingFileOperation file = new HandlingFileOperation();
+        file.readFile();
         DepartamentDao.readDepartament(date);
         RanksDao.readRanks(date);
         RangeDao.readRange(date);

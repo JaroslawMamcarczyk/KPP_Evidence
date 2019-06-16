@@ -6,9 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pl.kpp.controllers.productControllers.DetailsProductController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="632.0" prefWidth="957.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kpp.controllers.productControllers.DetailsProductController">
+   <children>
+      <HBox fx:id="hBoxProduct" layoutX="29.0" layoutY="74.0" prefHeight="543.0" prefWidth="450.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <VBox fx:id="vBoxLabel" prefHeight="570.0" prefWidth="225.0" />
+            <VBox fx:id="vBoxTextfield" prefHeight="570.0" prefWidth="225.0" />
+         </children>
+      </HBox>
+      <TextField fx:id="textFieldName" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="953.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+   </children>
 </AnchorPane>

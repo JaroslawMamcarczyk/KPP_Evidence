@@ -55,7 +55,7 @@
                               <HBox prefHeight="32.0" prefWidth="436.0" spacing="10.0">
                                  <children>
                                     <Label prefHeight="31.0" prefWidth="150.0" text="Telefon" />
-                                    <TextField fx:id="ltelephone1" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
+                                    <TextField fx:id="ltelephone" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="230.0" />
                                     <ToggleButton mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" text="Modyfikuj" />
                                  </children>
                               </HBox>
